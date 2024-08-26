@@ -1,4 +1,4 @@
-import  blogImage from '../images/blog-img.jpg'
+
 
 const header = () => {
   return (
