@@ -1,15 +1,23 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import BlogPage from "./components/BlogPage";
 import Header from "./components/Header";
 
 function App() {
   return (
-    <>
-      <Header />
-      <BlogPage />
-      <BlogPage />
-      <BlogPage />
-    </>
+    <Routes>
+      <Route
+        index
+        element={
+          <>
+            <Header />
+            <BlogPage />
+            <BlogPage />
+            <BlogPage />
+          </>
+        }
+      />
+    </Routes>
   );
 }
 
