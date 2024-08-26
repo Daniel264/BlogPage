@@ -5,11 +5,13 @@ const header = () => {
     <>
       <header className="flex justify-between">
         <div>
-          <h1 className="font-bold text-4xl">MyBlog</h1>
+          <Link to="/" className="font-bold text-4xl">
+            MyBlog
+          </Link>
         </div>
         <div className="flex justify-between w-40 font-medium text-lg">
           <Link to="/login">Login</Link>
-          <Link to="/login">Register</Link>
+          <Link to="/register">Register</Link>
         </div>
       </header>
     </>

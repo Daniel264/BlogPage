@@ -1,5 +1,12 @@
+import Header from "./Header";
+
 const Register = () => {
-  return <div>Register</div>;
+  return (
+    <>
+      <Header />
+      Register
+    </>
+  );
 };
 
 export default Register;
