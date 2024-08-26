@@ -7,6 +7,8 @@ function App() {
     <>
       <Header />
       <BlogPage />
+      <BlogPage />
+      <BlogPage />
     </>
   );
 }
