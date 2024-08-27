@@ -25,6 +25,8 @@ const Login = () => {
     });
     if (response.ok) {
       setTimeout(() => setRedirect(true), 4000);
+    } else {
+      setTimeout(() => setLoading(false), 4000);
     }
   }
 

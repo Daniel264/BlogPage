@@ -48,6 +48,8 @@ app.post("/login", async (req, res) => {
         res.cookie("token", token).json("ok");
       }
     );
+  } else {
+    return res.status(400).json({ message: "Incorrect password" });
   }
 });
 
