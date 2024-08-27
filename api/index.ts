@@ -3,8 +3,10 @@ import express from "express";
 const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
+const jwt = require("jsonwebtoken");
 const User = require("../api/models/User");
 const bcrypt = require("bcryptjs");
+const secret = "hhfu8f7djfdlhijsfjuf78g7fvjfg";
 
 app.use(cors());
 app.use(express.json());
@@ -32,7 +34,19 @@ app.post("/login", async (req, res) => {
   const { email, password } = req.body;
   const userDoc = await User.findOne({ email });
   const PassOk = bcrypt.compareSync(password, userDoc.password);
-  res.json(PassOk);
+  if (PassOk) {
+    jwt.sign(
+      { email, id: userDoc._id },
+      secret,
+      {},
+      (error: Error | null, token: string | undefined) => {
+        if (error) throw error;
+        res.cookie("token", token).json("ok");
+      }
+    );
+  } else {
+    res.status(400).json({ message: "Invalid credentials" });
+  }
 });
 
 const port = process.env.PORT || 3000;
