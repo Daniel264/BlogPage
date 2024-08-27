@@ -1,20 +1,29 @@
 import { FormEvent, useState } from "react";
 import Header from "./Header";
+import { Navigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [redirect, setRedirect] = useState(false);
 
   async function login(event: FormEvent) {
     event.preventDefault();
-    await fetch("http://localhost:3000/login", {
+    const response = await fetch("http://localhost:3000/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email, password }),
-      credentials: 'include'
+      credentials: "include",
     });
+    if (response.ok) {
+      setTimeout(() => setRedirect(true), 4000);
+    }
+  }
+
+  if (redirect) {
+    return <Navigate to="/" />;
   }
 
   return (
