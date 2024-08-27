@@ -31,10 +31,9 @@ app.post("/register", async (req, res) => {
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
   const userDoc = await User.findOne({ email });
-  res.json(userDoc);
+  const PassOk = bcrypt.compareSync(password, userDoc.password);
+  res.json(PassOk);
 });
-
-
 
 const port = process.env.PORT || 3000;
 
