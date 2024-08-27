@@ -8,7 +8,7 @@ const User = require("../api/models/User");
 const bcrypt = require("bcryptjs");
 const secret = "hhfu8f7djfdlhijsfjuf78g7fvjfg";
 
-app.use(cors());
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.json());
 
 const salt = bcrypt.genSaltSync(10);
