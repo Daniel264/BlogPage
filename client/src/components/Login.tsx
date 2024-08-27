@@ -6,9 +6,15 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  // function Loading() {
+  //   return <span className="loading loading-dots loading-xs"></span>;
+  // }
 
   async function login(event: FormEvent) {
     event.preventDefault();
+    setLoading(true);
     const response = await fetch("http://localhost:3000/login", {
       method: "POST",
       headers: {
@@ -100,7 +106,11 @@ const Login = () => {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Sign in
+                {loading ? (
+                  <span className="loading loading-dots loading-lg"></span>
+                ) : (
+                  "sign in"
+                )}
               </button>
             </div>
           </form>
