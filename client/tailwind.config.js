@@ -10,7 +10,10 @@ export default {
   plugins: [
     // eslint-disable-next-line no-undef
     require('@tailwindcss/forms'),
-    // eslint-disable-next-line no-undef
-    require('daisyui')
+    // eslint-disable-next-line no-undef, @typescript-eslint/no-var-requires
+    require('daisyui'),
   ],
+  daisyui: {
+    themes: [],
+  }
 }
