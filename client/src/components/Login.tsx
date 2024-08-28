@@ -7,7 +7,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState("");
 
   // function Loading() {
   //   return <span className="loading loading-dots loading-xs"></span>;
@@ -33,14 +33,15 @@ const Login = () => {
       setTimeout(() => setLoading(false), 4000);
     }
     if (response.ok) {
-      setSuccess(true);
+      setSuccess("Yes");
+    } else {
+      setSuccess("No");
     }
   }
 
   if (redirect) {
     return <Navigate to="/" />;
   }
-
 
   return (
     <>
@@ -133,10 +134,10 @@ const Login = () => {
             >
               Start a 14 day free trial
             </a>
-            {success ? (
+            {success == "Yes" ? (
               <div
                 role="alert mt-16"
-                className="alert alert-success text-green-500 border-none"
+                className="alert alert-success text-green-500"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -152,6 +153,26 @@ const Login = () => {
                   />
                 </svg>
                 <span>Verification Successful</span>
+              </div>
+            ) : (
+              ""
+            )}
+            {success == "No" ? (
+              <div role="alert" className="alert alert-error text-red-500">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 shrink-0 stroke-current"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <span>Invalid Credentials.</span>
               </div>
             ) : (
               ""
