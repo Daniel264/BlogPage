@@ -1,8 +1,27 @@
 import { PhotoIcon } from "@heroicons/react/24/solid";
-import ReactQuill from 'react-quill'
-import 'react-quill/dist/quill.snow.css'
+import { useState } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const CreatePost = () => {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const modules = {
+    toolbar: [
+      ["bold", "italic", "underline", "strike"],
+      ["blockquote", "code-block"],
+      [{ header: 1 }, { header: 2 }],
+      [{ list: "ordered" }, { list: "bullet" }],
+      [{ script: "sub" }, { script: "super" }],
+      [{ indent: "-1" }, { indent: "+1" }],
+      ["link", "image"],
+      ["clean"],
+    ],
+    // clipboard: {
+    //   // toggle to add extra line breaks before/after clipboard content
+    //   matchVisual: false
+    // }
+  };
   return (
     <form className="">
       <div className="space-y-12">
@@ -21,7 +40,7 @@ const CreatePost = () => {
                 htmlFor="username"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Username
+                Title
               </label>
               <div className="mt-2 w-full">
                 <div className="flex rounded-md shadow-sm w-full ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
