@@ -6,15 +6,17 @@ const app = express();
 const jwt = require("jsonwebtoken");
 const User = require("../api/models/User");
 const bcrypt = require("bcryptjs");
+const cookieParser = require("cookie-parser");
 const secret = "hhfu8f7djfdlhijsfjuf78g7fvjfg";
 
 app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 app.use(express.json());
+app.use(cookieParser());
 
 const salt = bcrypt.genSaltSync(10);
 
 mongoose.connect(
-  "mongodb+srv://Daniel264:eL9wKRx5PyydyqLT@cluster0.q5k8t.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+  "mongodb+srv://Blog:SZJThMSYPE3FrF5Q@cluster0.n60ur.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 );
 
 app.post("/register", async (req, res) => {
@@ -53,6 +55,14 @@ app.post("/login", async (req, res) => {
   }
 });
 
+app.get("/profile", (req, res) => {
+  const { token } = req.cookies;
+  jwt.verify(token, secret, {}, (err: Error, info: any) => {
+    if (err) throw err;
+    res.json(info);
+  });
+});
+
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => console.log(`listening on port ${port} `));
@@ -61,3 +71,6 @@ app.listen(port, () => console.log(`listening on port ${port} `));
 //mongodb+srv://Daniel264:eL9wKRx5PyydyqLT@cluster0.q5k8t.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 
 // 2590682f-b507-440d-a2c5-4d61e41b040c
+
+// pass
+// SZJThMSYPE3FrF5Q

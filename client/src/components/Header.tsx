@@ -1,6 +1,13 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const header = () => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    fetch("http://localhost:3000/profile", {
+      credentials: "include",
+    });
+  }, []);
   return (
     <>
       <header className="flex justify-between">
