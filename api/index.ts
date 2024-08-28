@@ -16,7 +16,10 @@ app.use(cookieParser());
 const salt = bcrypt.genSaltSync(10);
 
 mongoose.connect(
-  "mongodb+srv://Blog:SZJThMSYPE3FrF5Q@cluster0.n60ur.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+  "mongodb+srv://Blog:SZJThMSYPE3FrF5Q@cluster0.n60ur.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+  {
+    serverSelectionTimeoutMS: 30000,
+  }
 );
 
 app.post("/register", async (req, res) => {
@@ -57,10 +60,15 @@ app.post("/login", async (req, res) => {
 
 app.get("/profile", (req, res) => {
   const { token } = req.cookies;
+  if (!token) return res.status(401).json({ message: "Not authenticated" });
   jwt.verify(token, secret, {}, (err: Error, info: any) => {
     if (err) throw err;
     res.json(info);
   });
+});
+
+app.post("/logout", (req, res) => {
+  res.cookie("token", "").json("ok");
 });
 
 const port = process.env.PORT || 3000;
