@@ -3,25 +3,63 @@ import { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
+const modules = {
+  toolbar: [
+    ["bold", "italic", "underline", "strike"],
+    ["blockquote", "code-block"],
+    [{ header: 1 }, { header: 2 }],
+    [{ list: "ordered" }, { list: "bullet" }],
+    [{ script: "sub" }, { script: "super" }],
+    [{ indent: "-1" }, { indent: "+1" }],
+    ["link", "image"],
+    ["clean"],
+  ],
+  // clipboard: {
+  //   // toggle to add extra line breaks before/after clipboard content
+  //   matchVisual: false
+  // }
+};
+const formats = [
+  "header",
+  "font",
+  "size",
+  "bold",
+  "italic",
+  "underline",
+  "strike",
+  "blockquote",
+  "code-block",
+  "image",
+  "link",
+  "clean",
+  "list",
+  "indent",
+  "script",
+  "direction",
+  "align",
+  "color",
+  "background",
+  "font-family",
+  "font-weight",
+  "line-height",
+  "text-decoration",
+  "text-align",
+  "text-indent",
+  "text-transform",
+  "text-white-space",
+  "text-overflow",
+  "text-decoration-color",
+  "text-decoration-line",
+  "text-decoration-style",
+  "text-decoration-skip",
+  "letter-spacing",
+  "word-spacing",
+];
 const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const modules = {
-    toolbar: [
-      ["bold", "italic", "underline", "strike"],
-      ["blockquote", "code-block"],
-      [{ header: 1 }, { header: 2 }],
-      [{ list: "ordered" }, { list: "bullet" }],
-      [{ script: "sub" }, { script: "super" }],
-      [{ indent: "-1" }, { indent: "+1" }],
-      ["link", "image"],
-      ["clean"],
-    ],
-    // clipboard: {
-    //   // toggle to add extra line breaks before/after clipboard content
-    //   matchVisual: false
-    // }
-  };
+  const [summary, setSummary] = useState("");
+
   return (
     <form className="">
       <div className="space-y-12">
@@ -51,6 +89,8 @@ const CreatePost = () => {
                     id="username"
                     name="username"
                     type="text"
+                    value={title}
+                    onChange={(ev) => setTitle(ev.target.value)}
                     placeholder="janesmith"
                     autoComplete="username"
                     className="block flex-1 border-0 w-full bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
@@ -58,7 +98,35 @@ const CreatePost = () => {
                 </div>
               </div>
             </div>
-            <ReactQuill />
+            <div className="w-full">
+              <label
+                htmlFor="username"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Summary
+              </label>
+              <div className="mt-2 w-full">
+                <div className="flex rounded-md shadow-sm w-full ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
+                  <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm"></span>
+                  <input
+                    id="username"
+                    name="username"
+                    type="text"
+                    value={summary}
+                    onChange={(ev) => setSummary(ev.target.value)}
+                    placeholder="janesmith"
+                    autoComplete="username"
+                    className="block flex-1 border-0 w-full bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                  />
+                </div>
+              </div>
+            </div>
+            <ReactQuill
+              value={content}
+              modules={modules}
+              formats={formats}
+              onChange={setContent}
+            />
 
             <div className="col-span-full mt-10">
               <label
@@ -94,6 +162,7 @@ const CreatePost = () => {
                 </div>
               </div>
             </div>
+                <button className="btn">Create Post</button>
           </div>
         </div>
       </div>
