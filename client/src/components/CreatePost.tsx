@@ -2,6 +2,7 @@ import { PhotoIcon } from "@heroicons/react/24/solid";
 import { FormEvent, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { Navigate } from "react-router-dom";
 
 const modules = {
   toolbar: [
@@ -71,12 +72,20 @@ const CreatePost = () => {
       method: "POST",
       body: data,
     });
-    console.log(await response.json());
-    
+    if (response.ok) {
+      setTimeout(() => {
+        setRedirect(true);
+      }, 2000);
+    }
   }
   const [content, setContent] = useState("");
   const [summary, setSummary] = useState("");
   const [file, setFile] = useState<File | null>(null);
+  const [redirect, setRedirect] = useState(false);
+
+  if (redirect) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <form onSubmit={createNewPost} className="">

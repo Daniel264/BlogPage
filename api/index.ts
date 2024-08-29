@@ -1,6 +1,7 @@
 import express from "express";
 import { Request } from "express";
 import { Multer } from "multer";
+const Post = require("./models/Post");
 
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -77,7 +78,7 @@ app.post("/logout", (req, res) => {
   res.cookie("token", "").json("ok");
 });
 
-app.post("/post", uploadMiddleware.single("file"), (req, res) => {
+app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
   const file = req.file as Express.Multer.File | undefined;
   if (!file) {
     return res.status(400).json({ message: "No file uploaded" });
@@ -85,8 +86,17 @@ app.post("/post", uploadMiddleware.single("file"), (req, res) => {
 
   const parts = file.originalname.split(".");
   const extension = parts[parts.length - 1];
-  fs.renameSync(file.path, `uploads/${file.filename}.${extension}`);
-  res.json({ extension });
+  const newPath = `uploads/${file.filename}.${extension}`;
+  fs.renameSync(file.path, newPath);
+
+  const { title, summary, content } = req.body;
+  const postDoc = await Post.create({
+    title,
+    summary,
+    content,
+    cover: newPath,
+  });
+  res.json(postDoc);
 });
 
 const port = process.env.PORT || 3000;
