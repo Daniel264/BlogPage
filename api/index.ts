@@ -1,4 +1,6 @@
 import express from "express";
+import { Request } from "express";
+import { Multer } from "multer";
 
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -7,6 +9,9 @@ const jwt = require("jsonwebtoken");
 const User = require("../api/models/User");
 const bcrypt = require("bcryptjs");
 const cookieParser = require("cookie-parser");
+const multer = require("multer");
+const uploadMiddleware = multer({ dest: "uploads/" });
+
 const secret = "hhfu8f7djfdlhijsfjuf78g7fvjfg";
 
 app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
@@ -69,6 +74,17 @@ app.get("/profile", (req, res) => {
 
 app.post("/logout", (req, res) => {
   res.cookie("token", "").json("ok");
+});
+
+app.post("/post", uploadMiddleware.single("file"), (req, res) => {
+  const file = req.file as Express.Multer.File | undefined;
+  if (!file) {
+    return res.status(400).json({ message: "No file uploaded" });
+  }
+
+  const parts = file.originalname.split(".");
+  const extension = parts[parts.length - 1];
+  res.json({ extension });
 });
 
 const port = process.env.PORT || 3000;

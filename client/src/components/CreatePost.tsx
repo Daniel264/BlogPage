@@ -58,23 +58,25 @@ const formats = [
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");
-  function createNewPost(ev: FormEvent) {
+  async function createNewPost(ev: FormEvent) {
     const data = new FormData();
     data.set("title", title);
     data.set("summary", summary);
     data.set("content", content);
-    if (image) data.set("image", image);
+    if (file) data.set("file", file);
 
     ev.preventDefault();
-    console.log(image);
-    fetch("http://localhost/3000/post", {
+    console.log(file);
+    const response = await fetch("http://localhost:3000/post", {
       method: "POST",
       body: data,
     });
+    console.log(await response.json());
+    
   }
   const [content, setContent] = useState("");
   const [summary, setSummary] = useState("");
-  const [image, setImage] = useState<File | null>(null);
+  const [file, setFile] = useState<File | null>(null);
 
   return (
     <form onSubmit={createNewPost} className="">
@@ -166,7 +168,7 @@ const CreatePost = () => {
                         name="file-upload"
                         type="file"
                         onChange={(ev) =>
-                          setImage(ev.target.files ? ev.target.files[0] : null)
+                          setFile(ev.target.files ? ev.target.files[0] : null)
                         }
                         className="sr-only"
                       />
