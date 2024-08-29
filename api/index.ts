@@ -11,6 +11,7 @@ const bcrypt = require("bcryptjs");
 const cookieParser = require("cookie-parser");
 const multer = require("multer");
 const uploadMiddleware = multer({ dest: "uploads/" });
+const fs = require("fs");
 
 const secret = "hhfu8f7djfdlhijsfjuf78g7fvjfg";
 
@@ -84,6 +85,7 @@ app.post("/post", uploadMiddleware.single("file"), (req, res) => {
 
   const parts = file.originalname.split(".");
   const extension = parts[parts.length - 1];
+  fs.renameSync(file.path, `uploads/${file.filename}.${extension}`);
   res.json({ extension });
 });
 
