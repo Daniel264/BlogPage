@@ -1,5 +1,5 @@
 import { PhotoIcon } from "@heroicons/react/24/solid";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
@@ -55,13 +55,29 @@ const formats = [
   "letter-spacing",
   "word-spacing",
 ];
+
 const CreatePost = () => {
   const [title, setTitle] = useState("");
+  function createNewPost(ev: FormEvent) {
+    const data = new FormData();
+    data.set("title", title);
+    data.set("summary", summary);
+    data.set("content", content);
+    if (image) data.set("image", image);
+
+    ev.preventDefault();
+    console.log(image);
+    fetch("http://localhost/3000/post", {
+      method: "POST",
+      body: data,
+    });
+  }
   const [content, setContent] = useState("");
   const [summary, setSummary] = useState("");
+  const [image, setImage] = useState<File | null>(null);
 
   return (
-    <form className="">
+    <form onSubmit={createNewPost} className="">
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-base font-semibold leading-7 text-gray-900">
@@ -75,19 +91,17 @@ const CreatePost = () => {
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 w-full h-max justify-center mx-auto">
             <div className="w-full">
               <label
-                htmlFor="username"
+                htmlFor="title"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
                 Title
               </label>
               <div className="mt-2 w-full">
                 <div className="flex rounded-md shadow-sm w-full ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
-                  <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm">
-                    workcation.com/
-                  </span>
+                  <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm"></span>
                   <input
-                    id="username"
-                    name="username"
+                    id="title"
+                    name="title"
                     type="text"
                     value={title}
                     onChange={(ev) => setTitle(ev.target.value)}
@@ -100,7 +114,7 @@ const CreatePost = () => {
             </div>
             <div className="w-full">
               <label
-                htmlFor="username"
+                htmlFor="summary"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
                 Summary
@@ -109,8 +123,8 @@ const CreatePost = () => {
                 <div className="flex rounded-md shadow-sm w-full ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
                   <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm"></span>
                   <input
-                    id="username"
-                    name="username"
+                    id="summary"
+                    name="summary"
                     type="text"
                     value={summary}
                     onChange={(ev) => setSummary(ev.target.value)}
@@ -151,6 +165,9 @@ const CreatePost = () => {
                         id="file-upload"
                         name="file-upload"
                         type="file"
+                        onChange={(ev) =>
+                          setImage(ev.target.files ? ev.target.files[0] : null)
+                        }
                         className="sr-only"
                       />
                     </label>
@@ -162,7 +179,7 @@ const CreatePost = () => {
                 </div>
               </div>
             </div>
-                <button className="btn">Create Post</button>
+            <button className="btn">Create Post</button>
           </div>
         </div>
       </div>
