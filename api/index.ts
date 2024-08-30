@@ -30,7 +30,7 @@ mongoose.connect(
 );
 
 app.post("/register", async (req, res) => {
-  const {username, email, password } = req.body;
+  const { username, email, password } = req.body;
   try {
     const userDoc = await User.create({
       username,
@@ -44,7 +44,7 @@ app.post("/register", async (req, res) => {
 });
 
 app.post("/login", async (req, res) => {
-  const {username, email, password } = req.body;
+  const { username, email, password } = req.body;
   const userDoc = await User.findOne({ email });
 
   if (!userDoc) {
@@ -53,7 +53,7 @@ app.post("/login", async (req, res) => {
   const PassOk = bcrypt.compareSync(password, userDoc.password);
   if (PassOk) {
     jwt.sign(
-      {username, email, id: userDoc._id },
+      { username, email, id: userDoc._id },
       secret,
       {},
       (error: Error | null, token: string | undefined) => {
@@ -89,22 +89,28 @@ app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
   const extension = parts[parts.length - 1];
   const newPath = `uploads/${file.filename}.${extension}`;
   fs.renameSync(file.path, newPath);
+  const { token } = req.cookies;
+  if (!token) return res.status(401).json({ message: "Not authenticated" });
+  jwt.verify(token, secret, {}, async (err: Error, info: any) => {
+    if (err) throw err;
 
-  const { title, summary, content } = req.body;
-  const postDoc = await Post.create({
-    title,
-    summary,
-    content,
-    cover: newPath,
+    const { title, summary, content } = req.body;
+    const postDoc = await Post.create({
+      title,
+      summary,
+      content,
+      cover: newPath,
+      author: info.id,
+    });
+    res.json(postDoc);
   });
-  res.json(postDoc);
 });
 
 app.get("/post", async (req, res) => {
-  const posts = await Post.find({});
-  res.json(posts);
-});
-
+    const posts = await Post.find().populate("author", ["username"]);
+    res.json(posts);
+  });
+  
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => console.log(`listening on port ${port} `));
