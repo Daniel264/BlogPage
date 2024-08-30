@@ -5,8 +5,6 @@ import { formatISO9075 } from "date-fns";
 const BlogPage = ({
   title,
   summary,
-  content,
-  cover,
   createdAt,
   author,
 }: Post) => {

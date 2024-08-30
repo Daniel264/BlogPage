@@ -107,10 +107,12 @@ app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
 });
 
 app.get("/post", async (req, res) => {
-    const posts = await Post.find().populate("author", ["username"]);
-    res.json(posts);
-  });
-  
+  const posts = await Post.find()
+    .populate("author", ["username"])
+    .sort({ createdAt: -1 });
+  res.json(posts);
+});
+
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => console.log(`listening on port ${port} `));
