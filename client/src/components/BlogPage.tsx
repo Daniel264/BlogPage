@@ -1,20 +1,19 @@
 import blogImage from "../images/blog-img.jpg";
+import Post from "../assets/Interface/usePost";
 
-const BlogPage = () => {
+const BlogPage = ({title, summary, content, cover, createdAt}: Post) => {
   return (
     <div className="flex mt-10">
       <div className="w-[70rem]">
-        <img className="w-max" src={blogImage} alt="" />
+        <img className="w-max" src={content} alt="" />
       </div>
       <div className="pl-5">
         <h1 className="text-4xl font-semibold">
-          Full house battery backup coming later this year
+          {title}
         </h1>
+        <p>{createdAt}</p>
         <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit
-          itaque ullam illo dicta velit cumque esse dignissimos blanditiis omnis
-          vel possimus rerum in dolore quidem, voluptates consequuntur. Earum,
-          velit nobis.
+          {summary}
         </p>
       </div>
     </div>

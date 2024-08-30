@@ -4,6 +4,7 @@ interface Post {
     summary: string;
     content: string;
     cover: string;
+    createdAt: string;
 
   }
 

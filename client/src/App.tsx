@@ -20,10 +20,7 @@ function App() {
         element={
           <>
             <Header />
-            {/* <BlogPage />
-            <BlogPage />
-            <BlogPage /> */}
-            {posts.length > 0 && posts.map((post) => <BlogPage {...post} />)}
+            {posts.length > 0 && posts.map((post) => <BlogPage key={post.id} {...post} />)}
           </>
         }
       />
