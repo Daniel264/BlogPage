@@ -114,6 +114,13 @@ app.get("/post", async (req, res) => {
   res.json(posts);
 });
 
+app.get("/post/:id", async (req, res) => {
+  const post = await Post.findById(req.params.id)
+   .populate("author", ["username"]);
+  if (!post) return res.status(404).json({ message: "Post not found" });
+  res.json(post);
+})
+
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => console.log(`listening on port ${port} `));
