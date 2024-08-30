@@ -2,12 +2,13 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import BlogPage from "./components/BlogPage";
 import Header from "./components/Header";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [posts, setPosts] = useState([]);
   useEffect(() => {
     fetch("http://localhost:3000/post").then((response) =>
-      response.json().then((posts) => console.log(posts))
+      response.json().then((posts) => setPosts(posts))
     );
   }, []);
 
@@ -18,9 +19,10 @@ function App() {
         element={
           <>
             <Header />
+            {/* <BlogPage />
             <BlogPage />
-            <BlogPage />
-            <BlogPage />
+            <BlogPage /> */}
+            {posts.length > 0 && posts.map((post) => <BlogPage {...post} />)}
           </>
         }
       />
