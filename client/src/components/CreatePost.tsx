@@ -1,4 +1,4 @@
-import { PhotoIcon } from "@heroicons/react/24/solid";
+
 import { FormEvent, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -93,7 +93,7 @@ const CreatePost = () => {
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-base font-semibold leading-7 text-gray-900">
-            Profile
+            Blog Content
           </h2>
           <p className="mt-1 text-sm leading-6 text-gray-600">
             This information will be displayed publicly so be careful what you
@@ -169,7 +169,7 @@ const CreatePost = () => {
                 className="file-input file-input-bordered w-full sm:max-w-full"
               />
             </div>
-            <button className="btn">Create Post</button>
+            <button className="btn bg-black text-white">Create Post</button>
           </div>
         </div>
       </div>
