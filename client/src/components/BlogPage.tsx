@@ -73,6 +73,11 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
             <h3 className="font-bold text-lg">Hello!</h3>
             <p className="py-4">
               <Comments />
+              <input
+                type="text"
+                placeholder="Type here"
+                className="input input-bordered mt-5 ml-16 w-full max-w-xs"
+              />
             </p>
           </div>
           <form method="dialog" className="modal-backdrop">
