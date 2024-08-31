@@ -9,6 +9,7 @@ const Login = () => {
   const [redirect, setRedirect] = useState(false);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState("");
+  // const [header, setHeader] = useState(false)
 
   // function Loading() {
   //   return <span className="loading loading-dots loading-xs"></span>;
