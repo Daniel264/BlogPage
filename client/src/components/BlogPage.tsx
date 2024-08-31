@@ -28,7 +28,7 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
 
   setTimeout;
   return (
-    <div className="flex flex-col mt-10 font-montserrat">
+    <div className="flex flex-col mt-10 font-montserrat lg:w-9/12 lg:border-r-[2px] lg:border-dashed lg:pr-32">
       <div className="pl-5 text-left">
         <div className="flex flex-row w-full justify-between">
           <span className="font-regular flex">
