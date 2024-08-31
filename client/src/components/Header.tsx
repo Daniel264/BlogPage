@@ -5,9 +5,11 @@ import "@fontsource/roboto/700.css"; //
 import "@fontsource/alex-brush";
 
 const Header = () => {
+
   const [email, setEmail] = useState(null);
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
+
     fetch("http://localhost:3000/profile", {
       credentials: "include",
     }).then((response) => {
@@ -16,6 +18,8 @@ const Header = () => {
       });
     });
   }, []);
+
+
   function logout() {
     fetch("http://localhost:3000/logout", {
       credentials: "include",
@@ -188,7 +192,7 @@ const Header = () => {
         </div>
         <label className="swap swap-rotate">
   {/* this hidden checkbox controls the state */}
-  <input type="checkbox" className="theme-controller" value="synthwave" />
+  <input type="checkbox" className="theme-controller" value="dark" />
 
   {/* sun icon */}
   <svg
