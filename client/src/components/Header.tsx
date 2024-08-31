@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/700.css"; //
 import "@fontsource/alex-brush";
+import { FaPlus, FaCog } from "react-icons/fa";
 
 const Header = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
@@ -160,16 +161,27 @@ const Header = () => {
               aria-label="close sidebar"
               className="drawer-overlay"
             ></label>
-            <ul className="menu bg-black min-h-full w-96 text-white font-medium text-xl p-4">
+            <ul className="menu min-h-full w-96 text-white font-medium text-xl p-4">
               {/* Sidebar content here */}
               <li>
                 {email && (
                   <>
-                    <Link to="/create">Create Post</Link>
+                    <Link to="/create">
+                      Create Post <FaPlus />
+                    </Link>
                   </>
                 )}
               </li>
               <li>
+                <li>
+                  {email && (
+                    <>
+                      <Link to="/settings">
+                        Settings <FaCog />
+                      </Link>
+                    </>
+                  )}
+                </li>
                 <a>
                   {email && (
                     <>
@@ -193,6 +205,7 @@ const Header = () => {
                     </>
                   )}
                 </a>
+
                 <a>Sidebar Item 2</a>
               </li>
             </ul>
