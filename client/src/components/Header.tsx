@@ -199,10 +199,8 @@ const Header = () => {
           </div>
         </div>
         <label onChange={themeState} className="swap swap-rotate">
+          <input type="checkbox" className="theme-controller opacity-0" />
 
-          <input type="checkbox" className="theme-controller opacity-0" value="dark" />
-
-    
           <svg
             className="swap-off h-10 w-10 fill-current"
             xmlns="http://www.w3.org/2000/svg"
