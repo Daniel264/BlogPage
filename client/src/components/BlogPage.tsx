@@ -4,6 +4,7 @@ import Post from "../assets/Interface/usePost";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import "@fontsource/roboto/";
+import Comments from "./Comments";
 
 const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
   const [loading, setLoading] = useState(true);
@@ -70,7 +71,9 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
         <dialog id="my_modal_2" className="modal">
           <div className="modal-box">
             <h3 className="font-bold text-lg">Hello!</h3>
-            <p className="py-4">Press ESC key or click outside to close</p>
+            <p className="py-4">
+              <Comments />
+            </p>
           </div>
           <form method="dialog" className="modal-backdrop">
             <button>close</button>
