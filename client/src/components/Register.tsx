@@ -25,7 +25,7 @@ const Register = () => {
             src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
             className="mx-auto h-10 w-auto"
           />
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight ">
             Register for an account
           </h2>
         </div>
@@ -39,7 +39,7 @@ const Register = () => {
             <div>
               <label
                 htmlFor="username"
-                className="block text-sm font-medium leading-6 text-left text-gray-900"
+                className="block text-sm font-medium leading-6 text-left "
               >
                 Username
               </label>
@@ -59,7 +59,7 @@ const Register = () => {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium leading-6 text-left text-gray-900"
+                className="block text-sm font-medium leading-6 text-left "
               >
                 Email address
               </label>
@@ -80,7 +80,7 @@ const Register = () => {
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  className="block text-sm font-medium leading-6 "
                 >
                   Password
                 </label>
