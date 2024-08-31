@@ -1,4 +1,3 @@
-
 import { FormEvent, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -92,10 +91,8 @@ const CreatePost = () => {
     <form onSubmit={createNewPost} className="">
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
-          <h2 className="text-base font-semibold leading-7 text-gray-900">
-            Blog Content
-          </h2>
-          <p className="mt-1 text-sm leading-6 text-gray-600">
+          <h2 className="text-base font-semibold leading-7">Blog Content</h2>
+          <p className="mt-1 text-sm leading-6 ">
             This information will be displayed publicly so be careful what you
             share.
           </p>
@@ -104,7 +101,7 @@ const CreatePost = () => {
             <div className="w-full">
               <label
                 htmlFor="title"
-                className="block text-sm font-medium leading-6 text-gray-900"
+                className="block text-sm font-medium leading-6 "
               >
                 Title
               </label>
@@ -127,7 +124,7 @@ const CreatePost = () => {
             <div className="w-full">
               <label
                 htmlFor="summary"
-                className="block text-sm font-medium leading-6 text-gray-900"
+                className="block text-sm font-medium leading-6 "
               >
                 Summary
               </label>
@@ -147,17 +144,17 @@ const CreatePost = () => {
                 </div>
               </div>
             </div>
+            Write Something...
             <ReactQuill
               value={content}
               modules={modules}
               formats={formats}
               onChange={setContent}
             />
-
             <div className="col-span-full mt-10 w-full">
               <label
                 htmlFor="cover-photo"
-                className="block text-sm font-medium leading-6 text-gray-900"
+                className="block text-sm font-medium leading-6 "
               >
                 Upload Image
               </label>

@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import { useEffect, useState } from "react";
 import Post from "./assets/Interface/usePost";
 
+
 function App() {
   const [posts, setPosts] = useState<Post[]>([]);
   useEffect(() => {
@@ -12,6 +13,7 @@ function App() {
       response.json().then((posts) => setPosts(posts))
     );
   }, []);
+  
 
   return (
     <Routes>
@@ -20,7 +22,11 @@ function App() {
         element={
           <>
             <Header />
-            {posts.length > 0 && posts.map((post) => <BlogPage key={post.id} {...post} />)}
+            {/* <h1 className="font-normal text-2xl md:text-5xl text-left mt-5">
+              Hi 👋
+            </h1> */}
+            {posts.length > 0 &&
+              posts.map((post) => <BlogPage key={post.id} {...post} />)}
           </>
         }
       />

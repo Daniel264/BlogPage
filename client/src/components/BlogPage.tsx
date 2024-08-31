@@ -2,13 +2,32 @@
 import { Link } from "react-router-dom";
 import Post from "../assets/Interface/usePost";
 import { formatISO9075 } from "date-fns";
+import { useEffect, useState } from "react";
 
 const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+  if (loading) {
+    return (
+      <div className="flex w-full flex-col gap-4 mt-16">
+        <div className="skeleton h-32 w-full"></div>
+        <div className="skeleton h-4 w-28"></div>
+        <div className="skeleton h-4 w-full"></div>
+        <div className="skeleton h-4 w-full"></div>
+      </div>
+    );
+  }
+
+  setTimeout;
   return (
     <div className="flex flex-col mt-10 font-roboto">
-      <h1 className="font-medium text-2xl md:text-5xl text-left pb-5">
-        Hi {author?.username} 👋
-      </h1>
       <div className="pl-5 text-left">
         <div className="flex flex-row w-full justify-between">
           <span className="">{author?.username}</span>
