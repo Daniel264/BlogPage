@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        alexBrush: ['Alex Brush', 'cursive']
+        alexBrush: ['Alex Brush', 'cursive'],
+        roboto: ['Roboto', 'sans-serif'],
       }
     },
   },

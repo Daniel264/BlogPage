@@ -5,7 +5,10 @@ import { formatISO9075 } from "date-fns";
 
 const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
   return (
-    <div className="flex flex-col mt-10">
+    <div className="flex flex-col mt-10 font-roboto">
+      <h1 className="font-medium text-2xl md:text-5xl text-left pb-5">
+        Hi {author?.username} 👋
+      </h1>
       <div className="pl-5 text-left">
         <div className="flex flex-row w-full justify-between">
           <span className="">{author?.username}</span>
