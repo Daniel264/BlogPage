@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Post from "../assets/Interface/usePost";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
-import '@fontsource/roboto/';
+import "@fontsource/roboto/";
 
 const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
   const [loading, setLoading] = useState(true);
@@ -28,10 +28,18 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
 
   setTimeout;
   return (
-    <div className="flex flex-col mt-10 font-roboto">
+    <div className="flex flex-col mt-10 font-montserrat">
       <div className="pl-5 text-left">
         <div className="flex flex-row w-full justify-between">
-          <span className="font-regular">{author?.username}</span>
+          <span className="font-regular flex">
+            <div className="avatar mr-3">
+              <div className="ring-primary ring-offset-base-100 text-center w-7 rounded-full border-solid border-black border-[1px] bg-slate-600">
+                <p className="font-extrabold">A</p>
+                {/* <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" /> */}
+              </div>
+            </div>
+            <p>{author?.username}</p>
+          </span>
           <time>{format(new Date(createdAt), "MMMM do, yyyy")}</time>
         </div>
         <Link
@@ -51,7 +59,7 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
           />
         </Link>
       </div>
-      <hr className="border-dashed bg-gray-300 h-[1px]"/>
+      <hr className="border-dashed bg-gray-300 h-[1px]" />
     </div>
   );
 };
