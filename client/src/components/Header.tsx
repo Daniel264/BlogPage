@@ -5,8 +5,20 @@ import "@fontsource/roboto/700.css"; //
 import "@fontsource/alex-brush";
 
 const Header = () => {
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const [email, setEmail] = useState(null);
   // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    // Apply the theme stored in localStorage or default to light theme
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
+  function themeState() {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+    document.documentElement.setAttribute("data-theme", newTheme);
+  }
   useEffect(() => {
     fetch("http://localhost:3000/profile", {
       credentials: "include",
@@ -186,11 +198,11 @@ const Header = () => {
             </ul>
           </div>
         </div>
-        <label className="swap swap-rotate">
-          {/* this hidden checkbox controls the state */}
+        <label onChange={themeState} className="swap swap-rotate">
+
           <input type="checkbox" className="theme-controller opacity-0" value="dark" />
 
-          {/* sun icon */}
+    
           <svg
             className="swap-off h-10 w-10 fill-current"
             xmlns="http://www.w3.org/2000/svg"
