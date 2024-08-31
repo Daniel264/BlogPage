@@ -1,6 +1,7 @@
 import { FormEvent, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import '@fontsource/roboto';
 import { Navigate } from "react-router-dom";
 
 const modules = {
@@ -89,9 +90,9 @@ const CreatePost = () => {
 
   return (
     <form onSubmit={createNewPost} className="">
-      <div className="space-y-12">
+      <div className="space-y-12 font-roboto">
         <div className="border-b border-gray-900/10 pb-12">
-          <h2 className="text-base font-semibold leading-7">Blog Content</h2>
+          <h2 className=" font-bold leading-7 text-3xl">New Blog</h2>
           <p className="mt-1 text-sm leading-6 ">
             This information will be displayed publicly so be careful what you
             share.
@@ -114,9 +115,10 @@ const CreatePost = () => {
                     type="text"
                     value={title}
                     onChange={(ev) => setTitle(ev.target.value)}
-                    placeholder="janesmith"
+                    placeholder="Add a title..."
                     autoComplete="username"
-                    className="block flex-1 border-0 w-full bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                    className="block flex-1 border-0 w-full bg-transparent py-1.5 pl-1 text-gray-900
+                    placeholder:font-semibold placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                   />
                 </div>
               </div>

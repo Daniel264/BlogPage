@@ -1,8 +1,9 @@
 // import blogImage from "../images/blog-img.jpg";
 import { Link } from "react-router-dom";
 import Post from "../assets/Interface/usePost";
-import { formatISO9075 } from "date-fns";
+import { format } from "date-fns";
 import { useEffect, useState } from "react";
+import '@fontsource/roboto/';
 
 const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
   const [loading, setLoading] = useState(true);
@@ -30,8 +31,8 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
     <div className="flex flex-col mt-10 font-roboto">
       <div className="pl-5 text-left">
         <div className="flex flex-row w-full justify-between">
-          <span className="">{author?.username}</span>
-          <time>{formatISO9075(new Date(createdAt))}</time>
+          <span className="font-regular">{author?.username}</span>
+          <time>{format(new Date(createdAt), "MMMM do, yyyy")}</time>
         </div>
         <Link
           className="sm:text-4xl text-2xl font-semibold"
@@ -50,6 +51,7 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
           />
         </Link>
       </div>
+      <hr className="border-dashed bg-gray-300 h-[1px]"/>
     </div>
   );
 };

@@ -9,6 +9,15 @@ export default {
       fontFamily: {
         alexBrush: ['Alex Brush', 'cursive'],
         roboto: ['Roboto', 'sans-serif'],
+        montserrat: ['Montserrat', 'sans-serif']
+      },
+      fontWeight: {
+        light: 300,
+        regular: 400,
+        medium: 500,
+        bold: 700,
+        black: 900,
+
       }
     },
   },
