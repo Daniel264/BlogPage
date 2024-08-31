@@ -100,7 +100,7 @@ const CreatePost = () => {
             share.
           </p>
 
-          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 w-full h-max justify-center mx-auto">
+          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 w-full h-max justify-center mx-auto sm:max-w-xl lg:max-w-full">
             <div className="w-full">
               <label
                 htmlFor="title"
@@ -154,42 +154,20 @@ const CreatePost = () => {
               onChange={setContent}
             />
 
-            <div className="col-span-full mt-10">
+            <div className="col-span-full mt-10 w-full">
               <label
                 htmlFor="cover-photo"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
                 Upload Image
               </label>
-              <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                <div className="text-center">
-                  <PhotoIcon
-                    aria-hidden="true"
-                    className="mx-auto h-12 w-12 text-gray-300"
-                  />
-                  <div className="mt-4 flex text-sm leading-6 text-gray-600">
-                    <label
-                      htmlFor="file-upload"
-                      className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
-                    >
-                      <span>Upload a file</span>
-                      <input
-                        id="file-upload"
-                        name="file-upload"
-                        type="file"
-                        onChange={(ev) =>
-                          setFile(ev.target.files ? ev.target.files[0] : null)
-                        }
-                        className="sr-only"
-                      />
-                    </label>
-                    <p className="pl-1">or drag and drop</p>
-                  </div>
-                  <p className="text-xs leading-5 text-gray-600">
-                    PNG, JPG, GIF up to 10MB
-                  </p>
-                </div>
-              </div>
+              <input
+                onChange={(ev) =>
+                  setFile(ev.target.files ? ev.target.files[0] : null)
+                }
+                type="file"
+                className="file-input file-input-bordered w-full sm:max-w-full"
+              />
             </div>
             <button className="btn">Create Post</button>
           </div>
