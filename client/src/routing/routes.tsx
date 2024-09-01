@@ -5,9 +5,11 @@ import App from "../App";
 import CreatePost from "../components/CreatePost";
 import PostPage from "../components/PostPage";
 import Settings from "../components/Settings";
+import AnimatePage from "../components/AnimatePage";
 
 const router = createBrowserRouter([
-  { path: "/", element: <App /> },
+  { path: "/", element: <AnimatePage /> },
+  { path: "/home", element: <App /> },
   { path: "/Login", element: <Login /> },
   { path: "/Register", element: <Register /> },
   { path: "/Create", element: <CreatePost /> },

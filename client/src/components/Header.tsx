@@ -100,7 +100,7 @@ const Header = () => {
               <div className="mx-2 flex-1 px-2">
                 {" "}
                 <Link
-                  to="/"
+                  to="/home"
                   className="font-bold text-3xl md:text-5xl font-alexBrush"
                 >
                   MyBlog

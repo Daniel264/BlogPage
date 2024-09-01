@@ -85,7 +85,7 @@ const CreatePost = () => {
   const [redirect, setRedirect] = useState(false);
 
   if (redirect) {
-    return <Navigate to="/" />;
+    return <Navigate to="home" />;
   }
 
   return (
