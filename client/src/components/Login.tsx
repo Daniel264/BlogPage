@@ -182,7 +182,7 @@ const Login = () => {
               ""
             )}
             {success == "No" ? (
-              <div role="alert" className="alert alert-error text-red-500">
+              <div role="alert" className="alert alert-error text-red-500 bg-inherit">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6 shrink-0 stroke-current"
