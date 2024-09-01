@@ -22,7 +22,7 @@ const secret = "hhfu8f7djfdlhijsfjuf78g7fvjfg";
 app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 app.use(express.json());
 app.use(cookieParser());
-app.use(express.urlencoded({ extended: true}))
+app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static(__dirname + "/uploads"));
 
 const salt = bcrypt.genSaltSync(10);
@@ -139,7 +139,10 @@ app.post("/comment", upload.none(), async (req, res) => {
   res.json(CommentDoc);
 });
 
-// app.get('/comment')
+app.get("/comment", async (req, res) => {
+  const comments = await Comment.find().populate("author", ["username"]);
+  res.json(comments);
+});
 
 const port = process.env.PORT || 3000;
 

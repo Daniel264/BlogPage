@@ -1,6 +1,6 @@
 // import { FormEvent } from "react";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { Form } from "react-router-dom";
 
 const Comments = () => {
@@ -21,6 +21,14 @@ const Comments = () => {
     if (response.ok) {
       setComment("");
     }
+    const [rest, setRest] = useState<Post[]>([]);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
+      fetch("http://localhost:3000/comment").then((response) =>
+        response.json().then((posts) => setPosts(posts))
+      );
+    }, []);
+    
   }
   return (
     <div>
