@@ -1,7 +1,9 @@
+import { log } from "console";
 import express from "express";
 import { Request } from "express";
 import { Multer } from "multer";
 const Post = require("./models/Post");
+const Comment = require("./models/Comment");
 
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -12,6 +14,7 @@ const bcrypt = require("bcryptjs");
 const cookieParser = require("cookie-parser");
 const multer = require("multer");
 const uploadMiddleware = multer({ dest: "uploads/" });
+const upload = multer();
 const fs = require("fs");
 
 const secret = "hhfu8f7djfdlhijsfjuf78g7fvjfg";
@@ -19,6 +22,7 @@ const secret = "hhfu8f7djfdlhijsfjuf78g7fvjfg";
 app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 app.use(express.json());
 app.use(cookieParser());
+app.use(express.urlencoded({ extended: true}))
 app.use("/uploads", express.static(__dirname + "/uploads"));
 
 const salt = bcrypt.genSaltSync(10);
@@ -95,11 +99,12 @@ app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
   jwt.verify(token, secret, {}, async (err: Error, info: any) => {
     if (err) throw err;
 
-    const { title, summary, content } = req.body;
+    const { title, summary, content, comment } = req.body;
     const postDoc = await Post.create({
       title,
       summary,
       content,
+      comment,
       cover: newPath,
       author: info.id,
     });
@@ -122,14 +127,19 @@ app.get("/post/:id", async (req, res) => {
   res.json(post);
 });
 
-// app.post("/comments", async (req, res) => {
-//   const {content} = res.json(req.body);
-//   const CommentDoc = await Comment.Create({
-//     content: comments,
-//     post: req.body.post_id,
-//     author: req.body.author_id,
-//   })
-// });
+app.post("/comment", upload.none(), async (req, res) => {
+  console.log("req:", req.body);
+
+  const { content, post, author } = req.body;
+  const CommentDoc = await Comment.create({
+    content,
+    post: req.body.post_id,
+    author: req.body.author_id,
+  });
+  res.json(CommentDoc);
+});
+
+// app.get('/comment')
 
 const port = process.env.PORT || 3000;
 

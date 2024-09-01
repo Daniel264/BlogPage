@@ -1,14 +1,27 @@
 // import { FormEvent } from "react";
 
- const Comments = () => {
-    // async function createComments(ev: FormEvent) {
-        
-        
-    //     const response = await fetch('http:..localhost:3000/Comments').then(response => response.json());
-    //     if (response.ok) {
+import { FormEvent, useState } from "react";
+import { Form } from "react-router-dom";
 
-    //     }
-    // }
+const Comments = () => {
+  const [comment, setComment] = useState("");
+  async function createComments(ev: FormEvent) {
+    const data = new FormData();
+    data.set("content", comment);
+    // data.set("userId", localStorage.getItem("userId"));
+    ev.preventDefault();
+
+    const response = await fetch("http://localhost:3000/comment", {
+      method: "POST",
+      body: data,
+      credentials: "include",
+    });
+    response.json();
+
+    if (response.ok) {
+      setComment("");
+    }
+  }
   return (
     <div>
       <div className="chat chat-start">
@@ -48,11 +61,15 @@
         </div>
         <div className="chat-bubble">Not leave it in Darkness</div>
       </div>
-      <input
-        type="text"
-        placeholder="Type here"
-        className="input input-bordered mt-5 ml-16 w-full max-w-xs"
-      />
+      <Form onSubmit={createComments}>
+        <input
+          type="text"
+          placeholder="Type here"
+          className="input input-bordered mt-5 ml-16 w-full max-w-xs"
+          value={comment}
+          onChange={(ev) => setComment(ev.target.value)}
+        />
+      </Form>
     </div>
   );
 };

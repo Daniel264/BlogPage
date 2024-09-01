@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-import { models, Schema } from "mongoose";
+import { model, Schema } from "mongoose";
 
 const CommmentSchema = new Schema({
   comment: String,
