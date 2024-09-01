@@ -122,6 +122,11 @@ app.get("/post/:id", async (req, res) => {
   res.json(post);
 });
 
+// app.get('/comments', async (req, res) => {
+
+//   const response = res.json(req.params.body);
+// })
+
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => console.log(`listening on port ${port} `));
