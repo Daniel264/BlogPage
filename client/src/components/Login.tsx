@@ -56,7 +56,7 @@ const Login = () => {
             className="mx-auto h-10 w-auto"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight">
-            Sign in to your account
+            Welcome Back!
           </h2>
         </div>
 

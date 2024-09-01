@@ -122,10 +122,14 @@ app.get("/post/:id", async (req, res) => {
   res.json(post);
 });
 
-// app.get('/comments', async (req, res) => {
-
-//   const response = res.json(req.params.body);
-// })
+// app.post("/comments", async (req, res) => {
+//   const {content} = res.json(req.body);
+//   const CommentDoc = await Comment.Create({
+//     content: comments,
+//     post: req.body.post_id,
+//     author: req.body.author_id,
+//   })
+// });
 
 const port = process.env.PORT || 3000;
 

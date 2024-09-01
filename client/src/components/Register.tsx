@@ -104,6 +104,15 @@ const Register = () => {
                 />
               </div>
             </div>
+            <div>
+              <input type="checkbox" name="terms" className="rounded-md" id="" />
+              <label htmlFor="terms" className="ml-3">
+                By creating an account, you agree to all our{" "}
+                <a href="#" className="text-blue-600">
+                  Terms and Conditions
+                </a>
+              </label>
+            </div>
 
             <div>
               <button
@@ -119,7 +128,7 @@ const Register = () => {
             </div>
           </form>
           <p className="mt-10 text-center text-sm text-gray-500">
-            Have an Account?{" "}
+            Already have an Account?{" "}
             <Link to="/login">
               <a
                 href="#"
