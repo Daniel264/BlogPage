@@ -32,7 +32,7 @@ const AnimatePage: React.FC = () => {
   }, 8000);
 
   if (redirect) {
-    return <Navigate to="/home" />;
+    return <Navigate to="/login" />;
   }
   return (
     <div className="p-0">
