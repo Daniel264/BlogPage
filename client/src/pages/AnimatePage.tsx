@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
 import Typed from "typed.js";
 
 const AnimatePage: React.FC = () => {
@@ -25,6 +26,14 @@ const AnimatePage: React.FC = () => {
     };
   }, []);
 
+  const [redirect, setRedirect] = useState(false);
+  setTimeout(() => {
+    setRedirect(true);
+  }, 8000);
+
+  if (redirect) {
+    return <Navigate to="/home" />;
+  }
   return (
     <div className="p-0">
       <div className="w-screen p-0 h-[90vh] flex items-center justify-center font-montserrat bg-blue-500 text-white">
