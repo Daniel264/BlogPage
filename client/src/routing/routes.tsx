@@ -5,7 +5,7 @@ import App from "../App";
 import CreatePost from "../components/CreatePost";
 import PostPage from "../components/PostPage";
 import Settings from "../components/Settings";
-import AnimatePage from "../components/AnimatePage";
+import AnimatePage from "../pages/AnimatePage";
 
 const router = createBrowserRouter([
   { path: "/", element: <AnimatePage /> },
