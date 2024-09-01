@@ -1,5 +1,6 @@
 import { FormEvent, useState } from "react";
 import Header from "./Header";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -103,6 +104,7 @@ const Register = () => {
                 />
               </div>
             </div>
+
             <div>
               <button
                 type="submit"
@@ -116,6 +118,60 @@ const Register = () => {
               </button>
             </div>
           </form>
+          <p className="mt-10 text-center text-sm text-gray-500">
+            Have an Account?{" "}
+            <Link to="/login">
+              <a
+                href="#"
+                className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+              >
+                Sign in
+              </a>
+            </Link>
+            {/* {success == "Yes" ? (
+              <div
+                role="alert mt-16"
+                className="alert alert-success text-green-500 bg-inherit"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 shrink-0 stroke-current"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <span>Verification Successful</span>
+              </div>
+            ) : (
+              ""
+            )} */}
+            {/* {success == "No" ? (
+              <div role="alert" className="alert alert-error text-red-500">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 shrink-0 stroke-current"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <span>Invalid Credentials.</span>
+              </div>
+            ) : (
+              ""
+            )} */}
+          </p>
         </div>
       </div>
     </>

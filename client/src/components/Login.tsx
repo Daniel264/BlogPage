@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import Header from "./Header";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 const Login = () => {
   // const [username, setUsername] = useState("");
@@ -150,12 +150,14 @@ const Login = () => {
 
           <p className="mt-10 text-center text-sm text-gray-500">
             Not a member?{" "}
-            <a
-              href="#"
-              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-            >
-              Start a 14 day free trial
-            </a>
+            <Link to="/register">
+              <a
+                href="#"
+                className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+              >
+                Create an account
+              </a>
+            </Link>
             {success == "Yes" ? (
               <div
                 role="alert mt-16"
