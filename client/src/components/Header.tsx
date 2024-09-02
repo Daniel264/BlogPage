@@ -21,7 +21,7 @@ const Header = () => {
     document.documentElement.setAttribute("data-theme", newTheme);
   }
   useEffect(() => {
-    fetch("https://blog-page-six-dusky.vercel.app/profile", {
+    fetch("http://localhost:3000/profile", {
       credentials: "include",
     }).then((response) => {
       response.json().then((userInfo) => {
@@ -31,7 +31,7 @@ const Header = () => {
   }, []);
 
   function logout() {
-    fetch("https://blog-page-six-dusky.vercel.app/logout", {
+    fetch("http://localhost:3000/logout", {
       credentials: "include",
       method: "POST",
     });

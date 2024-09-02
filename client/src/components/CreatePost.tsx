@@ -68,7 +68,7 @@ const CreatePost = () => {
 
     ev.preventDefault();
     console.log(file);
-    const response = await fetch("https://blog-page-six-dusky.vercel.app/post", {
+    const response = await fetch("http://localhost:3000/post", {
       method: "POST",
       body: data,
       credentials: "include",
