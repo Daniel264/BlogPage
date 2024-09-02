@@ -20,11 +20,13 @@ const fs = require("fs");
 
 const secret = "hhfu8f7djfdlhijsfjuf78g7fvjfg";
 
-app.use(cors({ credentials: true, origin: "https://blog-page-frontend-daniel-olatinsus-projects.vercel.app" }));
+app.use(cors({ credentials: true, origin: "https://blog-page-frontend-liart.vercel.app" }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static(__dirname + "/uploads"));
+app.options('*', cors()); // Handle preflight requests
+
 
 const salt = bcrypt.genSaltSync(10);
 
