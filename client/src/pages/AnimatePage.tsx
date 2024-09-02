@@ -4,6 +4,15 @@ import Typed from "typed.js";
 
 const AnimatePage: React.FC = () => {
   useEffect(() => {
+    const rootElement = document.getElementById("root");
+    rootElement?.classList.add("no-padding");
+
+    return () => {
+      rootElement?.classList.remove("no-padding");
+    };
+  }, []);
+
+  useEffect(() => {
     const options = {
       strings: ["Welcome to Olatinsu's Blog"],
       typeSpeed: 150,
