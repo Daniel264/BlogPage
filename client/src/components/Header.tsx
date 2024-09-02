@@ -161,9 +161,9 @@ const Header = () => {
               aria-label="close sidebar"
               className="drawer-overlay"
             ></label>
-            <ul className="menu min-h-full w-96 text-white font-medium text-xl p-4">
+            <ul className="menu min-h-full text-white font-medium text-xl p-4 bg-black">
               {/* Sidebar content here */}
-              <li>
+              <li className="pb-4">
                 {email && (
                   <>
                     <Link to="/create">
@@ -172,16 +172,17 @@ const Header = () => {
                   </>
                 )}
               </li>
-              <li>
-                <li>
+              
+                <li className="pb-4">
                   {email && (
                     <>
                       <Link to="/settings">
-                        Settings <FaCog />
+                      Settings <FaCog />
                       </Link>
                     </>
                   )}
                 </li>
+                <li>
                 <a>
                   {email && (
                     <>
