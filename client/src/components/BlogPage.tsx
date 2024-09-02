@@ -16,6 +16,14 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
 
     return () => clearTimeout(timer);
   }, []);
+  function openModal(): void {
+    const modal = document.getElementById(
+      "my_modal_2"
+    ) as HTMLDialogElement | null;
+    if (modal) {
+      modal.showModal();
+    }
+  }
   if (loading) {
     return (
       <div className="flex w-full flex-col gap-4 mt-16">
@@ -62,10 +70,7 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
       </div>
       <div className="text-left">
         {/* Open the modal using document.getElementById('ID').showModal() method */}
-        <button
-          className="btn"
-          onClick={() => document.getElementById("my_modal_2").showModal()}
-        >
+        <button className="btn" onClick={openModal}>
           Comments
         </button>
         <dialog id="my_modal_2" className="modal">
@@ -73,7 +78,6 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
             <h3 className="font-bold text-lg">Comments</h3>
             <p className="py-4">
               <Comments />
-
             </p>
           </div>
           <form method="dialog" className="modal-backdrop">

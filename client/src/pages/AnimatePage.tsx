@@ -45,7 +45,7 @@ const AnimatePage: React.FC = () => {
   }
   return (
     <div className="p-0">
-      <div className="w-screen p-0 h-[90vh] flex items-center justify-center font-montserrat bg-blue-500 text-white">
+      <div className="w-screen p-0 h-[100vh] flex items-center justify-center font-montserrat bg-blue-500 text-white">
         <p className="text-6xl font-semibold">
           <span className="auto-type"></span>
         </p>
