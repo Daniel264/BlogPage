@@ -26,7 +26,7 @@ const Settings = ({ picture: initialPicture }: Pictures) => {
 
       response.json();
     } else {
-      setMessage("Picture not found");
+      setMessage("Picture not updated");
     }
   }
   return (
@@ -34,20 +34,20 @@ const Settings = ({ picture: initialPicture }: Pictures) => {
       <div className="w-full h-[100vh] font-montserrat flex flex-col items-center justify-center">
         <h1 className="text-3xl font-semibold"></h1>
         <div className="card bg-base-100 w-96 shadow-xl">
-          <figure className="rounded-full">
+          <figure className="">
             <img
-              className=""
+              className="w-[200px] h-[200px] rounded-full bg-contain"
               src={`http://localhost:3000/${picture}`}
-              alt="Shoes"
+              alt="Profile picture"
             />
           </figure>
           <div className="card-body">
-            <h2 className="card-title t">Profile</h2>
+            <h2 className="card-title t mx-auto">Profile</h2>
             <p>Edit Profile picture / avatar</p>
             <div className="card-actions justify-end"></div>
           </div>
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col pt-5">
           <input
             onChange={(ev) =>
               setFile(ev.target.files ? ev.target.files[0] : null)
@@ -55,9 +55,11 @@ const Settings = ({ picture: initialPicture }: Pictures) => {
             type="file"
             className="file-input file-input-bordered w-full max-w-xs"
           />
-          <button className="btn btn-primary">Save Changes</button>
+          <button className="btn btn-primary mt-5">Save Changes</button>
         </div>
-        {message && <p className="mt-4 text-red-500">{message}</p>}
+        {message && <p className="mt-4 text-green-500">{message}</p>}
+
+        {!message && <p className="mt-4 text-red-500">{message}</p>}
       </div>
     </Form>
   );
