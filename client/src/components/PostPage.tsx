@@ -9,7 +9,7 @@ const PostPage = () => {
   // useEffect(() => {
   const { id } = useParams();
   useEffect(() => {
-    fetch(`http://localhost:3000/post/${id}`)
+    fetch(`https://blog-page-six-dusky.vercel.app/post/${id}`)
       .then((response) => response.json())
       .then((data) => setPostInfo(data))
       .catch((error) => console.error("Error fetching post:", error));
@@ -20,7 +20,7 @@ const PostPage = () => {
     <>
       <Header />
       <div className="pt-10">
-        <img className="w-full" src={`http://localhost:3000/${postInfo.cover}`} alt="" />
+        <img className="w-full" src={`https://blog-page-six-dusky.vercel.app/${postInfo.cover}`} alt="" />
         <h1 className="text-4xl font-semibold">{postInfo.title}</h1>
         <p dangerouslySetInnerHTML={{__html:postInfo.content}}/>
       </div>
