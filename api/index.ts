@@ -128,19 +128,23 @@ app.get("/post/:id", async (req, res) => {
 });
 
 app.post("/comment", upload.none(), async (req, res) => {
-  console.log("req:", req.body);
+  const { content, post_id, author_id } = req.body;
+  console.log({ content, post_id, author_id });
 
-  const { content, post, author } = req.body;
-  const CommentDoc = await Comment.create({
-    content,
-    post: req.body.post_id,
-    author: req.body.author_id,
-  });
-  res.json(CommentDoc);
+  try {
+    const commentDoc = await Comment.create({
+      content,
+      post: post_id,
+      author: author_id,
+    });
+    res.status(201).json(commentDoc);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to create comment", error });
+  }
 });
 
 app.get("/comment", async (req, res) => {
-  const comments = await Comment.find().populate("author", ["username"]);
+  const comments = await Comment.find();
   res.json(comments);
 });
 
