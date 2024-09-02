@@ -5,7 +5,10 @@ import { Multer } from "multer";
 const Post = require("./models/Post");
 const Comment = require("./models/Comment");
 const Picture = require("./models/Picture");
+require("dotenv").config();
 
+const mongoURI = process.env.MONGODB_URI;
+const secret = process.env.JWT_SECRET;
 const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
@@ -18,7 +21,7 @@ const uploadMiddleware = multer({ dest: "uploads/" });
 const upload = multer();
 const fs = require("fs");
 
-const secret = "hhfu8f7djfdlhijsfjuf78g7fvjfg";
+// const secret = "hhfu8f7djfdlhijsfjuf78g7fvjfg";
 
 app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 app.use(express.json());
@@ -28,12 +31,9 @@ app.use("/uploads", express.static(__dirname + "/uploads"));
 
 const salt = bcrypt.genSaltSync(10);
 
-mongoose.connect(
-  "mongodb+srv://Blog:SZJThMSYPE3FrF5Q@cluster0.n60ur.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
-  {
-    serverSelectionTimeoutMS: 30000,
-  }
-);
+mongoose.connect(mongoURI, {
+  serverSelectionTimeoutMS: 30000,
+});
 
 app.post("/register", async (req, res) => {
   const { username, email, password } = req.body;
