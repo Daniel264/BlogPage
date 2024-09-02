@@ -5,8 +5,9 @@ interface Pictures {
   picture: string;
 }
 
-const Settings = ({ picture }: Pictures) => {
+const Settings = ({ picture: initialPicture }: Pictures) => {
   const [file, setFile] = useState<File | null>(null);
+  const [picture, setPicture] = useState<string>(initialPicture);
   const [message, setMessage] = useState<string | null>(null);
   async function changePicture(ev: FormEvent) {
     const data = new FormData();
@@ -20,6 +21,7 @@ const Settings = ({ picture }: Pictures) => {
     if (response.ok) {
       const result = await response.json();
       setMessage("Picture updated successfully");
+      setPicture(result.picture);
       console.log(result);
 
       response.json();
@@ -35,7 +37,7 @@ const Settings = ({ picture }: Pictures) => {
           <figure className="rounded-full">
             <img
               className=""
-              src={`http://localhost:3000/uploads/${picture}`}
+              src={`http://localhost:3000/${picture}`}
               alt="Shoes"
             />
           </figure>
