@@ -33,9 +33,9 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
       <div className="pl-5 text-left">
         <div className="flex flex-row w-full justify-between">
           <span className="font-regular flex">
-            <div className="avatar mr-3">
-              <div className="ring-primary ring-offset-base-100 text-center w-7 rounded-full border-solid border-black border-[1px] bg-slate-600">
-                <p className="font-extrabold">A</p>
+            <div className="avatar mr-3 z-0">
+              <div className="ring-primary ring-offset-base-100 text-center w-7 rounded-full border-solid border-black border-[1px] bg-slate-600 z-0">
+                <p className="font-extrabold ">A</p>
                 {/* <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" /> */}
               </div>
             </div>
