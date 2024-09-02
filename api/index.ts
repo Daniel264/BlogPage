@@ -4,6 +4,7 @@ import { Request } from "express";
 import { Multer } from "multer";
 const Post = require("./models/Post");
 const Comment = require("./models/Comment");
+const Picture = require("./models/Picture");
 
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -146,6 +147,23 @@ app.post("/comment", upload.none(), async (req, res) => {
 app.get("/comment", async (req, res) => {
   const comments = await Comment.find();
   res.json(comments);
+});
+
+app.post("/picture", uploadMiddleware.single("picture"), async (req, res) => {
+  const file = req.file as Express.Multer.File | undefined;
+  if (!file) {
+    return res.status(400).json({ message: "No file uploaded" });
+  }
+
+  const parts = file.originalname.split(".");
+  const extension = parts[parts.length - 1];
+  const newPath = `uploads/${file.filename}.${extension}`;
+  fs.renameSync(file.path, newPath);
+
+  const pictureDoc = await Picture.create({
+    picture: newPath,
+  });
+  res.json(pictureDoc);
 });
 
 const port = process.env.PORT || 3000;
