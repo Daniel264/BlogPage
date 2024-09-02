@@ -14,7 +14,7 @@ const Settings = ({ picture: initialPicture }: Pictures) => {
     const data = new FormData();
     if (file) data.set("picture", file);
     ev.preventDefault();
-    const response = await fetch("http://localhost:3000/picture", {
+    const response = await fetch("https://blog-page-six-dusky.vercel.app/picture", {
       method: "POST",
       body: data,
       credentials: "include",
