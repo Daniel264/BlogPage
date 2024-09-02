@@ -6,6 +6,8 @@ import { Form } from "react-router-dom";
 
 import { Comment } from "../assets/Interface/useComment";
 
+
+
 const Comments = () => {
   const [comment, setComment] = useState("");
   // const [user_id, setUser_id] = useState("");
@@ -45,7 +47,7 @@ const Comments = () => {
   return (
     <div>
       {rest.map((comment) => (
-        <div key={comment._id} className="chat chat-start">
+        <div key={comment._id} className="chat chat-start flex">
           <div className="chat-image avatar">
             <div className="w-10 rounded-full">
               <img
@@ -58,6 +60,7 @@ const Comments = () => {
             {/* Not leave it in Darkness */}
             {comment.content}
           </div>
+              <p>{comment.createdAt}</p>
         </div>
       ))}
 
