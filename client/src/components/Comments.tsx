@@ -6,7 +6,7 @@ import { Form } from "react-router-dom";
 
 import { Comment } from "../assets/Interface/useComment";
 
-
+import { formatDistanceToNow } from "date-fns";
 
 const Comments = () => {
   const [comment, setComment] = useState("");
@@ -60,7 +60,11 @@ const Comments = () => {
             {/* Not leave it in Darkness */}
             {comment.content}
           </div>
-              <p>{comment.createdAt}</p>
+          <p className="text-base mt-3">
+            {formatDistanceToNow(new Date(comment.createdAt), {
+              addSuffix: true,
+            })}
+          </p>
         </div>
       ))}
 
