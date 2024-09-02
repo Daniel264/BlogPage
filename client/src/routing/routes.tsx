@@ -6,6 +6,7 @@ import CreatePost from "../components/CreatePost";
 import PostPage from "../components/PostPage";
 import Settings from "../components/Settings";
 import AnimatePage from "../pages/AnimatePage";
+import Profile from "../images/profile.png";
 
 const router = createBrowserRouter([
   { path: "/", element: <AnimatePage /> },
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
   { path: "/Register", element: <Register /> },
   { path: "/Create", element: <CreatePost /> },
   { path: "/post/:id", element: <PostPage /> },
-  { path: "/settings", element: <Settings /> },
+  { path: "/settings", element: <Settings picture={Profile} /> },
 ]);
 
 export default router;
