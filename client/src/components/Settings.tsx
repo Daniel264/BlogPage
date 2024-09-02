@@ -35,10 +35,7 @@ const Settings = ({ picture }: Pictures) => {
           <figure className="rounded-full">
             <img
               className=""
-              src={
-                picture ||
-                "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-              }
+              src={`http://localhost:3000/uploads/${picture}`}
               alt="Shoes"
             />
           </figure>

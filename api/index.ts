@@ -166,7 +166,10 @@ app.post("/picture", uploadMiddleware.single("picture"), async (req, res) => {
   res.json(pictureDoc);
 });
 
-
+app.get("/picture", async (req, res) => {
+  const picture = await Picture.find();
+  res.json(picture);
+});
 
 const port = process.env.PORT || 3000;
 
