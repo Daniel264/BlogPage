@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./Header";
 import { useParams } from "react-router-dom";
+import Post from "../assets/Interface/usePost";
 
 const PostPage = () => {
-  const [postInfo, setPostInfo] = useState(null);
+  const [postInfo, setPostInfo] = useState<Post | null>(null);
 
   // useEffect(() => {
   const { id } = useParams();
