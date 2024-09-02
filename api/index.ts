@@ -23,11 +23,13 @@ const fs = require("fs");
 
 // const secret = "hhfu8f7djfdlhijsfjuf78g7fvjfg";
 
-app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
+app.use(cors({ credentials: true, methods: ["POST", "GET"], origin: "*" }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static(__dirname + "/uploads"));
+app.options('*', cors()); // Handle preflight requests
+
 
 const salt = bcrypt.genSaltSync(10);
 
