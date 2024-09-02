@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import { Form } from "react-router-dom";
-import Profile from "../images/profile.png";
+
 
 interface Pictures {
   picture: string;
@@ -37,8 +37,8 @@ const Settings = ({ picture: initialPicture }: Pictures) => {
         <div className="card bg-base-100 w-96 shadow-xl">
           <figure className="">
             <img
-              className="w-[200px] h-[200px] rounded-full bg-contain"
-              src={`http://localhost:3000/${picture}` || Profile}
+              className="w-[200px] h-[200px] rounded-full bg-contain border-[1px]"
+              src={`http://localhost:3000/${picture}`} 
               alt="Profile picture"
             />
           </figure>

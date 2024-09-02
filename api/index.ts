@@ -144,6 +144,16 @@ app.post("/comment", upload.none(), async (req, res) => {
   }
 });
 
+app.get('comment/:post_id', async (req, res) => {
+  const {post_id} = req.params;
+  try {
+  const comments = await Comment.find({ post: post_id }).populate("author", ["username"]);
+  res.json(comments);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to get comments", error });
+  }
+})
+
 app.get("/comment", async (req, res) => {
   const comments = await Comment.find();
   res.json(comments);
