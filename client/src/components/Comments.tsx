@@ -8,16 +8,31 @@ import { Comment } from "../assets/Interface/useComment";
 
 import { formatDistanceToNow } from "date-fns";
 
-const Comments = () => {
+const Comments = ({ postId }: { postId: string }) => {
   const [comment, setComment] = useState("");
   // const [user_id, setUser_id] = useState("");
   // const [author_id, setAuthor_id] = useState("");
+  const [rest, setRest] = useState<Comment[]>([]);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  async function fetchComments() {
+    const response = await fetch("http://localhost:3000/comment/${postId}");
+    if (response.ok) {
+      const comments = await response.json();
+      setRest(comments);
+      response.json();
+    }
+  }
+
+  useEffect(() => {
+    fetchComments();
+  }, [postId]);
+
   async function createComments(ev: FormEvent) {
+    ev.preventDefault();
     const data = new FormData();
     data.set("content", comment);
-    // data.set("user_id", user_id);
+    data.set("post_id", postId);
     // data.set("author_id", author_id);
-    ev.preventDefault();
 
     const response = await fetch("http://localhost:3000/comment", {
       method: "POST",
@@ -32,20 +47,6 @@ const Comments = () => {
       setRest((prevComment) => [newComment, ...prevComment]);
     }
   }
-  const [rest, setRest] = useState<Comment[]>([]);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  async function fetchComments() {
-    const response = await fetch("http://localhost:3000/comment");
-    if (response.ok) {
-      const comments = await response.json();
-      setRest(comments);
-      response.json();
-    }
-  }
-
-  useEffect(() => {
-    fetchComments();
-  }, []);
   return (
     <div>
       {rest.map((comment) => (
