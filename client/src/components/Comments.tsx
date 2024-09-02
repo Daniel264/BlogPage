@@ -27,7 +27,9 @@ const Comments = () => {
     response.json();
 
     if (response.ok) {
+      const newComment = await response.json();
       setComment("");
+      setRest((prevComment) => [newComment, ...prevComment]);
     }
   }
   const [rest, setRest] = useState<Comment[]>([]);

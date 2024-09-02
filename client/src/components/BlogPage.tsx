@@ -70,7 +70,7 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
         </button>
         <dialog id="my_modal_2" className="modal">
           <div className="modal-box">
-            <h3 className="font-bold text-lg">Hello!</h3>
+            <h3 className="font-bold text-lg">Comments</h3>
             <p className="py-4">
               <Comments />
 
