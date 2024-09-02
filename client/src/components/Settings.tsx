@@ -1,7 +1,11 @@
 import { FormEvent, useState } from "react";
 import { Form } from "react-router-dom";
 
-const Settings = () => {
+interface Pictures {
+  picture: string;
+}
+
+const Settings = ({ picture }: Pictures) => {
   const [file, setFile] = useState<File | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   async function changePicture(ev: FormEvent) {
@@ -26,12 +30,15 @@ const Settings = () => {
   return (
     <Form onSubmit={changePicture}>
       <div className="w-full h-[100vh] font-montserrat flex flex-col items-center justify-center">
-        <h1 className="text-3xl font-semibold">Settings</h1>
+        <h1 className="text-3xl font-semibold"></h1>
         <div className="card bg-base-100 w-96 shadow-xl">
           <figure className="rounded-full">
             <img
               className=""
-              src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+              src={
+                picture ||
+                "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+              }
               alt="Shoes"
             />
           </figure>

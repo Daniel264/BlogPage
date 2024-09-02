@@ -166,6 +166,8 @@ app.post("/picture", uploadMiddleware.single("picture"), async (req, res) => {
   res.json(pictureDoc);
 });
 
+
+
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => console.log(`listening on port ${port} `));
