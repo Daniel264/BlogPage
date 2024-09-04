@@ -19,7 +19,7 @@ const Comments = () => {
     // data.set("author_id", author_id);
     ev.preventDefault();
 
-    const response = await fetch("http://localhost:3000/comment", {
+    const response = await fetch("https://blogpage-sho4.onrender.com/comment", {
       method: "POST",
       body: data,
       credentials: "include",
@@ -35,7 +35,7 @@ const Comments = () => {
   const [rest, setRest] = useState<Comment[]>([]);
   // eslint-disable-next-line react-hooks/rules-of-hooks
   async function fetchComments() {
-    const response = await fetch("http://localhost:3000/comment");
+    const response = await fetch("https://blogpage-sho4.onrender.com/comment");
     if (response.ok) {
       const comments = await response.json();
       setRest(comments);
