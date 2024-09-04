@@ -80,7 +80,7 @@ const CreatePost = () => {
                 data.set("file", file);
             ev.preventDefault();
             console.log(file);
-            const response = yield fetch("http://localhost:3000/post", {
+            const response = yield fetch("https://blogpage-sho4.onrender.com/post", {
                 method: "POST",
                 body: data,
                 credentials: "include",
