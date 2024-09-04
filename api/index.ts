@@ -6,6 +6,8 @@ const Post = require("./models/Post");
 const Comment = require("./models/Comment");
 const Picture = require("./models/Picture");
 require("dotenv").config();
+import "ts-node/register";
+import "tsconfig-paths/register";
 
 const mongoURI = process.env.MONGODB_URI;
 const secret = process.env.JWT_SECRET;
@@ -28,7 +30,6 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static(__dirname + "/uploads"));
-
 
 const salt = bcrypt.genSaltSync(10);
 
