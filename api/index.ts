@@ -1,28 +1,26 @@
-import express from "express";
-import { Request } from "express";
-import { Multer } from "multer";
-const Post = require("./models/Post");
-const Comment = require("./models/Comment");
-const Picture = require("./models/Picture");
-require("dotenv").config();
+import express, { Request, Response } from "express";
+import multer, { Multer } from "multer";
+import fs from "fs";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import mongoose from "mongoose";
+import "dotenv/config";
 import "ts-node/register";
 import "tsconfig-paths/register";
 
-const mongoURI = process.env.MONGODB_URI;
-const secret = process.env.JWT_SECRET;
-const mongoose = require("mongoose");
-const cors = require("cors");
 const app = express();
-const jwt = require("jsonwebtoken");
-const User = require("../api/models/User");
-const bcrypt = require("bcryptjs");
-const cookieParser = require("cookie-parser");
-const multer = require("multer");
-const uploadMiddleware = multer({ dest: "uploads/" });
-const upload = multer();
-const fs = require("fs");
+const upload = multer({ dest: "uploads/" });
 
-// const secret = "hhfu8f7djfdlhijsfjuf78g7fvjfg";
+const mongoURI = process.env.MONGODB_URI!;
+const secret = process.env.JWT_SECRET!;
+
+// Import your models
+const Post = require("./models/Post");
+const Comment = require("./models/Comment");
+const Picture = require("./models/Picture");
+const User = require("../api/models/User");
 
 app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 app.use(express.json());
@@ -36,7 +34,7 @@ mongoose.connect(mongoURI, {
   serverSelectionTimeoutMS: 30000,
 });
 
-app.post("/register", async (req, res) => {
+app.post("/register", async (req: Request, res: Response) => {
   const { username, email, password } = req.body;
   try {
     const userDoc = await User.create({
@@ -50,7 +48,7 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.post("/login", async (req, res) => {
+app.post("/login", async (req: Request, res: Response) => {
   const { username, email, password } = req.body;
   const userDoc = await User.findOne({ email });
 
@@ -73,7 +71,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get("/profile", (req, res) => {
+app.get("/profile", (req: Request, res: Response) => {
   const { token } = req.cookies;
   if (!token) return res.status(401).json({ message: "Not authenticated" });
   jwt.verify(token, secret, {}, (err: Error, info: any) => {
@@ -82,46 +80,50 @@ app.get("/profile", (req, res) => {
   });
 });
 
-app.post("/logout", (req, res) => {
+app.post("/logout", (req: Request, res: Response) => {
   res.cookie("token", "").json("ok");
 });
 
-app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
-  const file = req.file as Express.Multer.File | undefined;
-  if (!file) {
-    return res.status(400).json({ message: "No file uploaded" });
-  }
+app.post(
+  "/post",
+  upload.single("file"),
+  async (req: Request, res: Response) => {
+    const file = req.file as Express.Multer.File | undefined;
+    if (!file) {
+      return res.status(400).json({ message: "No file uploaded" });
+    }
 
-  const parts = file.originalname.split(".");
-  const extension = parts[parts.length - 1];
-  const newPath = `uploads/${file.filename}.${extension}`;
-  fs.renameSync(file.path, newPath);
-  const { token } = req.cookies;
-  if (!token) return res.status(401).json({ message: "Not authenticated" });
-  jwt.verify(token, secret, {}, async (err: Error, info: any) => {
-    if (err) throw err;
+    const parts = file.originalname.split(".");
+    const extension = parts[parts.length - 1];
+    const newPath = `uploads/${file.filename}.${extension}`;
+    fs.renameSync(file.path, newPath);
+    const { token } = req.cookies;
+    if (!token) return res.status(401).json({ message: "Not authenticated" });
+    jwt.verify(token, secret, {}, async (err: Error, info: any) => {
+      if (err) throw err;
 
-    const { title, summary, content, comment } = req.body;
-    const postDoc = await Post.create({
-      title,
-      summary,
-      content,
-      comment,
-      cover: newPath,
-      author: info.id,
+      const { title, summary, content, comment } = req.body;
+      const postDoc = await Post.create({
+        title,
+        summary,
+        content,
+        comment,
+        cover: newPath,
+        author: info.id,
+      });
+      res.json(postDoc);
     });
-    res.json(postDoc);
-  });
-});
+  }
+);
 
-app.get("/post", async (req, res) => {
+app.get("/post", async (req: Request, res: Response) => {
   const posts = await Post.find()
     .populate("author", ["username"])
     .sort({ createdAt: -1 });
   res.json(posts);
 });
 
-app.get("/post/:id", async (req, res) => {
+app.get("/post/:id", async (req: Request, res: Response) => {
   const post = await Post.findById(req.params.id).populate("author", [
     "username",
   ]);
@@ -129,7 +131,7 @@ app.get("/post/:id", async (req, res) => {
   res.json(post);
 });
 
-app.post("/comment", upload.none(), async (req, res) => {
+app.post("/comment", upload.none(), async (req: Request, res: Response) => {
   const { content, post_id, author_id } = req.body;
   console.log({ content, post_id, author_id });
 
@@ -145,41 +147,37 @@ app.post("/comment", upload.none(), async (req, res) => {
   }
 });
 
-app.get("/comment", async (req, res) => {
+app.get("/comment", async (req: Request, res: Response) => {
   const comments = await Comment.find();
   res.json(comments);
 });
 
-app.post("/picture", uploadMiddleware.single("picture"), async (req, res) => {
-  const file = req.file as Express.Multer.File | undefined;
-  if (!file) {
-    return res.status(400).json({ message: "No file uploaded" });
+app.post(
+  "/picture",
+  upload.single("picture"),
+  async (req: Request, res: Response) => {
+    const file = req.file as Express.Multer.File | undefined;
+    if (!file) {
+      return res.status(400).json({ message: "No file uploaded" });
+    }
+
+    const parts = file.originalname.split(".");
+    const extension = parts[parts.length - 1];
+    const newPath = `uploads/${file.filename}.${extension}`;
+    fs.renameSync(file.path, newPath);
+
+    const pictureDoc = await Picture.create({
+      picture: newPath,
+    });
+    res.json(pictureDoc);
   }
+);
 
-  const parts = file.originalname.split(".");
-  const extension = parts[parts.length - 1];
-  const newPath = `uploads/${file.filename}.${extension}`;
-  fs.renameSync(file.path, newPath);
-
-  const pictureDoc = await Picture.create({
-    picture: newPath,
-  });
-  res.json(pictureDoc);
-});
-
-app.get("/picture", async (req, res) => {
+app.get("/picture", async (req: Request, res: Response) => {
   const picture = await Picture.find();
   res.json(picture);
 });
 
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => console.log(`listening on port ${port} `));
-
-// eL9wKRx5PyydyqLT
-//mongodb+srv://Daniel264:eL9wKRx5PyydyqLT@cluster0.q5k8t.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
-
-// 2590682f-b507-440d-a2c5-4d61e41b040c
-
-// pass
-// SZJThMSYPE3FrF5Q
+app.listen(port, () => console.log(`listening on port ${port}`));
