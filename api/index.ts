@@ -190,6 +190,3 @@ app.listen(port, () => console.log(`listening on port ${port} `));
 //mongodb+srv://Daniel264:eL9wKRx5PyydyqLT@cluster0.q5k8t.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 
 // 2590682f-b507-440d-a2c5-4d61e41b040c
-
-// pass
-// SZJThMSYPE3FrF5Q
