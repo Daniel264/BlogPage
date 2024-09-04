@@ -1,4 +1,3 @@
-import { log } from "console";
 import express from "express";
 import { Request } from "express";
 import { Multer } from "multer";
