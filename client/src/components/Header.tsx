@@ -130,6 +130,17 @@ const Header = () => {
                   </li>
                   <li>
                     <a className="text-xl font-medium">
+                      {email && (
+                        <>
+                          <a className="cursor-pointer">
+                            <Link to="/settings">Settings</Link>
+                          </a>
+                        </>
+                      )}
+                    </a>
+                  </li>
+                  <li>
+                    <a className="text-xl font-medium">
                       {!email && (
                         <>
                           <Link to="/register">Register</Link>
@@ -172,17 +183,17 @@ const Header = () => {
                   </>
                 )}
               </li>
-              
-                <li className="pb-4">
-                  {email && (
-                    <>
-                      <Link to="/settings">
+
+              <li className="pb-4">
+                {email && (
+                  <>
+                    <Link to="/settings">
                       Settings <FaCog />
-                      </Link>
-                    </>
-                  )}
-                </li>
-                <li>
+                    </Link>
+                  </>
+                )}
+              </li>
+              <li>
                 <a>
                   {email && (
                     <>
