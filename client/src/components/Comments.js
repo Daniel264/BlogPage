@@ -25,7 +25,7 @@ const Comments = () => {
             // data.set("user_id", user_id);
             // data.set("author_id", author_id);
             ev.preventDefault();
-            const response = yield fetch("http://localhost:3000/comment", {
+            const response = yield fetch("https://blogpage-sho4.onrender.com/comment", {
                 method: "POST",
                 body: data,
                 credentials: "include",
@@ -42,7 +42,7 @@ const Comments = () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     function fetchComments() {
         return __awaiter(this, void 0, void 0, function* () {
-            const response = yield fetch("http://localhost:3000/comment");
+            const response = yield fetch("https://blogpage-sho4.onrender.com/comment");
             if (response.ok) {
                 const comments = yield response.json();
                 setRest(comments);
