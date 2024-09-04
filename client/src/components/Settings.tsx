@@ -14,7 +14,7 @@ const Settings = ({ picture: initialPicture }: Pictures) => {
     const data = new FormData();
     if (file) data.set("picture", file);
     ev.preventDefault();
-    const response = await fetch("https://localhost:3000/picture", {
+    const response = await fetch("https://blogpage-sho4.onrender.com/picture", {
       method: "POST",
       body: data,
       credentials: "include",
@@ -38,7 +38,7 @@ const Settings = ({ picture: initialPicture }: Pictures) => {
           <figure className="">
             <img
               className="w-[200px] h-[200px] rounded-full bg-contain border-[1px]"
-              src={`http://localhost:3000/${picture}`} 
+              src={`https://blogpage-sho4.onrender.com/${picture}`} 
               alt="Profile picture"
             />
           </figure>
