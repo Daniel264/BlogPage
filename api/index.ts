@@ -30,7 +30,7 @@ app.use(
   cors({
     origin: "https://blogpage-frontend.onrender.com", // Allow only your frontend domain
     methods: ["GET", "POST"], // Specify allowed methods
-    credentials: false, // Include credentials if needed
+    credentials: true, // Include credentials if needed
   })
 );
 app.use(express.json());
