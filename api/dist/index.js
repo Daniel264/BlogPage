@@ -1,18 +1,18 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function (o, m, k, k2) {
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     var desc = Object.getOwnPropertyDescriptor(m, k);
     if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-        desc = { enumerable: true, get: function () { return m[k]; } };
+      desc = { enumerable: true, get: function() { return m[k]; } };
     }
     Object.defineProperty(o, k2, desc);
-}) : (function (o, m, k, k2) {
+}) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
 }));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function (o, v) {
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
     Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function (o, v) {
+}) : function(o, v) {
     o["default"] = v;
 });
 var __importStar = (this && this.__importStar) || function (mod) {
@@ -58,45 +58,75 @@ const uploadMiddleware = (0, multer_1.default)({ dest: "uploads/" });
 const upload = (0, multer_1.default)();
 const fs = require("fs");
 // const secret = "hhfu8f7djfdlhijsfjuf78g7fvjfg";
-app.use((0, cors_1.default)({ credentials: true, origin: "https://blogpage-frontend.onrender.com" }));
+app.use((0, cors_1.default)({
+    origin: "https://blogpage-frontend.onrender.com", // Allow only your frontend domain
+    methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
+    credentials: true, // Include credentials if needed
+}));
 app.use(express_1.default.json());
 app.use(cookieParser());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use("/uploads", express_1.default.static(__dirname + "/uploads"));
+app.options("*", (0, cors_1.default)());
 const salt = bcrypt.genSaltSync(10);
 mongoose.connect(mongoURI, {
     serverSelectionTimeoutMS: 30000,
 });
+app.get("/", (req, res) => {
+    res.send("Welcome to the Backend Server");
+});
 app.post("/register", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, email, password } = req.body;
+    if (!username || !email || !password) {
+        return res.status(400).json({ message: "Missing required fields" });
+    }
     try {
         const userDoc = yield User.create({
             username,
             email,
             password: bcrypt.hashSync(password, salt),
         });
-        res.json(userDoc);
+        res.status(201).json(userDoc);
     }
     catch (e) {
-        res.status(400).json(e);
+        const errorMessage = e.message || "An unknown error occurred";
+        console.error("Registration error:", e);
+        res.status(500).json({ message: "Registration failed", error: errorMessage });
     }
 }));
 app.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, email, password } = req.body;
-    const userDoc = yield User.findOne({ email });
-    if (!userDoc) {
-        return res.status(404).json({ message: "User not found" });
+    if (!email || !password) {
+        return res.status(400).json({ message: "Email and password are required" });
     }
-    const PassOk = bcrypt.compareSync(password, userDoc.password);
-    if (PassOk) {
-        jwt.sign({ username, email, id: userDoc._id }, secret, {}, (error, token) => {
-            if (error)
-                return res.status(400).json({ message: "JWT error", error });
-            res.cookie("token", token).json("ok");
-        });
+    try {
+        const userDoc = yield User.findOne({ email });
+        if (!userDoc) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        const PassOk = bcrypt.compareSync(password, userDoc.password);
+        if (PassOk) {
+            jwt.sign({ username, email, id: userDoc._id }, secret, {}, (error, token) => {
+                if (error)
+                    return res.status(400).json({ message: "JWT error", error });
+                // Set the session cookie with the correct options
+                res.cookie("sessionCookie", token, {
+                    httpOnly: true,
+                    secure: process.env.NODE_ENV === "production", // Secure cookie only in production (on https)
+                    sameSite: "lax", // Adjust depending on your use case
+                });
+                // Send a response to the client
+                res.json("ok");
+            });
+        }
+        else {
+            return res.status(400).json({ message: "Incorrect password" });
+        }
     }
-    else {
-        return res.status(400).json({ message: "Incorrect password" });
+    catch (e) {
+        const errorMessage = e.message || "An unknown error occurred";
+        console.error("Login error:", e);
+        res.status(500).json({ message: "Login failed", error: errorMessage });
     }
 }));
 app.get("/profile", (req, res) => {
