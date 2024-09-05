@@ -45,6 +45,10 @@ mongoose.connect(mongoURI, {
   serverSelectionTimeoutMS: 30000,
 });
 
+app.get("/", (req: Request, res: Response) => {
+  res.send("Welcome to the Backend Server");
+});
+
 app.post("/register", async (req: Request, res: Response) => {
   const { username, email, password } = req.body;
   if (!username || !email || !password) {
