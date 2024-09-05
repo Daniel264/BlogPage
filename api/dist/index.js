@@ -58,7 +58,7 @@ const uploadMiddleware = (0, multer_1.default)({ dest: "uploads/" });
 const upload = (0, multer_1.default)();
 const fs = require("fs");
 // const secret = "hhfu8f7djfdlhijsfjuf78g7fvjfg";
-app.use((0, cors_1.default)({ credentials: true, origin: "https://blog-page-frontend-woad.vercel.app/" }));
+app.use((0, cors_1.default)({ credentials: true, origin: "https://blog-page-frontend-woad.vercel.app" }));
 app.use(express_1.default.json());
 app.use(cookieParser());
 app.use(express_1.default.urlencoded({ extended: true }));
