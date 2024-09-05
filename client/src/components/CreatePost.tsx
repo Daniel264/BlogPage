@@ -68,7 +68,7 @@ const CreatePost = () => {
 
     ev.preventDefault();
     console.log(file);
-    const response = await fetch("https://blogpage-sho4.onrender.com/post", {
+    const response = await fetch("https://blogpage-1-r5za.onrender.com/post", {
       method: "POST",
       body: data,
       credentials: "include",

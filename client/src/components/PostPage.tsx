@@ -9,7 +9,7 @@ const PostPage = () => {
   // useEffect(() => {
   const { id } = useParams();
   useEffect(() => {
-    fetch(`https://blogpage-sho4.onrender.com/post/${id}`)
+    fetch(`https://blogpage-1-r5za.onrender.com/post/${id}`)
       .then((response) => response.json())
       .then((data) => setPostInfo(data))
       .catch((error) => console.error("Error fetching post:", error));
@@ -20,7 +20,7 @@ const PostPage = () => {
     <>
       <Header />
       <div className="pt-10">
-        <img className="w-full" src={`https://blogpage-sho4.onrender.com/${postInfo.cover}`} alt="" />
+        <img className="w-full" src={`https://blogpage-1-r5za.onrender.com/${postInfo.cover}`} alt="" />
         <h1 className="text-4xl font-semibold">{postInfo.title}</h1>
         <p dangerouslySetInnerHTML={{__html:postInfo.content}}/>
       </div>

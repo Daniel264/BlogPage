@@ -8,7 +8,7 @@ import Post from "./assets/Interface/usePost";
 function App() {
   const [posts, setPosts] = useState<Post[]>([]);
   useEffect(() => {
-    fetch("https://blogpage-sho4.onrender.com/post").then((response) =>
+    fetch("https://blogpage-1-r5za.onrender.com/post").then((response) =>
       response.json().then((posts) => setPosts(posts))
     );
   }, []);

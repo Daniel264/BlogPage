@@ -21,7 +21,7 @@ const Header = () => {
     document.documentElement.setAttribute("data-theme", newTheme);
   }
   useEffect(() => {
-    fetch("https://blogpage-sho4.onrender.com/profile", {
+    fetch("https://blogpage-1-r5za.onrender.com/profile", {
       credentials: "include",
     }).then((response) => {
       response.json().then((userInfo) => {
@@ -31,7 +31,7 @@ const Header = () => {
   }, []);
 
   function logout() {
-    fetch("https://blogpage-sho4.onrender.com/logout", {
+    fetch("https://blogpage-1-r5za.onrender.com/logout", {
       credentials: "include",
       method: "POST",
     });
