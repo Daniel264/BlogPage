@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+      "outDir": "./dist",  // Directory where the compiled JS files will be stored
+      "module": "commonjs",
+      "target": "es2016",
+      "strict": true,
+      "esModuleInterop": true
+    },
+    "include": [
+      "./**/*.ts"   // Include all .ts files in the backend folder (adjust as needed)
+    ],
+    "exclude": [
+      "../client",  // Exclude the frontend folder
+      "node_modules"  // Exclude node_modules
+    ]
+  }
+  

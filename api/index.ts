@@ -1,4 +1,5 @@
 import express from "express";
+import cors from 'cors';
 import { Request, Response } from "express";
 import multer, { Multer } from "multer";
 const Post = require("./models/Post");
@@ -13,7 +14,6 @@ import "tsconfig-paths/register";
 const mongoURI = process.env.MONGODB_URI;
 const secret = process.env.JWT_SECRET;
 const mongoose = require("mongoose");
-const cors = require("cors");
 const app = express();
 const jwt = require("jsonwebtoken");
 const User = require("./models/User");
