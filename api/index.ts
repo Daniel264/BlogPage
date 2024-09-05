@@ -64,9 +64,11 @@ app.post("/register", async (req: Request, res: Response) => {
     });
     res.status(201).json(userDoc);
   } catch (e) {
+    const errorMessage = (e as Error).message || "An unknown error occurred";
     console.error("Registration error:", e);
-    res.status(400).json({ message: "Registration failed", error: e.message });
+    res.status(500).json({ message: "Registration failed", error: errorMessage });
   }
+  
 });
 
 app.post("/login", async (req: Request, res: Response) => {
@@ -104,9 +106,11 @@ app.post("/login", async (req: Request, res: Response) => {
       return res.status(400).json({ message: "Incorrect password" });
     }
   } catch (e) {
+    const errorMessage = (e as Error).message || "An unknown error occurred";
     console.error("Login error:", e);
-    res.status(500).json({ message: "Login failed", error: e.message });
+    res.status(500).json({ message: "Login failed", error: errorMessage });
   }
+  
 });
 
 
