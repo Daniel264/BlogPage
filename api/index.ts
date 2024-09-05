@@ -26,7 +26,7 @@ const fs = require("fs");
 
 // const secret = "hhfu8f7djfdlhijsfjuf78g7fvjfg";
 
-app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
+app.use(cors({ credentials: true, origin: "https://blog-page-frontend-woad.vercel.app/" }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
