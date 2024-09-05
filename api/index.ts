@@ -33,6 +33,8 @@ app.use(
     credentials: true, // Include credentials if needed
   })
 );
+
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
@@ -86,7 +88,16 @@ app.post("/login", async (req: Request, res: Response) => {
         (error: Error | null, token: string | undefined) => {
           if (error)
             return res.status(400).json({ message: "JWT error", error });
-          res.cookie("token", token).json("ok");
+          
+          // Set the session cookie with the correct options
+          res.cookie("sessionCookie", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production", // Secure cookie only in production (on https)
+            sameSite: "lax", // Adjust depending on your use case
+          });
+
+          // Send a response to the client
+          res.json("ok");
         }
       );
     } else {
@@ -97,6 +108,7 @@ app.post("/login", async (req: Request, res: Response) => {
     res.status(500).json({ message: "Login failed", error: e.message });
   }
 });
+
 
 app.get("/profile", (req: Request, res: Response) => {
   const { token } = req.cookies;
