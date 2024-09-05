@@ -47,38 +47,50 @@ mongoose.connect(mongoURI, {
 
 app.post("/register", async (req: Request, res: Response) => {
   const { username, email, password } = req.body;
+  if (!username || !email || !password) {
+    return res.status(400).json({ message: "Missing required fields" });
+  }
   try {
     const userDoc = await User.create({
       username,
       email,
       password: bcrypt.hashSync(password, salt),
     });
-    res.json(userDoc);
+    res.status(201).json(userDoc);
   } catch (e) {
-    res.status(400).json(e);
+    console.error("Registration error:", e);
+    res.status(400).json({ message: "Registration failed", error: e.message });
   }
 });
 
 app.post("/login", async (req: Request, res: Response) => {
   const { username, email, password } = req.body;
-  const userDoc = await User.findOne({ email });
-
-  if (!userDoc) {
-    return res.status(404).json({ message: "User not found" });
+  if (!email || !password) {
+    return res.status(400).json({ message: "Email and password are required" });
   }
-  const PassOk = bcrypt.compareSync(password, userDoc.password);
-  if (PassOk) {
-    jwt.sign(
-      { username, email, id: userDoc._id },
-      secret,
-      {},
-      (error: Error | null, token: string | undefined) => {
-        if (error) return res.status(400).json({ message: "JWT error", error });
-        res.cookie("token", token).json("ok");
-      }
-    );
-  } else {
-    return res.status(400).json({ message: "Incorrect password" });
+  try {
+    const userDoc = await User.findOne({ email });
+    if (!userDoc) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const PassOk = bcrypt.compareSync(password, userDoc.password);
+    if (PassOk) {
+      jwt.sign(
+        { username, email, id: userDoc._id },
+        secret,
+        {},
+        (error: Error | null, token: string | undefined) => {
+          if (error)
+            return res.status(400).json({ message: "JWT error", error });
+          res.cookie("token", token).json("ok");
+        }
+      );
+    } else {
+      return res.status(400).json({ message: "Incorrect password" });
+    }
+  } catch (e) {
+    console.error("Login error:", e);
+    res.status(500).json({ message: "Login failed", error: e.message });
   }
 });
 
