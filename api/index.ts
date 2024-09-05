@@ -30,14 +30,14 @@ app.use(
   cors({
     origin: "https://blog-page-frontend-woad.vercel.app", // Allow only your frontend domain
     methods: ["GET", "POST"], // Specify allowed methods
-    credentials: true, // Include credentials if needed
+    credentials: false, // Include credentials if needed
   })
 );
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static(__dirname + "/uploads"));
-app.options("/login", cors());
+app.options("*", cors());
 
 const salt = bcrypt.genSaltSync(10);
 
