@@ -28,7 +28,7 @@ const fs = require("fs");
 
 app.use(
   cors({
-    origin: "https://blog-page-frontend-woad.vercel.app", // Allow only your frontend domain
+    origin: "https://blogpage-frontend.onrender.com", // Allow only your frontend domain
     methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
     credentials: true, // Include credentials if needed
   })
