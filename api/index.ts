@@ -29,10 +29,11 @@ const fs = require("fs");
 app.use(
     cors({
         // origin: "https://blogpage-frontend.onrender.com",
-        origin: "http://localhost:5173",
+        origin: true,
         // Allow only your frontend domain
-        methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
+        // methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
         credentials: true, // Include credentials if needed
+        allowedHeaders: ["Content-Type", "Authorization"],
     }),
 );
 
@@ -44,9 +45,14 @@ app.options("*", cors());
 
 const salt = bcrypt.genSaltSync(10);
 
-mongoose.connect(mongoURI, {
-    serverSelectionTimeoutMS: 30000,
-});
+// mongoose.connect(mongoURI, {
+//     serverSelectionTimeoutMS: 30000,
+// });
+
+mongoose
+    .connect("mongodb://localhost/blog")
+    .then(() => console.log("Connected to MongoDB..."))
+    .catch(() => console.error("Could not connect to MongoDB..."));
 
 app.get("/", (req: Request, res: Response) => {
     res.send("Welcome to the Backend Server");
@@ -103,7 +109,10 @@ app.post("/login", async (req: Request, res: Response) => {
                     res.cookie("sessionCookie", token, {
                         httpOnly: true,
                         secure: process.env.NODE_ENV === "production", // Secure cookie only in production (on https)
-                        sameSite: "lax", // Adjust depending on your use case
+                        sameSite:
+                            process.env.NODE_ENV === "production"
+                                ? "lax"
+                                : "none", // Adjust depending on your use case
                     });
 
                     // Send a response to the client
