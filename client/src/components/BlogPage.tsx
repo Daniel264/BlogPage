@@ -63,7 +63,7 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
                 <Link to={`/post/${_id}`}>
                     <img
                         className="w-full rounded-2xl bg-cover min-h-[192px] sm:h-[400px]"
-                        src={"https://blogpage-1-r5za.onrender.com/" + cover}
+                        src={"http://localhost:3000/" + cover}
                         alt=""
                     />
                 </Link>

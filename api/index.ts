@@ -111,9 +111,9 @@ app.post("/login", async (req: Request, res: Response) => {
                         secure: false,
                         // secure: process.env.NODE_ENV === "production", // Secure cookie only in production (on https)
                         // sameSite:
-                            // process.env.NODE_ENV === "production"
-                            //     ? "lax"
-                            //     : "none", // Adjust depending on your use case
+                        // process.env.NODE_ENV === "production"
+                        //     ? "lax"
+                        //     : "none", // Adjust depending on your use case
                     });
 
                     // Send a response to the client
@@ -133,7 +133,8 @@ app.post("/login", async (req: Request, res: Response) => {
 
 app.get("/profile", (req: Request, res: Response) => {
     const { sessionCookie } = req.cookies;
-    if (!sessionCookie) return res.status(401).json({ message: "Not authenticated" });
+    if (!sessionCookie)
+        return res.status(401).json({ message: "Not authenticated" });
     jwt.verify(sessionCookie, secret, {}, (err: Error, info: any) => {
         if (err) throw err;
         res.json(info);
@@ -157,10 +158,10 @@ app.post(
         const extension = parts[parts.length - 1];
         const newPath = `uploads/${file.filename}.${extension}`;
         fs.renameSync(file.path, newPath);
-        const { token } = req.cookies;
-        if (!token)
+        const { sessionCookie } = req.cookies;
+        if (!sessionCookie)
             return res.status(401).json({ message: "Not authenticated" });
-        jwt.verify(token, secret, {}, async (err: Error, info: any) => {
+        jwt.verify(sessionCookie, secret, {}, async (err: Error, info: any) => {
             if (err) throw err;
 
             const { title, summary, content, comment } = req.body;
