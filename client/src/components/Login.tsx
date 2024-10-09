@@ -11,7 +11,6 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [redirect, setRedirect] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [success, setSuccess] = useState("");
     // const [header, setHeader] = useState(false)
 
     // function Loading() {
@@ -38,10 +37,8 @@ const Login = () => {
             setTimeout(() => setLoading(false), 4000);
         }
         if (response.ok) {
-            setSuccess("Yes");
             toast.success("Login Successful");
         } else {
-            setSuccess("No");
             toast.error("Invalid Credentials");
         }
     }
@@ -170,52 +167,6 @@ const Login = () => {
                                 Create an account
                             </a>
                         </Link>
-                        {success == "Yes" ? (
-                            <div
-                                role="alert mt-16"
-                                className="alert alert-success text-green-500 bg-inherit"
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="h-6 w-6 shrink-0 stroke-current"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                                    />
-                                </svg>
-                                <span>Verification Successful</span>
-                            </div>
-                        ) : (
-                            ""
-                        )}
-                        {success == "No" ? (
-                            <div
-                                role="alert"
-                                className="alert alert-error text-red-500 bg-inherit"
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="h-6 w-6 shrink-0 stroke-current"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-                                    />
-                                </svg>
-                                <span>Invalid Credentials.</span>
-                            </div>
-                        ) : (
-                            ""
-                        )}
                     </p>
                 </div>
             </div>
