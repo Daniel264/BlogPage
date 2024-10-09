@@ -2,6 +2,8 @@ import { FormEvent, useState } from "react";
 import Header from "./Header";
 import { Link, Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
     // const [username, setUsername] = useState("");
@@ -50,6 +52,11 @@ const Login = () => {
 
     return (
         <>
+            <ToastContainer
+                newestOnTop={true}
+                pauseOnHover={false}
+                autoClose={3000}
+            />
             <Header />
             <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 font-montserrat">
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">

@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import BlogPage from "./components/BlogPage";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Header from "./components/Header";
 import { useEffect, useState } from "react";
 import Post from "./assets/Interface/usePost";
