@@ -39,7 +39,7 @@ const Header = () => {
   }
   return (
     <>
-      <header className="flex justify-between">
+      <header className="flex justify-between ">
         {/* <div>
           <Link to="/" className="font-bold text-3xl">
             MyBlog
@@ -75,6 +75,7 @@ const Header = () => {
                 >
                   {/* <svg 
                     xmlns="http://www.w3.org/2000/svg"
+                    
                     fill="none"
                     viewBox="0 0 24 24"
                     className="inline-block h-6 w-6 stroke-current"
@@ -109,7 +110,7 @@ const Header = () => {
               <div className="hidden flex-none lg:block">
                 <ul className="menu menu-horizontal">
                   <li>
-                    <a className="text-xl font-medium">
+                    <a className="text-base font-normal">
                       {email && (
                         <>
                           <Link to="/create">Create Post</Link>
@@ -118,7 +119,7 @@ const Header = () => {
                     </a>
                   </li>
                   <li>
-                    <a className="text-xl font-medium">
+                    <a className="text-base font-normal">
                       {email && (
                         <>
                           <a className="cursor-pointer" onClick={logout}>
@@ -129,7 +130,7 @@ const Header = () => {
                     </a>
                   </li>
                   <li>
-                    <a className="text-xl font-medium">
+                    <a className="text-base font-normal">
                       {email && (
                         <>
                           <a className="cursor-pointer">
@@ -140,7 +141,7 @@ const Header = () => {
                     </a>
                   </li>
                   <li>
-                    <a className="text-xl font-medium">
+                    <a className="text-base font-normal">
                       {!email && (
                         <>
                           <Link to="/register">Register</Link>
@@ -149,7 +150,7 @@ const Header = () => {
                     </a>
                   </li>
                   <li>
-                    <a className="text-xl font-medium">
+                    <a className="text-base font-normal">
                       {!email && (
                         <>
                           <Link to="/login">Login</Link>
