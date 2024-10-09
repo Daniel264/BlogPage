@@ -108,11 +108,12 @@ app.post("/login", async (req: Request, res: Response) => {
                     // Set the session cookie with the correct options
                     res.cookie("sessionCookie", token, {
                         httpOnly: true,
-                        secure: process.env.NODE_ENV === "production", // Secure cookie only in production (on https)
-                        sameSite:
-                            process.env.NODE_ENV === "production"
-                                ? "lax"
-                                : "none", // Adjust depending on your use case
+                        secure: false,
+                        // secure: process.env.NODE_ENV === "production", // Secure cookie only in production (on https)
+                        // sameSite:
+                            // process.env.NODE_ENV === "production"
+                            //     ? "lax"
+                            //     : "none", // Adjust depending on your use case
                     });
 
                     // Send a response to the client
@@ -131,9 +132,9 @@ app.post("/login", async (req: Request, res: Response) => {
 });
 
 app.get("/profile", (req: Request, res: Response) => {
-    const { token } = req.cookies;
-    if (!token) return res.status(401).json({ message: "Not authenticated" });
-    jwt.verify(token, secret, {}, (err: Error, info: any) => {
+    const { sessionCookie } = req.cookies;
+    if (!sessionCookie) return res.status(401).json({ message: "Not authenticated" });
+    jwt.verify(sessionCookie, secret, {}, (err: Error, info: any) => {
         if (err) throw err;
         res.json(info);
     });
