@@ -27,13 +27,15 @@ const fs = require("fs");
 // const secret = "hhfu8f7djfdlhijsfjuf78g7fvjfg";
 
 app.use(
-  cors({
-    origin: "https://blogpage-frontend.onrender.com", // Allow only your frontend domain
-    methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
-    credentials: true, // Include credentials if needed
-  })
+    cors({
+        // origin: "https://blogpage-frontend.onrender.com",
+        origin: true,
+        // Allow only your frontend domain
+        // methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
+        credentials: true, // Include credentials if needed
+        allowedHeaders: ["Content-Type", "Authorization"],
+    }),
 );
-
 
 app.use(express.json());
 app.use(cookieParser());
@@ -43,182 +45,199 @@ app.options("*", cors());
 
 const salt = bcrypt.genSaltSync(10);
 
-mongoose.connect(mongoURI, {
-  serverSelectionTimeoutMS: 30000,
-});
+// mongoose.connect(mongoURI, {
+//     serverSelectionTimeoutMS: 30000,
+// });
+
+mongoose
+    .connect("mongodb://localhost/blog")
+    .then(() => console.log("Connected to MongoDB..."))
+    .catch(() => console.error("Could not connect to MongoDB..."));
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Welcome to the Backend Server");
+    res.send("Welcome to the Backend Server");
 });
 
 app.post("/register", async (req: Request, res: Response) => {
-  const { username, email, password } = req.body;
-  if (!username || !email || !password) {
-    return res.status(400).json({ message: "Missing required fields" });
-  }
-  try {
-    const userDoc = await User.create({
-      username,
-      email,
-      password: bcrypt.hashSync(password, salt),
-    });
-    res.status(201).json(userDoc);
-  } catch (e) {
-    const errorMessage = (e as Error).message || "An unknown error occurred";
-    console.error("Registration error:", e);
-    res.status(500).json({ message: "Registration failed", error: errorMessage });
-  }
-  
+    const { username, email, password } = req.body;
+    if (!username || !email || !password) {
+        return res.status(400).json({ message: "Missing required fields" });
+    }
+    try {
+        const userDoc = await User.create({
+            username,
+            email,
+            password: bcrypt.hashSync(password, salt),
+        });
+        res.status(201).json(userDoc);
+    } catch (e) {
+        const errorMessage =
+            (e as Error).message || "An unknown error occurred";
+        console.error("Registration error:", e);
+        res.status(500).json({
+            message: "Registration failed",
+            error: errorMessage,
+        });
+    }
 });
 
 app.post("/login", async (req: Request, res: Response) => {
-  const { username, email, password } = req.body;
-  if (!email || !password) {
-    return res.status(400).json({ message: "Email and password are required" });
-  }
-  try {
-    const userDoc = await User.findOne({ email });
-    if (!userDoc) {
-      return res.status(404).json({ message: "User not found" });
+    const { username, email, password } = req.body;
+    if (!email || !password) {
+        return res
+            .status(400)
+            .json({ message: "Email and password are required" });
     }
-    const PassOk = bcrypt.compareSync(password, userDoc.password);
-    if (PassOk) {
-      jwt.sign(
-        { username, email, id: userDoc._id },
-        secret,
-        {},
-        (error: Error | null, token: string | undefined) => {
-          if (error)
-            return res.status(400).json({ message: "JWT error", error });
-          
-          // Set the session cookie with the correct options
-          res.cookie("sessionCookie", token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production", // Secure cookie only in production (on https)
-            sameSite: "lax", // Adjust depending on your use case
-          });
-
-          // Send a response to the client
-          res.json("ok");
+    try {
+        const userDoc = await User.findOne({ email });
+        if (!userDoc) {
+            return res.status(404).json({ message: "User not found" });
         }
-      );
-    } else {
-      return res.status(400).json({ message: "Incorrect password" });
+        const PassOk = bcrypt.compareSync(password, userDoc.password);
+        if (PassOk) {
+            jwt.sign(
+                { username, email, id: userDoc._id },
+                secret,
+                {},
+                (error: Error | null, token: string | undefined) => {
+                    if (error)
+                        return res
+                            .status(400)
+                            .json({ message: "JWT error", error });
+
+                    // Set the session cookie with the correct options
+                    res.cookie("sessionCookie", token, {
+                        httpOnly: true,
+                        secure: false,
+                        // secure: process.env.NODE_ENV === "production", // Secure cookie only in production (on https)
+                        // sameSite:
+                        // process.env.NODE_ENV === "production"
+                        //     ? "lax"
+                        //     : "none", // Adjust depending on your use case
+                    });
+
+                    // Send a response to the client
+                    res.json("ok");
+                },
+            );
+        } else {
+            return res.status(400).json({ message: "Incorrect password" });
+        }
+    } catch (e) {
+        const errorMessage =
+            (e as Error).message || "An unknown error occurred";
+        console.error("Login error:", e);
+        res.status(500).json({ message: "Login failed", error: errorMessage });
     }
-  } catch (e) {
-    const errorMessage = (e as Error).message || "An unknown error occurred";
-    console.error("Login error:", e);
-    res.status(500).json({ message: "Login failed", error: errorMessage });
-  }
-  
 });
 
-
 app.get("/profile", (req: Request, res: Response) => {
-  const { token } = req.cookies;
-  if (!token) return res.status(401).json({ message: "Not authenticated" });
-  jwt.verify(token, secret, {}, (err: Error, info: any) => {
-    if (err) throw err;
-    res.json(info);
-  });
+    const { sessionCookie } = req.cookies;
+    if (!sessionCookie)
+        return res.status(401).json({ message: "Not authenticated" });
+    jwt.verify(sessionCookie, secret, {}, (err: Error, info: any) => {
+        if (err) throw err;
+        res.json(info);
+    });
 });
 
 app.post("/logout", (req: Request, res: Response) => {
-  res.cookie("token", "").json("ok");
+    res.cookie("token", "").json("ok");
 });
 
 app.post(
-  "/post",
-  uploadMiddleware.single("file"),
-  async (req: Request, res: Response) => {
-    const file = req.file as Express.Multer.File | undefined;
-    if (!file) {
-      return res.status(400).json({ message: "No file uploaded" });
-    }
+    "/post",
+    uploadMiddleware.single("file"),
+    async (req: Request, res: Response) => {
+        const file = req.file as Express.Multer.File | undefined;
+        if (!file) {
+            return res.status(400).json({ message: "No file uploaded" });
+        }
 
-    const parts = file.originalname.split(".");
-    const extension = parts[parts.length - 1];
-    const newPath = `uploads/${file.filename}.${extension}`;
-    fs.renameSync(file.path, newPath);
-    const { token } = req.cookies;
-    if (!token) return res.status(401).json({ message: "Not authenticated" });
-    jwt.verify(token, secret, {}, async (err: Error, info: any) => {
-      if (err) throw err;
+        const parts = file.originalname.split(".");
+        const extension = parts[parts.length - 1];
+        const newPath = `uploads/${file.filename}.${extension}`;
+        fs.renameSync(file.path, newPath);
+        const { sessionCookie } = req.cookies;
+        if (!sessionCookie)
+            return res.status(401).json({ message: "Not authenticated" });
+        jwt.verify(sessionCookie, secret, {}, async (err: Error, info: any) => {
+            if (err) throw err;
 
-      const { title, summary, content, comment } = req.body;
-      const postDoc = await Post.create({
-        title,
-        summary,
-        content,
-        comment,
-        cover: newPath,
-        author: info.id,
-      });
-      res.json(postDoc);
-    });
-  }
+            const { title, summary, content, comment } = req.body;
+            const postDoc = await Post.create({
+                title,
+                summary,
+                content,
+                comment,
+                cover: newPath,
+                author: info.id,
+            });
+            res.json(postDoc);
+        });
+    },
 );
 
 app.get("/post", async (req: Request, res: Response) => {
-  const posts = await Post.find()
-    .populate("author", ["username"])
-    .sort({ createdAt: -1 });
-  res.json(posts);
+    const posts = await Post.find()
+        .populate("author", ["username"])
+        .sort({ createdAt: -1 });
+    res.json(posts);
 });
 
 app.get("/post/:id", async (req: Request, res: Response) => {
-  const post = await Post.findById(req.params.id).populate("author", [
-    "username",
-  ]);
-  if (!post) return res.status(404).json({ message: "Post not found" });
-  res.json(post);
+    const post = await Post.findById(req.params.id).populate("author", [
+        "username",
+    ]);
+    if (!post) return res.status(404).json({ message: "Post not found" });
+    res.json(post);
 });
 
 app.post("/comment", upload.none(), async (req: Request, res: Response) => {
-  const { content, post_id, author_id } = req.body;
-  console.log({ content, post_id, author_id });
+    const { content, post_id, author_id } = req.body;
+    console.log({ content, post_id, author_id });
 
-  try {
-    const commentDoc = await Comment.create({
-      content,
-      post: post_id,
-      author: author_id,
-    });
-    res.status(201).json(commentDoc);
-  } catch (error) {
-    res.status(500).json({ message: "Failed to create comment", error });
-  }
+    try {
+        const commentDoc = await Comment.create({
+            content,
+            post: post_id,
+            author: author_id,
+        });
+        res.status(201).json(commentDoc);
+    } catch (error) {
+        res.status(500).json({ message: "Failed to create comment", error });
+    }
 });
 
 app.get("/comment", async (req: Request, res: Response) => {
-  const comments = await Comment.find();
-  res.json(comments);
+    const comments = await Comment.find();
+    res.json(comments);
 });
 
 app.post(
-  "/picture",
-  uploadMiddleware.single("picture"),
-  async (req: Request, res: Response) => {
-    const file = req.file as Express.Multer.File | undefined;
-    if (!file) {
-      return res.status(400).json({ message: "No file uploaded" });
-    }
+    "/picture",
+    uploadMiddleware.single("picture"),
+    async (req: Request, res: Response) => {
+        const file = req.file as Express.Multer.File | undefined;
+        if (!file) {
+            return res.status(400).json({ message: "No file uploaded" });
+        }
 
-    const parts = file.originalname.split(".");
-    const extension = parts[parts.length - 1];
-    const newPath = `uploads/${file.filename}.${extension}`;
-    fs.renameSync(file.path, newPath);
+        const parts = file.originalname.split(".");
+        const extension = parts[parts.length - 1];
+        const newPath = `uploads/${file.filename}.${extension}`;
+        fs.renameSync(file.path, newPath);
 
-    const pictureDoc = await Picture.create({
-      picture: newPath,
-    });
-    res.json(pictureDoc);
-  }
+        const pictureDoc = await Picture.create({
+            picture: newPath,
+        });
+        res.json(pictureDoc);
+    },
 );
 
 app.get("/picture", async (req: Request, res: Response) => {
-  const picture = await Picture.find();
-  res.json(picture);
+    const picture = await Picture.find();
+    res.json(picture);
 });
 
 const port = process.env.PORT || 3000;

@@ -14,7 +14,7 @@ const Settings = ({ picture: initialPicture }: Pictures) => {
     if (file) data.set("picture", file);
     ev.preventDefault();
     const response = await fetch(
-      "https://blogpage-1-r5za.onrender.com/picture",
+      "http://localhost:3000/picture",
       {
         method: "POST",
         body: data,
@@ -40,7 +40,7 @@ const Settings = ({ picture: initialPicture }: Pictures) => {
           <figure className="">
             <img
               className="w-[200px] h-[200px] rounded-full bg-contain border-[1px]"
-              src={`https://blogpage-1-r5za.onrender.com/${picture}`}
+              src={`http://localhost:3000/${picture}`}
               alt="Profile picture"
             />
           </figure>

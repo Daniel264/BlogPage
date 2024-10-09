@@ -5,10 +5,12 @@ import Header from "./components/Header";
 import { useEffect, useState } from "react";
 import Post from "./assets/Interface/usePost";
 
+//https://blogpage-1-r5za.onrender.com
+
 function App() {
   const [posts, setPosts] = useState<Post[]>([]);
   useEffect(() => {
-    fetch("https://blogpage-1-r5za.onrender.com/post").then((response) =>
+    fetch("http://localhost:3000/post").then((response) =>
       response.json().then((posts) => setPosts(posts))
     );
   }, []);
