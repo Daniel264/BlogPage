@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 // import { FormEvent } from "react";
+// https://blogpage-1-r5za.onrender.com/
 
 import { FormEvent, useEffect, useState } from "react";
 import { Form } from "react-router-dom";
@@ -19,7 +20,7 @@ const Comments = () => {
     // data.set("author_id", author_id);
     ev.preventDefault();
 
-    const response = await fetch("https://blogpage-1-r5za.onrender.com/comment", {
+    const response = await fetch("http://localhost:3000/comment", {
       method: "POST",
       body: data,
       credentials: "include",
@@ -35,7 +36,7 @@ const Comments = () => {
   const [rest, setRest] = useState<Comment[]>([]);
   // eslint-disable-next-line react-hooks/rules-of-hooks
   async function fetchComments() {
-    const response = await fetch("https://blogpage-1-r5za.onrender.com/comment");
+    const response = await fetch("http://localhost:3000/comment");
     if (response.ok) {
       const comments = await response.json();
       setRest(comments);

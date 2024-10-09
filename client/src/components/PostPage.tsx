@@ -20,7 +20,7 @@ const PostPage = () => {
     <>
       <Header />
       <div className="pt-10">
-        <img className="w-full" src={`https://blogpage-1-r5za.onrender.com/${postInfo.cover}`} alt="" />
+        <img className="w-full" src={`http://localhost:3000/${postInfo.cover}`} alt="" />
         <h1 className="text-4xl font-semibold">{postInfo.title}</h1>
         <p dangerouslySetInnerHTML={{__html:postInfo.content}}/>
       </div>
