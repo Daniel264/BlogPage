@@ -25,7 +25,7 @@ const Comments = () => {
       body: data,
       credentials: "include",
     });
-    response.json();
+    // response.json();
 
     if (response.ok) {
       const newComment = await response.json();
