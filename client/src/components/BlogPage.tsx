@@ -85,7 +85,7 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
                     </form>
                 </dialog>
             </div>
-            <hr className="border-dashed bg-gray-300 h-[1px]" />
+            {/* <hr className="border-dashed bg-gray-300 h-[1px]" /> */}
         </div>
     );
 };
