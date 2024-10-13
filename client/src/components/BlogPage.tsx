@@ -62,7 +62,7 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
             <div className="w-full py-5 rounded-2xl">
                 <Link to={`/post/${_id}`}>
                     <img
-                        className="w-full rounded-2xl border-2 border-black/5 bg-cover min-h-[192px] sm:h-[400px]"
+                        className="w-full rounded-2xl border-2 border-black bg-cover min-h-[192px] sm:h-[400px]"
                         src={"http://localhost:3000/" + cover}
                         alt=""
                     />
