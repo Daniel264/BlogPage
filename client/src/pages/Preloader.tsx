@@ -6,14 +6,24 @@ const Preloader = () => {
     const [redirect, setRedirect] = useState(false);
     setTimeout(() => {
         setRedirect(true);
-    }, 8000);
+    }, 80000000);
 
     if (redirect) {
         return <Navigate to="/login" />;
     }
     return (
-        <motion.div className="w-full h-full flex items-center justify-center">
-            <h1 className="font-semibold text-5xl">My Blog</h1>
+        <motion.div className="w-[100%] p-0 h-[100vh] flex items-center justify-center font-montserrat bg-white text-black">
+            <motion.p
+                initial={{
+                    y: 200,
+                }}
+                whileInView={{
+                    y: 0,
+                }}
+                className="text-6xl font-semibold"
+            >
+                Blogggg
+            </motion.p>
         </motion.div>
     );
 };
