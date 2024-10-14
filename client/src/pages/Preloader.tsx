@@ -16,11 +16,14 @@ const Preloader = () => {
             <motion.p
                 initial={{
                     y: 200,
+                    x: 200,
                 }}
                 whileInView={{
                     y: 0,
+                    x: 0,
                 }}
-                className="text-6xl font-semibold"
+                
+                className="text-6xl font-semibold absolute top-12 left-10"
             >
                 Blogggg
             </motion.p>
