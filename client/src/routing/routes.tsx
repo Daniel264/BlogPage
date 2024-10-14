@@ -5,11 +5,12 @@ import App from "../App";
 import CreatePost from "../components/CreatePost";
 import PostPage from "../components/PostPage";
 import Settings from "../components/Settings";
-import AnimatePage from "../pages/AnimatePage";
+// import AnimatePage from "../pages/AnimatePage";
 import Profile from "../images/profile.png";
+import Preloader from "../pages/Preloader";
 
 const router = createBrowserRouter([
-  { path: "/", element: <AnimatePage /> },
+  { path: "/", element: <Preloader /> },
   { path: "/home", element: <App /> },
   { path: "/Login", element: <Login /> },
   { path: "/Register", element: <Register /> },
