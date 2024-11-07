@@ -38,7 +38,7 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
 
     setTimeout;
     return (
-        <div className="flex flex-col mt-10 font-montserrat lg:w-9/12 lg:pr-32">
+        <div className="flex flex-col mt-10 font-montserrat lg:w-9/12 lg:pr-32 border-x-[1.5px] border-b-[1.5px]">
             <div className="pl-5 text-left">
                 <div className="flex flex-row w-full justify-between">
                     <span className="font-regular flex">
@@ -69,9 +69,9 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
                     />
                 </Link>
             </div>
-            <div className="text-left w-full ">
+            <div className="text-left w-full bg-inherit">
                 {/* Open the modal using document.getElementById('ID').showModal() method */}
-                <button className="btn bg-white flex w-full justify-center border-none hover:bg-white hover:border-none" onClick={openModal}>
+                <button className="btn bg-white flex w-full justify-center border-none hover:bg-inherit hover:border-none" onClick={openModal}>
                     <FaComment size="30px"/>
                 </button>
                 <dialog id="my_modal_2" className="modal">
