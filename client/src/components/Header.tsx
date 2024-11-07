@@ -40,27 +40,7 @@ const Header = () => {
   return (
     <>
       <header className="flex justify-between ">
-        {/* <div>
-          <Link to="/" className="font-bold text-3xl">
-            MyBlog
-          </Link>
-        </div>
-        <div className="flex justify-between w-40 font-medium text-lg">
-          {email && (
-            <>
-              <Link to="/create">Create Post</Link>
-              <a className="cursor-pointer" onClick={logout}>
-                Logout
-              </a>
-            </>
-          )}
-          {!email && (
-            <>
-              <Link to="/login">Login</Link>
-              <Link to="/register">Register</Link>
-            </>
-          )}
-        </div> */}
+
 
         <div className="drawer">
           <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -73,20 +53,7 @@ const Header = () => {
                   aria-label="open sidebar"
                   className="btn btn-square btn-ghost"
                 >
-                  {/* <svg 
-                    xmlns="http://www.w3.org/2000/svg"
-                    
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    className="inline-block h-6 w-6 stroke-current"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M4 6h16M4 12h16M4 18h16"
-                    ></path> */}
-                  {/* </svg> */}
+
                   <div className="avatar w-14 mr-5">
                     <div className="ring-primary ring-offset-base-100 w-24 rounded-full ring ring-offset-2">
                       <img

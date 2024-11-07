@@ -28,16 +28,16 @@ function App() {
                 <Route
                     index
                     element={
-                        <>
+                        <div>
                             <Header />
-                            {/* <h1 className="font-normal text-2xl md:text-5xl text-left mt-5">
-              Hi 👋
-            </h1> */}
-                            {posts.length > 0 &&
-                                posts.map((post) => (
-                                    <BlogPage key={post.id} {...post} />
-                                ))}
-                        </>
+
+                            <div className="w-full flex flex-col items-center">
+                                {posts.length > 0 &&
+                                    posts.map((post) => (
+                                        <BlogPage key={post.id} {...post} />
+                                    ))}
+                            </div>
+                        </div>
                     }
                 />
             </Routes>

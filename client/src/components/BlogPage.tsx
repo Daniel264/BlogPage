@@ -4,6 +4,7 @@ import Post from "../assets/Interface/usePost";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import "@fontsource/roboto/";
+import { FaComment } from "react-icons/fa";
 import Comments from "./Comments";
 
 const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
@@ -37,7 +38,7 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
 
     setTimeout;
     return (
-        <div className="flex flex-col mt-10 font-montserrat lg:w-9/12 lg:border-r-[2px] lg:border-dashed lg:pr-32">
+        <div className="flex flex-col mt-10 font-montserrat lg:w-9/12 lg:pr-32 border-x-[1.5px] border-b-[1.5px]">
             <div className="pl-5 text-left">
                 <div className="flex flex-row w-full justify-between">
                     <span className="font-regular flex">
@@ -47,12 +48,12 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
                                 {/* <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" /> */}
                             </div>
                         </div>
-                        <p>{author?.username}</p>
+                        <p className="font-medium">{author?.username}</p>
                     </span>
-                    <time>{format(new Date(createdAt), "MMMM do, yyyy")}</time>
+                    <time className="font-medium">{format(new Date(createdAt), "MMMM do, yyyy")}</time>
                 </div>
                 <Link
-                    className="sm:text-4xl text-2xl font-semibold"
+                    className="sm:text-3xl md:text-4xl text-2xl font-semibold"
                     to={`/post/${_id}`}
                 >
                     {title}
@@ -62,16 +63,16 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
             <div className="w-full py-5 rounded-2xl">
                 <Link to={`/post/${_id}`}>
                     <img
-                        className="w-full rounded-2xl border-2 border-black/5 bg-cover min-h-[192px] sm:h-[400px]"
+                        className="w-full rounded-2xl  bg-cover min-h-[192px] sm:h-[400px]"
                         src={"http://localhost:3000/" + cover}
                         alt=""
                     />
                 </Link>
             </div>
-            <div className="text-left">
+            <div className="text-left w-full bg-inherit">
                 {/* Open the modal using document.getElementById('ID').showModal() method */}
-                <button className="btn" onClick={openModal}>
-                    Comments
+                <button className="btn bg-white flex w-full justify-center border-none hover:bg-inherit hover:border-none" onClick={openModal}>
+                    <FaComment size="30px"/>
                 </button>
                 <dialog id="my_modal_2" className="modal">
                     <div className="modal-box">
@@ -85,7 +86,7 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
                     </form>
                 </dialog>
             </div>
-            <hr className="border-dashed bg-gray-300 h-[1px]" />
+            {/* <hr className="border-dashed bg-gray-300 h-[1px]" /> */}
         </div>
     );
 };
