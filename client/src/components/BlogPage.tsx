@@ -47,12 +47,12 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
                                 {/* <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" /> */}
                             </div>
                         </div>
-                        <p>{author?.username}</p>
+                        <p className="font-medium">{author?.username}</p>
                     </span>
-                    <time>{format(new Date(createdAt), "MMMM do, yyyy")}</time>
+                    <time className="font-medium">{format(new Date(createdAt), "MMMM do, yyyy")}</time>
                 </div>
                 <Link
-                    className="sm:text-4xl text-2xl font-semibold"
+                    className="sm:text-3xl md:text-4xl text-2xl font-semibold"
                     to={`/post/${_id}`}
                 >
                     {title}
