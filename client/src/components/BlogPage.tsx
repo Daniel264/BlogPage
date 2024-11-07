@@ -4,6 +4,7 @@ import Post from "../assets/Interface/usePost";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import "@fontsource/roboto/";
+import { FaComment } from "react-icons/fa";
 import Comments from "./Comments";
 
 const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
@@ -68,10 +69,10 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
                     />
                 </Link>
             </div>
-            <div className="text-left">
+            <div className="text-left w-full ">
                 {/* Open the modal using document.getElementById('ID').showModal() method */}
-                <button className="btn" onClick={openModal}>
-                    Comments
+                <button className="btn bg-white flex w-full justify-center border-none hover:bg-white hover:border-none" onClick={openModal}>
+                    <FaComment size="30px"/>
                 </button>
                 <dialog id="my_modal_2" className="modal">
                     <div className="modal-box">
