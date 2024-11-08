@@ -21,13 +21,14 @@ const Settings = () => {
       const result = await response.json();
       setMessage("Picture updated successfully");
       setPicture(result.picture);
-      console.log(result);
-
+      localStorage.setItem("savedPicture", picture);
       response.json();
     } else {
       setMessage("Picture not updated");
     }
   }
+  const getPicture:string | null = localStorage.getItem("savedPicture")
+
   return (
     <Form onSubmit={changePicture}>
       <div className="w-full h-[100vh] font-montserrat flex flex-col items-center justify-center">
@@ -36,7 +37,7 @@ const Settings = () => {
           <figure className="">
             <img
               className="w-[200px] h-[200px] rounded-full bg-contain border-[1px]"
-              src={`http://localhost:3000/${picture}`}
+              src={`http://localhost:3000/${getPicture}`}
               alt="Profile picture"
             />
           </figure>
