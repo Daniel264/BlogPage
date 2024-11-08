@@ -1,13 +1,9 @@
 import { FormEvent, useState } from "react";
 import { Form } from "react-router-dom";
 
-interface Pictures {
-  picture: string;
-}
-
-const Settings = ({ picture: initialPicture }: Pictures) => {
+const Settings = () => {
   const [file, setFile] = useState<File | null>(null);
-  const [picture, setPicture] = useState<string>(initialPicture);
+  const [picture, setPicture] = useState<string>("");
   const [message, setMessage] = useState<string | null>(null);
   async function changePicture(ev: FormEvent) {
     const data = new FormData();
