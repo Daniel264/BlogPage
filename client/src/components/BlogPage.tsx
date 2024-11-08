@@ -37,20 +37,29 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
     }
 
     setTimeout;
+
+    const getPicture: string | null = localStorage.getItem("savedPicture");
     return (
         <div className="flex flex-col mt-10 font-montserrat lg:w-9/12 lg:pr-32 border-x-[1.5px] border-b-[1.5px]">
             <div className="pl-5 text-left">
                 <div className="flex flex-row w-full justify-between">
                     <span className="font-regular flex">
                         <div className="avatar mr-3 z-0">
-                            <div className="ring-primary ring-offset-base-100 text-center w-7 rounded-full border-solid border-black border-[1px] bg-slate-600 z-0">
-                                <p className="font-extrabold ">A</p>
-                                {/* <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" /> */}
+                            <div className="ring-primary ring-offset-base-100 text-center w-7 rounded-full border-[1px] border-black z-0">
+                                <figure className="">
+                                    <img
+                                        className="w-[200px] h-[200px] rounded-full bg-contain border-[1px]"
+                                        src={`http://localhost:3000/${getPicture}`}
+                                        alt="Profile picture"
+                                    />
+                                </figure>
                             </div>
                         </div>
                         <p className="font-medium">{author?.username}</p>
                     </span>
-                    <time className="font-medium">{format(new Date(createdAt), "MMMM do, yyyy")}</time>
+                    <time className="font-medium">
+                        {format(new Date(createdAt), "MMMM do, yyyy")}
+                    </time>
                 </div>
                 <Link
                     className="sm:text-3xl md:text-4xl text-2xl font-semibold"
@@ -71,8 +80,11 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
             </div>
             <div className="text-left w-full bg-inherit">
                 {/* Open the modal using document.getElementById('ID').showModal() method */}
-                <button className="btn bg-white flex w-full justify-center border-none hover:bg-inherit hover:border-none" onClick={openModal}>
-                    <FaComment size="30px"/>
+                <button
+                    className="btn bg-white flex w-full justify-center border-none hover:bg-inherit hover:border-none"
+                    onClick={openModal}
+                >
+                    <FaComment size="30px" />
                 </button>
                 <dialog id="my_modal_2" className="modal">
                     <div className="modal-box">
