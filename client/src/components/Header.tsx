@@ -69,15 +69,15 @@ const Header = () => {
                 {" "}
                 <Link
                   to="/home"
-                  className="font-bold text-3xl md:text-5xl font-alexBrush"
+                  className="font-bold text-3xl md:text-5xl use-condensed"
                 >
-                  MyBlog
+                  BLOG
                 </Link>
               </div>
               <div className="hidden flex-none lg:block">
                 <ul className="menu menu-horizontal">
                   <li>
-                    <a className="text-base font-normal">
+                    <a className="text-base font-normal use-condensed">
                       {email && (
                         <>
                           <Link to="/create">Create Post</Link>
@@ -89,7 +89,7 @@ const Header = () => {
                     <a className="text-base font-normal">
                       {email && (
                         <>
-                          <a className="cursor-pointer" onClick={logout}>
+                          <a className="cursor-pointer use-condensed" onClick={logout}>
                             Logout
                           </a>
                         </>
@@ -100,7 +100,7 @@ const Header = () => {
                     <a className="text-base font-normal">
                       {email && (
                         <>
-                          <a className="cursor-pointer">
+                          <a className="cursor-pointer use-condensed">
                             <Link to="/settings">Settings</Link>
                           </a>
                         </>
@@ -108,7 +108,7 @@ const Header = () => {
                     </a>
                   </li>
                   <li>
-                    <a className="text-base font-normal">
+                    <a className="text-base font-normal use-condensed">
                       {!email && (
                         <>
                           <Link to="/register">Register</Link>
@@ -117,7 +117,7 @@ const Header = () => {
                     </a>
                   </li>
                   <li>
-                    <a className="text-base font-normal">
+                    <a className="text-base font-normal use-condensed">
                       {!email && (
                         <>
                           <Link to="/login">Login</Link>

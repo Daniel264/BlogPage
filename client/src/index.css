@@ -6,3 +6,89 @@
     padding: 0 !important;
     max-width: 100% !important;
 }
+
+body {
+  font-family: ClashGrotesk-Regular, sans-serif;
+}
+
+h1, h2 {
+  font-family: Formula Condensed Bold, sans-serif;
+}
+
+p {
+  font-family: ClashGrotesk-Medium, sans-serif;
+}
+
+@font-face {
+  font-family: 'Formula Condensed Light';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Formula Condensed Light'), url('../public/fonts/FormulaCondensed-Light.woff') format('woff');
+  }
+
+
+  @font-face {
+  font-family: 'Formula Condensed Bold';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Formula Condensed Bold'), url('../public/fonts/FormulaCondensed-Bold.woff') format('woff');
+  }
+
+  .use-condensed {
+    font-family: Formula Condensed Bold, sans-serif;
+  }
+
+@font-face {
+  font-family: 'ClashGrotesk-Extralight';
+  src:
+       url('../fonts/ClashGrotesk-Extralight.woff') format('woff');
+  font-weight: 200;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ClashGrotesk-Light';
+  src:
+       url('../fonts/ClashGrotesk-Light.woff') format('woff');
+  font-weight: 300;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ClashGrotesk-Regular';
+  src:
+       url('../public/fonts/ClashGrotesk-Regular.woff') format('woff');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ClashGrotesk-Medium';
+  src:url('../fonts/ClashGrotesk-Medium.woff') format('woff');
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ClashGrotesk-Semibold';
+  src:
+       url('../fonts/ClashGrotesk-Semibold.woff') format('woff');
+  font-weight: 600;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ClashGrotesk-Bold';
+  src:
+       url('../fonts/ClashGrotesk-Bold.woff') format('woff');
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ClashGrotesk-Variable';
+  src: local('Formula Condensed Light'), url('../public/fonts/ClashGrotesk-Variable.woff') format('woff');
+  font-weight: 200 700;
+  font-display: swap;
+  font-style: normal;
+}

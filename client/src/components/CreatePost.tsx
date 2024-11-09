@@ -90,7 +90,7 @@ const CreatePost = () => {
 
   return (
     <form onSubmit={createNewPost} className="">
-      <div className="space-y-12 font-montserrat">
+      <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
           <h2 className=" font-bold leading-7 text-3xl">New Blog</h2>
           <p className="mt-1 text-sm leading-6 ">
@@ -117,7 +117,7 @@ const CreatePost = () => {
                     onChange={(ev) => setTitle(ev.target.value)}
                     placeholder="Add a title..."
                     autoComplete="username"
-                    className="block flex-1 border-0 w-full bg-transparent py-1.5 pl-1 
+                    className="block flex-1 border-0 w-full bg-transparent py-1.5 pl-1
                     placeholder:font-semibold placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                   />
                 </div>

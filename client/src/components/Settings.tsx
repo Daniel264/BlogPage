@@ -31,7 +31,7 @@ const Settings = () => {
 
   return (
     <Form onSubmit={changePicture}>
-      <div className="w-full h-[100vh] font-montserrat flex flex-col items-center justify-center">
+      <div className="w-full h-[100vh] flex flex-col items-center justify-center">
         <h1 className="text-3xl font-semibold"></h1>
         <div className="card bg-base-100 w-96 shadow-xl">
           <figure className="">

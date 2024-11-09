@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Post from "../assets/Interface/usePost";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
-import "@fontsource/roboto/";
 import { FaComment } from "react-icons/fa";
 import Comments from "./Comments";
 
@@ -40,7 +39,7 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
 
     const getPicture: string | null = localStorage.getItem("savedPicture");
     return (
-        <div className="flex flex-col mt-10 font-montserrat lg:w-9/12 lg:pr-32 border-x-[1.5px] border-b-[1.5px]">
+        <div className="flex flex-col mt-10 lg:w-9/12 lg:pr-32 border-x-[1.5px] border-b-[1.5px]">
             <div className="pl-5 text-left">
                 <div className="flex flex-row w-full justify-between">
                     <span className="font-regular flex">
@@ -62,7 +61,7 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
                     </time>
                 </div>
                 <Link
-                    className="sm:text-3xl md:text-4xl text-2xl font-semibold"
+                    className="sm:text-3xl md:text-4xl text-2xl font-semibold use-condensed"
                     to={`/post/${_id}`}
                 >
                     {title}
