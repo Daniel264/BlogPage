@@ -39,7 +39,7 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
 
     const getPicture: string | null = localStorage.getItem("savedPicture");
     return (
-        <div className="flex flex-col mt-10 lg:w-9/12 lg:pr-32 border-x-[1.5px] border-b-[1.5px]">
+        <div className="flex flex-row-reverse mt-10 lg:w-9/12 lg:pr-32 border-x-[1.5px] border-b-[1.5px]">
             <div className="pl-5 text-left">
                 <div className="flex flex-row w-full justify-between">
                     <span className="font-regular flex">
@@ -61,25 +61,25 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
                     </time>
                 </div>
                 <Link
-                    className="sm:text-3xl md:text-4xl text-2xl font-semibold"
+                    className=" text-[1.7rem] leading-[2.5rem] font-semibold mb-16"
                     to={`/post/${_id}`}
                 >
                     {title}
                 </Link>
-                <p>{summary}</p>
+                <p className="text-[#616A77] text-md">{summary}</p>
             </div>
-            <div className="w-full py-5 rounded-2xl">
-                <Link to={`/post/${_id}`}>
+            <div className="">
+                <Link className="max-w-[450px] max-h-[250px] overflow-hidden" to={`/post/${_id}`}>
                     <img
-                        className="w-full rounded-2xl  bg-cover min-h-[192px] sm:h-[400px]"
+                        className="w-full md:min-w-[450px] bg-cover min-h-[192px] sm:max-h-[250px] scale-95 hover:scale-100  transition-all ease-in duration-150 overflow-hidden"
                         src={"http://localhost:3000/" + cover}
                         alt=""
                     />
                 </Link>
             </div>
-            <div className="text-left w-full bg-inherit">
+            {/* <div className="text-left w-full bg-inherit"> */}
                 {/* Open the modal using document.getElementById('ID').showModal() method */}
-                <button
+                {/* <button
                     className="btn bg-white flex w-full justify-center border-none hover:bg-inherit hover:border-none"
                     onClick={openModal}
                 >
@@ -96,7 +96,7 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
                         <button>close</button>
                     </form>
                 </dialog>
-            </div>
+            </div> */}
             {/* <hr className="border-dashed bg-gray-300 h-[1px]" /> */}
         </div>
     );
