@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import Post from "../assets/Interface/usePost";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
-import { FaComment } from "react-icons/fa";
+import { FaComment, FaRegCalendarAlt } from "react-icons/fa";
 import Comments from "./Comments";
+import { FaCalendarAlt } from "react-icons/fa";
 
 const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
     const [loading, setLoading] = useState(true);
@@ -56,7 +57,8 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
                         </div>
                         <p className="font-medium">{author?.username}</p>
                     </span>
-                    <time className="font-medium">
+                    <time className="font-medium flex gap-2 w-fit h-fit items-center text-[#616A77]">
+                        <FaRegCalendarAlt size="18px" />
                         {format(new Date(createdAt), "MMMM do, yyyy")}
                     </time>
                 </div>
@@ -96,26 +98,6 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
                     />
                 </Link>
             </div>
-            {/* <div className="text-left w-full bg-inherit"> */
-            /* <button
-                    className="btn bg-white flex w-full justify-center border-none hover:bg-inherit hover:border-none"
-                    onClick={openModal}
-                >
-                    <FaComment size="30px" />
-                </button>
-                <dialog id="my_modal_2" className="modal">
-                    <div className="modal-box">
-                        <h3 className="font-bold text-lg">Comments</h3>
-                        <p className="py-4">
-                            <Comments />
-                        </p>
-                    </div>
-                    <form method="dialog" className="modal-backdrop">
-                        <button>close</button>
-                    </form>
-                </dialog>
-            </div> */}
-            {/* <hr className="border-dashed bg-gray-300 h-[1px]" /> */}
         </div>
     );
 };
