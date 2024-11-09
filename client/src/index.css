@@ -41,6 +41,10 @@ body {
   font-family: Manrope_da111, sans-serif;
 }
 
+.Toastify__toast-body {
+  font-family: Manrope_da111, sans-serif;
+  font-size: 0.9rem;
+}
 
 h1 {
   font-family: Manrope_da111, sans-serif;
