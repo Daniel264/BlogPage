@@ -8,15 +8,22 @@
 }
 
 body {
-  font-family: ClashGrotesk-Regular, sans-serif;
+  /* font-family: ClashGrotesk-Regular, sans-serif; */
+  font-family: Manrope_da111, sans-serif;
 }
 
-h1, h2 {
-  font-family: Formula Condensed Bold, sans-serif;
+
+h1 {
+  font-family: Manrope_da111, sans-serif;
+}
+
+h2 {
+  font-family: Manrope_semibold, sans-serif;
 }
 
 p {
-  font-family: ClashGrotesk-Medium, sans-serif;
+  font-family: Manrope_da111, sans-serif;
+  /* font-family: ClashGrotesk-Medium, sans-serif; */
 }
 
 @font-face {
@@ -26,6 +33,24 @@ p {
   src: local('Formula Condensed Light'), url('../public/fonts/FormulaCondensed-Light.woff') format('woff');
   }
 
+@font-face {
+  font-family: 'Manrope_da111';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Manrope Medium'), url('../public/fonts/regular.woff') format('woff');
+  }
+@font-face {
+  font-family: 'Manrope_semibold';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Manrope Semibold'), url('../public/fonts/bold.woff') format('woff');
+  }
+@font-face {
+  font-family: 'Manrope_da111_bold';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Manrope Bold'), url('../public/fonts/ClashGrotesk-Bold.woff') format('woff');
+  }
 
   @font-face {
   font-family: 'Formula Condensed Bold';

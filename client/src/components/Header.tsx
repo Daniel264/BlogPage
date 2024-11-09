@@ -77,7 +77,7 @@ const Header = () => {
               <div className="hidden flex-none lg:block">
                 <ul className="menu menu-horizontal">
                   <li>
-                    <a className="text-base font-normal use-condensed">
+                    <a className="text-base font-normal">
                       {email && (
                         <>
                           <Link to="/create">Create Post</Link>
@@ -89,7 +89,7 @@ const Header = () => {
                     <a className="text-base font-normal">
                       {email && (
                         <>
-                          <a className="cursor-pointer use-condensed" onClick={logout}>
+                          <a className="cursor-pointer" onClick={logout}>
                             Logout
                           </a>
                         </>
@@ -100,7 +100,7 @@ const Header = () => {
                     <a className="text-base font-normal">
                       {email && (
                         <>
-                          <a className="cursor-pointer use-condensed">
+                          <a className="cursor-pointer">
                             <Link to="/settings">Settings</Link>
                           </a>
                         </>
@@ -108,7 +108,7 @@ const Header = () => {
                     </a>
                   </li>
                   <li>
-                    <a className="text-base font-normal use-condensed">
+                    <a className="text-base font-normal">
                       {!email && (
                         <>
                           <Link to="/register">Register</Link>
@@ -117,7 +117,7 @@ const Header = () => {
                     </a>
                   </li>
                   <li>
-                    <a className="text-base font-normal use-condensed">
+                    <a className="text-base font-normal">
                       {!email && (
                         <>
                           <Link to="/login">Login</Link>

@@ -61,7 +61,7 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
                     </time>
                 </div>
                 <Link
-                    className="sm:text-3xl md:text-4xl text-2xl font-semibold use-condensed"
+                    className="sm:text-3xl md:text-4xl text-2xl font-semibold"
                     to={`/post/${_id}`}
                 >
                     {title}
