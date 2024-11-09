@@ -67,6 +67,25 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
                     {title}
                 </Link>
                 <p className="text-[#616A77] text-md">{summary}</p>
+                <div className="text-left">
+                    <button
+                        className="btn flex justify-center w-fit bg-inherit border-none hover:bg-inherit hover:border-none"
+                        onClick={openModal}
+                    >
+                        <FaComment size="18px" />
+                    </button>
+                    <dialog id="my_modal_2" className="modal">
+                        <div className="modal-box">
+                            <h3 className="font-bold text-lg">Comments</h3>
+                            <p className="py-4">
+                                <Comments />
+                            </p>
+                        </div>
+                        <form method="dialog" className="modal-backdrop">
+                            <button>close</button>
+                        </form>
+                    </dialog>
+                </div>
             </div>
             <div className="max-w-[400px] max-h-[250px] overflow-hidden">
                 <Link className="" to={`/post/${_id}`}>
@@ -77,9 +96,8 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
                     />
                 </Link>
             </div>
-            {/* <div className="text-left w-full bg-inherit"> */}
-                {/* Open the modal using document.getElementById('ID').showModal() method */}
-                {/* <button
+            {/* <div className="text-left w-full bg-inherit"> */
+            /* <button
                     className="btn bg-white flex w-full justify-center border-none hover:bg-inherit hover:border-none"
                     onClick={openModal}
                 >
