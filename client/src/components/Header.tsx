@@ -17,7 +17,7 @@ const Header = () => {
     }, [theme]);
 
     function themeState() {
-        const newTheme = theme === "light" ? "dark" : "light";
+        const newTheme = theme === "light" ? "synthwave" : "light";
         setTheme(newTheme);
         localStorage.setItem("theme", newTheme);
         document.documentElement.setAttribute("data-theme", newTheme);

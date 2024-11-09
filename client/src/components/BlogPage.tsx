@@ -63,7 +63,7 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
                     </time>
                 </div>
                 <Link
-                    className=" text-[1.7rem] leading-[2.5rem] font-semibold mb-16"
+                    className=" text-[1.7rem] leading-[2.5rem] font-semibold hover:text-[#646464] hover:opacity-75 transition-opacity hover:transition-all duration-200 ease-linear"
                     to={`/post/${_id}`}
                 >
                     {title}
