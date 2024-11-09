@@ -41,7 +41,7 @@ const Header = () => {
     }
     return (
         <>
-            <header className="flex justify-between ">
+            <header className="flex justify-between md:border-b-2">
                 <div className="drawer">
                     <input
                         id="my-drawer-3"
