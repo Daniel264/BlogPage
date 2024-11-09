@@ -68,10 +68,10 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
                 </Link>
                 <p className="text-[#616A77] text-md">{summary}</p>
             </div>
-            <div className="">
-                <Link className="max-w-[450px] max-h-[250px] overflow-hidden" to={`/post/${_id}`}>
+            <div className="max-w-[400px] max-h-[250px] overflow-hidden">
+                <Link className="" to={`/post/${_id}`}>
                     <img
-                        className="w-full md:min-w-[450px] bg-cover min-h-[192px] sm:max-h-[250px] scale-95 hover:scale-100  transition-all ease-in duration-150 overflow-hidden"
+                        className="w-full h-full hover:scale-105  transition-all ease-in duration-300 overflow-hidden"
                         src={"http://localhost:3000/" + cover}
                         alt=""
                     />
