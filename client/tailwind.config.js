@@ -33,7 +33,7 @@ export default {
                   "primary": "#ff3eaa", // Customize colors directly here
                   "secondary": "#c058f3",
                   "accent": "#272932",
-                  "base-100": "#272932", // Your custom background color
+                  "base-100": "#000000", // Your custom background color
                   // You can add more color overrides here as needed
               },
           },
