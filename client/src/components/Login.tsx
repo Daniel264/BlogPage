@@ -146,7 +146,7 @@ const Login = () => {
                         <div>
                             <button
                                 type="submit"
-                                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-3.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                className="flex w-full justify-center rounded-md bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white hover:bg-gradient-to-l hover:from-black hover:via-gray-900 hover:to-gray-800 transition-all duration-300 px-3 py-3 text-sm font-semibold leading-6 shadow-sm"
                             >
                                 {loading ? (
                                     <span className="loading loading-dots loading-md"></span>

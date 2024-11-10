@@ -5,7 +5,6 @@ import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import { FaComment, FaRegCalendarAlt } from "react-icons/fa";
 import Comments from "./Comments";
-import { FaCalendarAlt } from "react-icons/fa";
 
 const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
     const [loading, setLoading] = useState(true);
@@ -40,7 +39,7 @@ const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
 
     const getPicture: string | null = localStorage.getItem("savedPicture");
     return (
-        <div className="flex flex-row-reverse mt-10 lg:w-9/12 lg:pr-32 ">
+        <div className="flex flex-col md:flex-row-reverse mt-10 lg:w-9/12 lg:pr-32 ">
             <div className="pl-5 text-left">
                 <div className="flex flex-row w-full justify-between">
                     <span className="font-regular flex">
