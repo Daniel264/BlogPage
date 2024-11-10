@@ -4,12 +4,13 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/700.css"; //
 import "@fontsource/alex-brush";
 import { FaPlus, FaCog } from "react-icons/fa";
+import GsapMagnetic from "./GsapMagnetic";
 
 const Header = () => {
-  const [theme, setTheme] = useState(() => {
-    const storedTheme = localStorage.getItem("theme");
-    return storedTheme ? storedTheme : "light"; // Default to "light" if no theme is stored
-});
+    const [theme, setTheme] = useState(() => {
+        const storedTheme = localStorage.getItem("theme");
+        return storedTheme ? storedTheme : "light"; // Default to "light" if no theme is stored
+    });
     const [email, setEmail] = useState(null);
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
@@ -105,19 +106,21 @@ const Header = () => {
                                             )}
                                         </a>
                                     </li>
-                                    <li>
-                                        <a className="text-base font-normal">
-                                            {email && (
-                                                <>
-                                                    <a className="cursor-pointer">
-                                                        <Link to="/settings">
-                                                            Settings
-                                                        </Link>
-                                                    </a>
-                                                </>
-                                            )}
-                                        </a>
-                                    </li>
+                                    <GsapMagnetic>
+                                        <li>
+                                            <a className="text-base font-normal">
+                                                {email && (
+                                                    <>
+                                                        <a className="cursor-pointer">
+                                                            <Link to="/settings">
+                                                                Settings
+                                                            </Link>
+                                                        </a>
+                                                    </>
+                                                )}
+                                            </a>
+                                        </li>
+                                    </GsapMagnetic>
                                     <li>
                                         <a className="text-base font-normal">
                                             {!email && (
@@ -217,7 +220,7 @@ const Header = () => {
                         className="label cursor-pointer"
                     >
                         <input
-                        onChange={themeState}
+                            onChange={themeState}
                             type="checkbox"
                             className="toggle bg-inherit"
                             defaultChecked
