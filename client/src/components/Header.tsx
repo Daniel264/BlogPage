@@ -216,8 +216,9 @@ const Header = () => {
                         className="label cursor-pointer"
                     >
                         <input
+                        onChange={themeState}
                             type="checkbox"
-                            className="toggle"
+                            className="toggle bg-inherit"
                             defaultChecked
                         />
                     </label>
