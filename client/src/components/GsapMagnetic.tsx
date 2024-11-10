@@ -19,7 +19,7 @@ export default function GsapMagnetic({
                 gsap.to(ref.current, { y: y });
             }
         };
-        const mouseLeave = (e: MouseEvent) => {
+        const mouseLeave = () => {
           gsap.to(ref.current, { x: 0 });
           gsap.to(ref.current, { y: 0 });
         };
