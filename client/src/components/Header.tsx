@@ -6,9 +6,10 @@ import "@fontsource/alex-brush";
 import { FaPlus, FaCog } from "react-icons/fa";
 
 const Header = () => {
-    const [theme, setTheme] = useState(
-        localStorage.getItem("theme") || "light",
-    );
+  const [theme, setTheme] = useState(() => {
+    const storedTheme = localStorage.getItem("theme");
+    return storedTheme ? storedTheme : "light"; // Default to "light" if no theme is stored
+});
     const [email, setEmail] = useState(null);
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
