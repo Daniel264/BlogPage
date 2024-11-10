@@ -19,7 +19,6 @@ function App() {
 
     return (
         <>
-            <GlobalStyles />
             <ToastContainer
                 newestOnTop={true}
                 pauseOnHover={false}
