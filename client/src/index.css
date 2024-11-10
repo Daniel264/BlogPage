@@ -59,6 +59,10 @@ p {
   /* font-family: ClashGrotesk-Medium, sans-serif; */
 }
 
+input {
+  font-family: Manrope_light, sans-serif;
+}
+
 @font-face {
   font-family: 'Formula Condensed Light';
   font-style: normal;
@@ -70,7 +74,13 @@ p {
   font-family: 'Manrope_da111';
   font-style: normal;
   font-weight: normal;
-  src: local('Manrope Medium'), url('../public/fonts/regular.woff') format('woff');
+  src: local('Manrope Regular'), url('../public/fonts/regular.woff') format('woff');
+  }
+@font-face {
+  font-family: 'Manrope_light';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Manrope Light'), url('../public/fonts/light.woff') format('woff');
   }
 @font-face {
   font-family: 'Manrope_semibold';
