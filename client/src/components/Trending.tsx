@@ -10,30 +10,47 @@ export default function Trending() {
         if (response.ok) {
             const result = await response.json();
             console.log("result:", result[0]);
-            const coverImage = result[0];
-            // console.log("cover image", coverImage.cover);
-            setFirstImage(coverImage.cover);
-
-            const secondCoverImage = result[1];
-            setFirstImage(secondCoverImage)
+            const sortedResults = result.sort(
+                (a: { views: number }, b: { views: number }) =>
+                    b.views - a.views,
+            );
+            const topCovers = sortedResults.map(
+                (post: { cover: unknown }) => post.cover,
+            );
+            setFirstImage(topCovers);
+            // console.log("Images", topCovers);
         }
     }
     useEffect(() => {
         Trending();
     }, []);
     return (
-        <section>
+        <section className="w-full flex flex-col justify-center items-center">
             <div>
-                <p className="font-light text-4xl">Trending Posts.</p>
+                <h2 className="font-light text-5xl">Trending Posts.</h2>
             </div>
-            <div>
-                <div>
-                    <img src={`http://localhost:3000/${firstImage}`} alt="" />
+            <div className="w-[50%] grid grid-cols-2 grid-rows-2 gap-5">
+                <div className="col-span-2 ">
+                    <img
+                        className="h-[360px] w-[100%]"
+                        src={`http://localhost:3000/${firstImage[0]}`}
+                        alt=""
+                    />
                 </div>
-                <div>
-                <img src={`http://localhost:3000/${firstImage}`} alt="" />
+                <div className="col-span-1">
+                    <img
+                        className="h-[300px] w-[100%]"
+                        src={`http://localhost:3000/${firstImage[1]}`}
+                        alt=""
+                    />
                 </div>
-                <div></div>
+                <div className="col-span-1">
+                    <img
+                        className="h-[300px] w-[100%]"
+                        src={`http://localhost:3000/${firstImage[2]}`}
+                        alt=""
+                    />
+                </div>
             </div>
         </section>
     );

@@ -48,7 +48,7 @@ const BlogPage = ({
     const getPicture: string | null = localStorage.getItem("savedPicture");
     return (
         <div className="flex flex-col md:flex-row-reverse mt-10 lg:w-9/12 lg:pr-32 ">
-            <div className="pl-5 text-left">
+            <div className="pl-5 text-left w-[480px]">
                 <div className="flex flex-row w-full justify-between">
                     <span className="font-regular flex">
                         <div className="avatar mr-3 z-0">
