@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Post from "../assets/Interface/usePost";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
-import { FaComment, FaRegCalendarAlt } from "react-icons/fa";
+import { FaComment, FaRegCalendarAlt, FaEye } from "react-icons/fa";
 import Comments from "./Comments";
 
 const BlogPage = ({
@@ -13,6 +13,7 @@ const BlogPage = ({
     createdAt,
     author,
     cover,
+    views,
 }: Post) => {
     const [loading, setLoading] = useState(true);
 
@@ -76,12 +77,18 @@ const BlogPage = ({
                 </Link>
                 <p className="text-[#616A77] text-md">{summary}</p>
                 <div className="text-left">
-                    <button
-                        className="btn flex justify-center w-fit bg-inherit border-none hover:bg-inherit hover:border-none"
-                        onClick={openModal}
-                    >
-                        <FaComment size="18px" />
-                    </button>
+                    <div className="flex w-fit h-fit justify-center items-center gap-3 mt-10">
+                        <button
+                            className="btn flex justify-center w-fit bg-inherit border-none hover:bg-inherit hover:border-none"
+                            onClick={openModal}
+                        >
+                            <FaComment size="18px" />
+                        </button>
+                        <div className="flex gap-2 w-fit h-fit justify-center items-center">
+                            <FaEye />
+                            <span className="text-sm font-semibold">Views:</span> {views}
+                        </div>
+                    </div>
                     <dialog id="my_modal_2" className="modal">
                         <div className="modal-box">
                             <h3 className="font-bold text-lg">Comments</h3>
