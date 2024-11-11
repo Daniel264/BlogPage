@@ -6,7 +6,14 @@ import { useEffect, useState } from "react";
 import { FaComment, FaRegCalendarAlt } from "react-icons/fa";
 import Comments from "./Comments";
 
-const BlogPage = ({ _id, title, summary, createdAt, author, cover }: Post) => {
+const BlogPage = ({
+    _id,
+    title,
+    summary,
+    createdAt,
+    author,
+    cover,
+}: Post) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {

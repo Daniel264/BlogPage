@@ -31,7 +31,7 @@ function App() {
                     element={
                         <div>
                             <Header />
-                          <Trending />
+<Trending />
                             <div className="w-full flex flex-col items-center">
                                 {posts.length > 0 &&
                                     posts.map((post) => (
