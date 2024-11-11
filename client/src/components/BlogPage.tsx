@@ -52,17 +52,17 @@ const BlogPage = ({
                 <div className="flex flex-row w-full justify-between">
                     <span className="font-regular flex">
                         <div className="avatar mr-3 z-0">
-                            <div className="ring-primary ring-offset-base-100 text-center w-7 rounded-full border-[1px] border-black z-0">
-                                <figure className="">
+                            <div className="ring-primary ring-offset-base-100 text-center w-7 rounded-full z-0">
+                                <figure className="w-7 h-7">
                                     <img
-                                        className="w-[200px] h-[200px] rounded-full bg-contain border-[1px]"
+                                        className="w-[200px] h-[200px] flex justify-center items-center rounded-full bg-contain"
                                         src={`http://localhost:3000/${getPicture}`}
                                         alt="Profile picture"
                                     />
                                 </figure>
                             </div>
                         </div>
-                        <p className="font-medium">{author?.username}</p>
+                        <p className="font-semibold">{author?.username}</p>
                     </span>
                     <time className="font-medium flex gap-2 w-fit h-fit items-center text-[#616A77]">
                         <FaRegCalendarAlt size="18px" />
