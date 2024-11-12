@@ -6,6 +6,7 @@ export default function Trending() {
     const [firstImage, setFirstImage] = useState<string[]>([]);
     const [titles, setTitles] = useState<string[]>([]);
     const [dates, setDates] = useState<string[]>([]);
+    // const [titles, setTitles] = useState<string[]>([]);
 
     async function Trending() {
         const response = await fetch("http://localhost:3000/post", {
@@ -38,11 +39,11 @@ export default function Trending() {
         Trending();
     }, []);
     return (
-        <section className="w-full flex flex-col justify-center items-center">
+        <section className="w-full flex flex-row justify-center items-center py-20">
             {/* <div>
                 <h2 className="font-light text-5xl">Trending Posts.</h2>
             </div> */}
-            <div className="w-[50%] grid grid-cols-2 grid-rows-2 gap-5">
+            <div className="w-[50%] grid grid-cols-2 gap-5">
                 <div className="col-span-2 relative h-[390px] w-[100%] flex justify-start items-end overflow-hidden">
                     <img
                         className="object-cover hover:scale-110  transition-all ease-in duration-300 overflow-hidden"
@@ -89,6 +90,24 @@ export default function Trending() {
                             ? format(new Date(dates[2]), "MMMM do, yyyy")
                             : "Invalid Date"}
                     </p>
+                </div>
+            </div>
+            <div>
+                <h2 className="text-3xl">Trending Posts</h2>
+                <div className="bg-base-200 rounded-badge">
+                    {titles.map((item, index) => (
+                        <article key={index} className="flex flex-col">
+                            <p className="font-semibold text-lg leading-10">
+                                {item}
+                            </p>
+                            <p>
+                                {" "}
+                                {dates[0]
+                                    ? format(new Date(dates[0]), "MMM do, yyyy")
+                                    : "Invalid Date"}
+                            </p>
+                        </article>
+                    ))}
                 </div>
             </div>
         </section>

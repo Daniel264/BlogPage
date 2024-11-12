@@ -105,7 +105,7 @@ const BlogPage = ({
             <div className="max-w-[400px] min-w-[400px] max-h-[250px] overflow-hidden">
                 <Link className="" to={`/post/${_id}`}>
                     <img
-                        className="min-w-full min-h-full hover:scale-105  transition-all ease-in duration-300 overflow-hidden"
+                        className="min-w-full min-h-full hover:scale-110  transition-all ease-in duration-300 overflow-hidden"
                         src={"http://localhost:3000/" + cover}
                         alt=""
                     />
