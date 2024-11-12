@@ -121,7 +121,7 @@ const Header = () => {
                                             </a>
                                         </li>
                                     </GsapMagnetic>
-                                    <li className="flex md:hidden">
+                                    <li className="flex ">
                                         <a className="text-base font-normal">
                                             {!email && (
                                                 <>
@@ -132,7 +132,7 @@ const Header = () => {
                                             )}
                                         </a>
                                     </li>
-                                    <li  className="flex md:hidden">
+                                    <li  className="flex ">
                                         <a className="text-base font-normal">
                                             {!email && (
                                                 <>

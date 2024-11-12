@@ -39,11 +39,11 @@ export default function Trending() {
         Trending();
     }, []);
     return (
-        <section className="w-full flex flex-row justify-center items-center py-20 gap-10">
+        <section className="w-full flex flex-col lg:flex-row justify-center items-center py-5 lg:py-20 gap-10">
             {/* <div>
                 <h2 className="font-light text-5xl">Trending Posts.</h2>
             </div> */}
-            <div className="w-[50%] grid grid-cols-2 gap-5">
+            <div className="w-[50%] grid lg:grid-cols-2 gap-5">
                 <div className="col-span-2 relative h-[390px] w-[100%] flex justify-start items-end overflow-hidden">
                     <img
                         className="object-cover hover:scale-110  transition-all ease-in duration-300 overflow-hidden"
@@ -60,7 +60,7 @@ export default function Trending() {
                             : "Invalid Date"}
                     </div>
                 </div>
-                <div className="col-span-1 relative h-max w-auto flex justify-start items-end overflow-hidden">
+                <div className="col-span-2 lg:col-span-1 relative h-max w-auto flex justify-start items-end overflow-hidden">
                     <img
                         className="h-[220px] w-[100%] hover:scale-110  transition-all ease-in duration-300 overflow-hidden"
                         src={`http://localhost:3000/${firstImage[1]}`}
@@ -76,7 +76,7 @@ export default function Trending() {
                             : "Invalid Date"}
                     </div>
                 </div>
-                <div className="col-span-1 relative h-max w-auto flex justify-start items-end overflow-hidden">
+                <div className="col-span-2 lg:col-span-1 relative h-max w-auto flex justify-start items-end overflow-hidden">
                     <img
                         className="h-[220px] w-[100%] hover:scale-110  transition-all ease-in duration-300 overflow-hidden"
                         src={`http://localhost:3000/${firstImage[2]}`}
