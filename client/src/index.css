@@ -2,33 +2,53 @@
 @tailwind components;
 @tailwind utilities;
 
-*, *::before, *::after {
-  box-sizing: border-box;
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
-img, picture, video, canvas, svg {
-  display: block;
-  max-width: 100%;
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
 }
 
 body {
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
 }
 
-input, button, textarea, select {
-  font: inherit;
+input,
+button,
+textarea,
+select {
+    font: inherit;
 }
 
-p, h1, h2, h3, h4, h5, h6 {
-  overflow-wrap: break-word;
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
 }
 
 p {
-  text-wrap: pretty;
+    text-wrap: pretty;
 }
-h1, h2, h3, h4, h5, h6 {
-  text-wrap: balance;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-wrap: balance;
 }
 
 .no-padding {
@@ -37,127 +57,147 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 body {
-  /* font-family: ClashGrotesk-Regular, sans-serif; */
-  font-family: Manrope_da111, sans-serif;
+    /* font-family: ClashGrotesk-Regular, sans-serif; */
+    font-family: Manrope_da111, sans-serif;
 }
 
 .Toastify__toast-body {
-  font-family: Manrope_da111, sans-serif;
-  font-size: 0.9rem;
+    font-family: Manrope_da111, sans-serif;
+    font-size: 0.9rem;
 }
 
 h1 {
-  font-family: Manrope_da111, sans-serif;
+    font-family: Manrope_da111, sans-serif;
 }
 
 h2 {
-  font-family: Manrope_semibold, sans-serif;
+    font-family: Manrope_semibold, sans-serif;
 }
 
 p {
-  font-family: Manrope_da111, sans-serif;
-  /* font-family: ClashGrotesk-Medium, sans-serif; */
+    font-family: Manrope_medium, sans-serif;
+    /* font-family: ClashGrotesk-Medium, sans-serif; */
 }
 
 input {
-  font-family: Manrope_light, sans-serif;
+    font-family: Manrope_light, sans-serif;
 }
 
+@font-face {
+    font-family: "Formula Condensed Light";
+    font-style: normal;
+    font-weight: normal;
+    src:
+        local("Formula Condensed Light"),
+        url("../public/fonts/FormulaCondensed-Light.woff") format("woff");
+}
 
 @font-face {
-  font-family: 'Formula Condensed Light';
-  font-style: normal;
-  font-weight: normal;
-  src: local('Formula Condensed Light'), url('../public/fonts/FormulaCondensed-Light.woff') format('woff');
-  }
+    font-family: "Manrope_da111";
+    font-style: normal;
+    font-weight: normal;
+    src:
+        local("Manrope Regular"),
+        url("../public/fonts/regular.woff") format("woff");
+}
+@font-face {
+    font-family: "Manrope_light";
+    font-style: normal;
+    font-weight: 300;
+    src:
+        local("Manrope Light"),
+        url("../public/fonts/light.woff") format("woff");
+}
 
 @font-face {
-  font-family: 'Manrope_da111';
-  font-style: normal;
-  font-weight: normal;
-  src: local('Manrope Regular'), url('../public/fonts/regular.woff') format('woff');
-  }
-@font-face {
-  font-family: 'Manrope_light';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Manrope Light'), url('../public/fonts/light.woff') format('woff');
-  }
-@font-face {
-  font-family: 'Manrope_semibold';
-  font-style: normal;
-  font-weight: normal;
-  src: local('Manrope Semibold'), url('../public/fonts/bold.woff') format('woff');
-  }
-@font-face {
-  font-family: 'Manrope_da111_bold';
-  font-style: normal;
-  font-weight: normal;
-  src: local('Manrope Bold'), url('../public/fonts/ClashGrotesk-Bold.woff') format('woff');
-  }
-
-  @font-face {
-  font-family: 'Formula Condensed Bold';
-  font-style: normal;
-  font-weight: normal;
-  src: local('Formula Condensed Bold'), url('../public/fonts/FormulaCondensed-Bold.woff') format('woff');
-  }
-
-  .use-condensed {
-    font-family: Formula Condensed Bold, sans-serif;
-  }
+    font-family: "Manrope_medium";
+    font-style: normal;
+    font-weight: 500;
+    src:
+        local("Manrope Medium"),
+        url("../public/fonts/medium.woff") format("woff");
+}
 
 @font-face {
-  font-family: 'ClashGrotesk-Extralight';
-  src:
-       url('../fonts/ClashGrotesk-Extralight.woff') format('woff');
-  font-weight: 200;
-  font-display: swap;
-  font-style: normal;
+    font-family: "Manrope_semibold";
+    font-style: normal;
+    font-weight: normal;
+    src:
+        local("Manrope Semibold"),
+        url("../public/fonts/bold.woff") format("woff");
 }
 @font-face {
-  font-family: 'ClashGrotesk-Light';
-  src:
-       url('../fonts/ClashGrotesk-Light.woff') format('woff');
-  font-weight: 300;
-  font-display: swap;
-  font-style: normal;
+    font-family: "Manrope_da111_bold";
+    font-style: normal;
+    font-weight: normal;
+    src:
+        local("Manrope Bold"),
+        url("../public/fonts/ClashGrotesk-Bold.woff") format("woff");
+}
+
+@font-face {
+    font-family: "Formula Condensed Bold";
+    font-style: normal;
+    font-weight: normal;
+    src:
+        local("Formula Condensed Bold"),
+        url("../public/fonts/FormulaCondensed-Bold.woff") format("woff");
+}
+
+.use-condensed {
+    font-family:
+        Formula Condensed Bold,
+        sans-serif;
+}
+
+@font-face {
+    font-family: "ClashGrotesk-Extralight";
+    src: url("../fonts/ClashGrotesk-Extralight.woff") format("woff");
+    font-weight: 200;
+    font-display: swap;
+    font-style: normal;
 }
 @font-face {
-  font-family: 'ClashGrotesk-Regular';
-  src:
-       url('../public/fonts/ClashGrotesk-Regular.woff') format('woff');
-  font-weight: 400;
-  font-display: swap;
-  font-style: normal;
+    font-family: "ClashGrotesk-Light";
+    src: url("../fonts/ClashGrotesk-Light.woff") format("woff");
+    font-weight: 300;
+    font-display: swap;
+    font-style: normal;
 }
 @font-face {
-  font-family: 'ClashGrotesk-Medium';
-  src:url('../fonts/ClashGrotesk-Medium.woff') format('woff');
-  font-weight: 500;
-  font-display: swap;
-  font-style: normal;
+    font-family: "ClashGrotesk-Regular";
+    src: url("../public/fonts/ClashGrotesk-Regular.woff") format("woff");
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
 }
 @font-face {
-  font-family: 'ClashGrotesk-Semibold';
-  src:
-       url('../fonts/ClashGrotesk-Semibold.woff') format('woff');
-  font-weight: 600;
-  font-display: swap;
-  font-style: normal;
+    font-family: "ClashGrotesk-Medium";
+    src: url("../fonts/ClashGrotesk-Medium.woff") format("woff");
+    font-weight: 500;
+    font-display: swap;
+    font-style: normal;
 }
 @font-face {
-  font-family: 'ClashGrotesk-Bold';
-  src:
-       url('../fonts/ClashGrotesk-Bold.woff') format('woff');
-  font-weight: 700;
-  font-display: swap;
-  font-style: normal;
+    font-family: "ClashGrotesk-Semibold";
+    src: url("../fonts/ClashGrotesk-Semibold.woff") format("woff");
+    font-weight: 600;
+    font-display: swap;
+    font-style: normal;
 }
 @font-face {
-  font-family: 'ClashGrotesk-Variable';
-  src: local('Formula Condensed Light'), url('../public/fonts/ClashGrotesk-Variable.woff') format('woff');
-  font-weight: 200 700;
-  font-display: swap;
-  font-style: normal;
+    font-family: "ClashGrotesk-Bold";
+    src: url("../fonts/ClashGrotesk-Bold.woff") format("woff");
+    font-weight: 700;
+    font-display: swap;
+    font-style: normal;
+}
+@font-face {
+    font-family: "ClashGrotesk-Variable";
+    src:
+        local("Formula Condensed Light"),
+        url("../public/fonts/ClashGrotesk-Variable.woff") format("woff");
+    font-weight: 200 700;
+    font-display: swap;
+    font-style: normal;
 }
