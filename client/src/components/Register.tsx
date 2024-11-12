@@ -1,5 +1,4 @@
 import { FormEvent, useState } from "react";
-import Header from "./Header";
 import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -35,11 +34,11 @@ const Register = () => {
                 pauseOnHover={false}
                 autoClose={3000}
             />
-            <Header />
 
-            <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+            <div className="flex min-h-full flex-1 flex-col justify-center px-6 lg:px-8">
+            <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 max-w-[450px] max-h-[575px] rounded-lg bg-card text-card-foreground w-full mx-auto mt-6 md:mt-12 border-0 shadow-none md:border md:shadow-sm">
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                    <h2 className="mt-10 text-center text-2xl md:text-4xl font-bold leading-9">
+                    <h2 className="mt-10 text-center text-2xl font-bold leading-9">
                         Register
                     </h2>
                 </div>
@@ -61,6 +60,7 @@ const Register = () => {
                                 <input
                                     id="username"
                                     name="username"
+                                    placeholder="Enter username"
                                     type="text"
                                     required
                                     value={username}
@@ -68,7 +68,7 @@ const Register = () => {
                                         setUsername(ev.target.value)
                                     }
                                     autoComplete="email"
-                                    className="block w-full rounded-md border-0 py-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    className="block w-full rounded-md border-0 py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 />
                             </div>
                         </div>
@@ -83,12 +83,13 @@ const Register = () => {
                                 <input
                                     id="email"
                                     name="email"
+                                     placeholder="Enter email"
                                     type="email"
                                     required
                                     value={email}
                                     onChange={(ev) => setEmail(ev.target.value)}
                                     autoComplete="email"
-                                    className="block w-full rounded-md border-0 py-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    className="block w-full rounded-md border-0 py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 />
                             </div>
                         </div>
@@ -105,6 +106,7 @@ const Register = () => {
                                 <input
                                     id="password"
                                     name="password"
+                                     placeholder="Enter password"
                                     type="password"
                                     value={password}
                                     onChange={(ev) =>
@@ -112,7 +114,7 @@ const Register = () => {
                                     }
                                     required
                                     autoComplete="current-password"
-                                    className="block w-full rounded-md border-0 py-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    className="block w-full rounded-md border-0 py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 />
                             </div>
                         </div>
@@ -120,6 +122,7 @@ const Register = () => {
                             <input
                                 type="checkbox"
                                 name="terms"
+                                required
                                 className="rounded-md"
                                 id=""
                             />
@@ -134,7 +137,7 @@ const Register = () => {
                         <div>
                             <button
                                 type="submit"
-                                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-3.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                className="flex w-full justify-center rounded-md bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white hover:bg-gradient-to-l hover:from-black hover:via-gray-900 hover:to-gray-800 transition-all duration-300 px-3 py-3 text-sm font-semibold leading-6 shadow-sm"
                             >
                                 {loading ? (
                                     <span className="loading loading-dots loading-md"></span>
@@ -144,18 +147,21 @@ const Register = () => {
                             </button>
                         </div>
                     </form>
-                    <p className="mt-10 text-center text-sm text-gray-500">
-                        Already have an Account?{" "}
-                        <Link to="/login">
-                            <a
-                                href="#"
-                                className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-                            >
-                                Sign in
-                            </a>
-                        </Link>
-                    </p>
                 </div>
+                </div>
+                    <div className="w-full flex justify-center">
+                      <p className="mt-10 text-center text-sm text-gray-500 border-[1px] rounded-badge shadow py-3 px-5 w-fit">
+                          Already have an Account?{" "}
+                          <Link to="/login">
+                              <a
+                                  href="#"
+                                  className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+                              >
+                                  Sign in
+                              </a>
+                          </Link>
+                      </p>
+                    </div>
             </div>
         </>
     );

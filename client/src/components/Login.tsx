@@ -54,7 +54,7 @@ const Login = () => {
                 autoClose={3000}
             />
             {/* <Header /> */}
-            <div className="w-full min-h-screen flex  flex-col justify-center items-center">
+            <div className="w-full min-h-screen flex flex-col justify-center items-center">
                 <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 max-w-[450px] max-h-[480px] rounded-lg bg-card text-card-foreground w-full mx-auto mt-6 md:mt-12 border-0 shadow-none md:border md:shadow-sm">
                     <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                         <h2 className="mt-10 text-center text-2xl leading-9">
@@ -143,20 +143,19 @@ const Login = () => {
                                 </div>
                             </div>
                         </form>
-
                     </div>
                 </div>
                 <p className="text-center mt-10 px-5 text-sm text-gray-500 border-[1px] rounded-badge shadow py-3">
-                            Not a member?{" "}
-                            <Link to="/register">
-                                <a
-                                    href="#"
-                                    className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-                                >
-                                    Create an account
-                                </a>
-                            </Link>
-                        </p>
+                    Not a member?{" "}
+                    <Link to="/register">
+                        <a
+                            href="#"
+                            className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+                        >
+                            Create an account
+                        </a>
+                    </Link>
+                </p>
             </div>
         </>
     );
