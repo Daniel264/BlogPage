@@ -121,7 +121,7 @@ const Header = () => {
                                             </a>
                                         </li>
                                     </GsapMagnetic>
-                                    <li>
+                                    <li className="flex md:hidden">
                                         <a className="text-base font-normal">
                                             {!email && (
                                                 <>
@@ -132,7 +132,7 @@ const Header = () => {
                                             )}
                                         </a>
                                     </li>
-                                    <li>
+                                    <li  className="flex md:hidden">
                                         <a className="text-base font-normal">
                                             {!email && (
                                                 <>
@@ -214,18 +214,18 @@ const Header = () => {
                 </div>
                 {/* <label onChange={themeState} className="swap swap-rotate">
         <input type="checkbox" className="toggle" defaultChecked /> */}
-                <div className="form-control">
-                    <label
+                <div className="form-control w-fit flex justify-center items-center">
+                    {/* <label
                         onChange={themeState}
                         className="label cursor-pointer"
-                    >
-                        <input
-                            onChange={themeState}
-                            type="checkbox"
-                            className="toggle bg-inherit"
-                            defaultChecked
-                        />
-                    </label>
+                    > */}
+                    <input
+                        onChange={themeState}
+                        type="checkbox"
+                        className="toggle"
+                        defaultChecked
+                    />
+                    {/* </label> */}
                 </div>
                 {/* <input type="checkbox" className="theme-controller opacity-0" /> */}
 
