@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
-import { FaCalendarAlt, FaRegCalendarAlt } from "react-icons/fa";
+import { FaRegCalendarAlt } from "react-icons/fa";
 
 export default function Trending() {
     const [firstImage, setFirstImage] = useState<string[]>([]);
@@ -39,7 +39,7 @@ export default function Trending() {
         Trending();
     }, []);
     return (
-        <section className="w-full flex flex-row justify-center items-center py-20">
+        <section className="w-full flex flex-row justify-center items-center py-20 gap-10">
             {/* <div>
                 <h2 className="font-light text-5xl">Trending Posts.</h2>
             </div> */}
@@ -92,15 +92,18 @@ export default function Trending() {
                     </p>
                 </div>
             </div>
-            <div>
-                <h2 className="text-3xl">Trending Posts</h2>
-                <div className="bg-base-200 rounded-badge">
-                    {titles.map((item, index) => (
-                        <article key={index} className="flex flex-col">
-                            <p className="font-semibold text-lg leading-10">
+            <div className="text-left">
+                <h4 className="text-3xl">Trending Posts</h4>
+                <div className="bg-base-200 px-7 rounded-md ">
+                    {titles.slice(0, 6).map((item, index) => (
+                        <article
+                            key={index}
+                            className="flex flex-col border-b-2 py-5"
+                        >
+                            <p className="text-lg leading-10 hover:text-[#6c6c6c] hover:cursor-pointer">
                                 {item}
                             </p>
-                            <p>
+                            <p className="text-sm text-[#6C6C6C]">
                                 {" "}
                                 {dates[0]
                                     ? format(new Date(dates[0]), "MMM do, yyyy")
