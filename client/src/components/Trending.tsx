@@ -1,11 +1,13 @@
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import { FaRegCalendarAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function Trending() {
     const [firstImage, setFirstImage] = useState<string[]>([]);
     const [titles, setTitles] = useState<string[]>([]);
     const [dates, setDates] = useState<string[]>([]);
+    const [links, setLinks] = useState<string[]>([]);
     // const [titles, setTitles] = useState<string[]>([]);
 
     async function Trending() {
@@ -29,9 +31,15 @@ export default function Trending() {
             const topDates = sortedResults.map(
                 (post: { createdAt: string }) => post.createdAt,
             );
+            const topLinks = sortedResults.map(
+                (post: { _id: string }) => post._id,
+            );
             setFirstImage(topCovers);
             setTitles(topTitles);
             setDates(topDates);
+            setLinks(topLinks);
+            console.log("links:", links);
+
             console.log(topDates);
         }
     }
@@ -50,9 +58,12 @@ export default function Trending() {
                         src={`http://localhost:3000/${firstImage[0]}`}
                         alt=""
                     />
-                    <p className="absolute text-white font-semibold text-2xl p-10">
+                    <Link
+                        to={`/post/${links[0]}`}
+                        className="absolute text-white font-semibold text-2xl p-10"
+                    >
                         {titles[0]}
-                    </p>
+                    </Link>
                     <div className="absolute text-white font-medium text-sm p-3 gap-2 flex w-fit h-fit items-center">
                         <FaRegCalendarAlt size="18px" />
                         {dates[0]
@@ -66,9 +77,10 @@ export default function Trending() {
                         src={`http://localhost:3000/${firstImage[1]}`}
                         alt=""
                     />
-                    <p className="absolute text-white font-semibold text-xl p-6">
+                    <Link
+                        to={`/post/${links[1]}`} className="absolute text-white font-semibold text-xl p-6">
                         {titles[1]}
-                    </p>
+                    </Link>
                     <div className="absolute text-white font-medium text-sm pl-8 p-2 flex gap-2 h-fit w-fit items-center">
                         <FaRegCalendarAlt size="18px" />
                         {dates[1]
@@ -82,9 +94,10 @@ export default function Trending() {
                         src={`http://localhost:3000/${firstImage[2]}`}
                         alt=""
                     />
-                    <p className="absolute text-white font-semibold text-xl p-8">
+                    <Link
+                        to={`/post/${links[2]}`} className="absolute text-white font-semibold text-xl p-8">
                         {titles[2]}
-                    </p>
+                    </Link>
                     <p className="absolute text-white font-medium text-sm pl-8 p-2">
                         {dates[2]
                             ? format(new Date(dates[2]), "MMMM do, yyyy")

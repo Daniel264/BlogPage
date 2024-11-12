@@ -201,3 +201,20 @@ input {
     font-display: swap;
     font-style: normal;
 }
+
+.nav-border-underline::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background-color: #000;
+    transition: transform 300ms ease-in-out;
+    transform: scaleX(0);
+}
+
+.nav-border-underline:hover::before,
+.nav-border-underline:focus::before {
+    transform: scaleX(1);
+}

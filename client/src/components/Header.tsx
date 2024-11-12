@@ -81,34 +81,40 @@ const Header = () => {
                             </div>
                             <div className="hidden flex-none lg:block">
                                 <ul className="menu menu-horizontal">
-                                    <li>
-                                        <a className="text-base font-normal">
-                                            {email && (
-                                                <>
-                                                    <Link to="/create">
-                                                        Create Post
-                                                    </Link>
-                                                </>
-                                            )}
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a className="text-base font-normal">
-                                            {email && (
-                                                <>
-                                                    <a
-                                                        className="cursor-pointer"
-                                                        onClick={logout}
-                                                    >
-                                                        Logout
-                                                    </a>
-                                                </>
-                                            )}
-                                        </a>
-                                    </li>
+                                    <GsapMagnetic>
+                                      <li>
+                                          <a className="text-base font-normal nav-border-underline hover:bg-inherit">
+                                              {email && (
+                                                  <>
+                                                      <Link to="/create">
+                                                          Create Post
+                                                      </Link>
+                                                  </>
+                                              )}
+                                          </a>
+                                      </li>
+                                    </GsapMagnetic>
+
                                     <GsapMagnetic>
                                         <li>
-                                            <a className="text-base font-normal">
+                                            <a className="text-base font-normal nav-border-underline hover:bg-inherit">
+                                                {email && (
+                                                    <>
+                                                        <a
+                                                            className="cursor-pointer"
+                                                            onClick={logout}
+                                                        >
+                                                            Logout
+                                                        </a>
+                                                    </>
+                                                )}
+                                            </a>
+                                        </li>
+                                    </GsapMagnetic>
+
+                                    <GsapMagnetic>
+                                        <li>
+                                            <a className="text-base font-normal nav-border-underline hover:bg-inherit">
                                                 {email && (
                                                     <>
                                                         <a className="cursor-pointer">
@@ -132,7 +138,7 @@ const Header = () => {
                                             )}
                                         </a>
                                     </li>
-                                    <li  className="flex ">
+                                    <li className="flex ">
                                         <a className="text-base font-normal">
                                             {!email && (
                                                 <>
