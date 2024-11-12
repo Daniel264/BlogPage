@@ -86,7 +86,8 @@ const BlogPage = ({
                         </button>
                         <div className="flex gap-2 w-fit h-fit justify-center items-center">
                             <FaEye />
-                            <span className="text-sm font-semibold">Views:</span> {views}
+                            {/* <span className="text-sm font-semibold">Views:</span> */}
+                             {views}
                         </div>
                     </div>
                     <dialog id="my_modal_2" className="modal">
