@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Header from "./components/Header";
 import { useEffect, useState } from "react";
 import Post from "./assets/Interface/usePost";
+import Trending from "./components/Trending";
 
 //https://blogpage-1-r5za.onrender.com
 
@@ -30,7 +31,7 @@ function App() {
                     element={
                         <div>
                             <Header />
-
+<Trending />
                             <div className="w-full flex flex-col items-center">
                                 {posts.length > 0 &&
                                     posts.map((post) => (

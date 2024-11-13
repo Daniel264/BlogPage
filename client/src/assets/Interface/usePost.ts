@@ -1,3 +1,4 @@
+
 interface Author {
   username: string;
 }
@@ -11,6 +12,7 @@ interface Post {
   cover: string;
   createdAt: string;
   author: Author;
+  views: number;
 }
 
 export default Post;

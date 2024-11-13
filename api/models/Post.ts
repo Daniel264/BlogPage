@@ -10,6 +10,10 @@ const PostSchema = new Schema(
         author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
         comment: String,
         likes: { type: mongoose.Schema.Types.ObjectId },
+        views: {
+          type: Number,
+          default: 0,
+        },
     },
     {
         timestamps: true,

@@ -1,13 +1,9 @@
 import { FormEvent, useState } from "react";
 import { Form } from "react-router-dom";
 
-interface Pictures {
-  picture: string;
-}
-
-const Settings = ({ picture: initialPicture }: Pictures) => {
+const Settings = () => {
   const [file, setFile] = useState<File | null>(null);
-  const [picture, setPicture] = useState<string>(initialPicture);
+  const [picture, setPicture] = useState<string>("");
   const [message, setMessage] = useState<string | null>(null);
   async function changePicture(ev: FormEvent) {
     const data = new FormData();
@@ -25,22 +21,23 @@ const Settings = ({ picture: initialPicture }: Pictures) => {
       const result = await response.json();
       setMessage("Picture updated successfully");
       setPicture(result.picture);
-      console.log(result);
-
+      localStorage.setItem("savedPicture", picture);
       response.json();
     } else {
       setMessage("Picture not updated");
     }
   }
+  const getPicture:string | null = localStorage.getItem("savedPicture")
+
   return (
     <Form onSubmit={changePicture}>
-      <div className="w-full h-[100vh] font-montserrat flex flex-col items-center justify-center">
+      <div className="w-full h-[100vh] flex flex-col items-center justify-center">
         <h1 className="text-3xl font-semibold"></h1>
         <div className="card bg-base-100 w-96 shadow-xl">
           <figure className="">
             <img
               className="w-[200px] h-[200px] rounded-full bg-contain border-[1px]"
-              src={`http://localhost:3000/${picture}`}
+              src={`http://localhost:3000/${getPicture}`}
               alt="Profile picture"
             />
           </figure>

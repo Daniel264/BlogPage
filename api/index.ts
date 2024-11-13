@@ -186,9 +186,15 @@ app.get("/post", async (req: Request, res: Response) => {
 });
 
 app.get("/post/:id", async (req: Request, res: Response) => {
-    const post = await Post.findById(req.params.id).populate("author", [
-        "username",
-    ]);
+  const postId = req.params.id;
+    const post = await Post.findByIdAndUpdate(
+      postId,
+      { $inc: { views: 1 } },
+      { new: true } // This returns the updated document
+    ).populate(
+        "author",
+        ["username"],
+    );
     if (!post) return res.status(404).json({ message: "Post not found" });
     res.json(post);
 });
