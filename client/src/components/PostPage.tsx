@@ -19,15 +19,17 @@ const PostPage = () => {
     return (
         <>
             <Header />
-            <div className="pt-10 space-y-10">
-                <img
-                    className="w-[80%]"
-                    src={`http://localhost:3000/${postInfo.cover}`}
-                    alt=""
-                />
+            <div className="pt-10 space-y-10 flex flex-col w-full min-h-screen justify-center">
+                <div className="w-full flex justify-center">
+                    <img
+                        className="w-[600px] h-[350px]"
+                        src={`http://localhost:3000/${postInfo.cover}`}
+                        alt=""
+                    />
+                </div>
                 <h1 className="text-4xl font-semibold">{postInfo.title}</h1>
                 <p
-                    className="text-left"
+                    className="text-left text-lg leading-relaxed"
                     dangerouslySetInnerHTML={{ __html: postInfo.content }}
                 />
             </div>
