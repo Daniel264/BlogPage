@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import Header from "./Header";
 import { useParams } from "react-router-dom";
 import Post from "../assets/Interface/usePost";
+import { FaCalendarCheck, FaEye } from "react-icons/fa";
+import { format } from "date-fns";
 
 const PostPage = () => {
     const [postInfo, setPostInfo] = useState<Post | null>(null);
@@ -20,12 +22,25 @@ const PostPage = () => {
         <>
             <Header />
             <div className="pt-10 space-y-10 flex flex-col w-full min-h-screen justify-center">
-                <div className="w-full flex justify-center">
+                <div className="w-full flex flex-col items-center">
                     <img
                         className="w-[600px] h-[350px]"
                         src={`http://localhost:3000/${postInfo.cover}`}
                         alt=""
                     />
+                    <div className="flex gap-8 pt-5">
+                        <span className="text-xl flex gap-1">
+                            Views: <FaEye size={26} />
+                            {postInfo.views}
+                        </span>
+                        <span className="text-xl flex gap-2">
+                            <FaCalendarCheck size={32} />
+                            {format(
+                                new Date(postInfo.createdAt),
+                                "MMMM do, yyyy",
+                            )}
+                        </span>
+                    </div>
                 </div>
                 <h1 className="text-4xl font-semibold">{postInfo.title}</h1>
                 <p
