@@ -8,7 +8,6 @@ import { format } from "date-fns";
 const PostPage = () => {
     const [postInfo, setPostInfo] = useState<Post | null>(null);
 
-    // useEffect(() => {
     const { id } = useParams();
     useEffect(() => {
         fetch(`http://localhost:3000/post/${id}`)
@@ -24,9 +23,10 @@ const PostPage = () => {
             <div className="pt-10 space-y-10 flex flex-col w-full min-h-screen justify-center">
                 <div className="w-full flex flex-col items-center">
                     <img
+                        aria-label="This is the post's cover."
                         className="w-[600px] h-[350px]"
                         src={`http://localhost:3000/${postInfo.cover}`}
-                        alt=""
+                        alt="Picture of the blog Post's Main cover image."
                     />
                     <div className="flex gap-8 pt-5">
                         <span className="text-xl flex gap-1">

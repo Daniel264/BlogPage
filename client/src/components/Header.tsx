@@ -4,7 +4,6 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/700.css"; //
 import "@fontsource/alex-brush";
 import { FaPlus, FaCog } from "react-icons/fa";
-import GsapMagnetic from "./GsapMagnetic";
 
 const Header = () => {
     const [theme, setTheme] = useState(() => {
@@ -81,52 +80,47 @@ const Header = () => {
                             </div>
                             <div className="hidden flex-none lg:block">
                                 <ul className="menu menu-horizontal">
-                                    <GsapMagnetic>
-                                      <li>
-                                          <a className="text-base font-normal nav-border-underline hover:bg-inherit">
-                                              {email && (
-                                                  <>
-                                                      <Link to="/create">
-                                                          Create Post
-                                                      </Link>
-                                                  </>
-                                              )}
-                                          </a>
-                                      </li>
-                                    </GsapMagnetic>
+                                    <li>
+                                        <a className="text-base font-normal nav-border-underline hover:bg-inherit">
+                                            {email && (
+                                                <>
+                                                    <Link to="/create">
+                                                        Create Post
+                                                    </Link>
+                                                </>
+                                            )}
+                                        </a>
+                                    </li>
 
-                                    <GsapMagnetic>
-                                        <li>
-                                            <a className="text-base font-normal nav-border-underline hover:bg-inherit">
-                                                {email && (
-                                                    <>
-                                                        <a
-                                                            className="cursor-pointer"
-                                                            onClick={logout}
-                                                        >
-                                                            Logout
-                                                        </a>
-                                                    </>
-                                                )}
-                                            </a>
-                                        </li>
-                                    </GsapMagnetic>
+                                    <li>
+                                        <a className="text-base font-normal nav-border-underline hover:bg-inherit">
+                                            {email && (
+                                                <>
+                                                    <a
+                                                        className="cursor-pointer"
+                                                        onClick={logout}
+                                                    >
+                                                        Logout
+                                                    </a>
+                                                </>
+                                            )}
+                                        </a>
+                                    </li>
 
-                                    <GsapMagnetic>
-                                        <li>
-                                            <a className="text-base font-normal nav-border-underline hover:bg-inherit">
-                                                {email && (
-                                                    <>
-                                                        <a className="cursor-pointer">
-                                                            <Link to="/settings">
-                                                                Settings
-                                                            </Link>
-                                                        </a>
-                                                    </>
-                                                )}
-                                            </a>
-                                        </li>
-                                    </GsapMagnetic>
+                                    <li>
+                                        <a className="text-base font-normal nav-border-underline hover:bg-inherit">
+                                            {email && (
+                                                <>
+                                                    <a className="cursor-pointer">
+                                                        <Link to="/settings">
+                                                            Settings
+                                                        </Link>
+                                                    </a>
+                                                </>
+                                            )}
+                                        </a>
+                                    </li>
+
                                     <li className="flex ">
                                         <a className="text-base font-normal">
                                             {!email && (
