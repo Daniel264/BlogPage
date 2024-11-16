@@ -20,7 +20,7 @@ const PostPage = () => {
     return (
         <>
             <Header />
-            <article className="w-full min-h-screen flex flex-col items-center text-[#474747]">
+            <article className="w-full min-h-screen flex flex-col items-center text-[#616A77]">
               <div className="pt-10 space-y-10 flex flex-col w-full md:w-[63%] min-h-screen justify-center">
                   <div className="w-full flex flex-col items-center">
                       <img
@@ -43,7 +43,7 @@ const PostPage = () => {
                           </span>
                       </div>
                   </div>
-                  <h1 className="text-4xl font-semibold">{postInfo.title}</h1>
+                  <h1 className="text-5xl font-bold">{postInfo.title}</h1>
                   <p
                       className="text-left text-lg leading-relaxed"
                       dangerouslySetInnerHTML={{ __html: postInfo.content }}
