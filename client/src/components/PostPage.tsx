@@ -9,12 +9,13 @@ const PostPage = () => {
     const [postInfo, setPostInfo] = useState<Post | null>(null);
     const [title, setTitle] = useState<string>("");
     const [summary, setSummary] = useState<string>("");
+    const { id } = useParams();
     async function UpdatePost() {
         const response = await fetch(`http://localhost:3000/post/${id}`, {
             method: "PUT",
-            // headers: {
-            //     "Content-Type": "application/json",
-            // },
+            headers: {
+                "Content-Type": "application/json",
+            },
             body: JSON.stringify({ title, summary }),
             credentials: "include",
         });
@@ -22,10 +23,9 @@ const PostPage = () => {
         if (response.ok) console.log("Good");
         else console.log("bad");
     }
-    useEffect(() => {
-        UpdatePost();
-    }, []);
-    const { id } = useParams();
+    console.log("Title", title);
+    console.log("Set Title", setTitle);
+
     useEffect(() => {
         fetch(`http://localhost:3000/post/${id}`)
             .then((response) => response.json())
@@ -87,24 +87,42 @@ const PostPage = () => {
                                             Hello!
                                         </h3>
                                         <section>
-                                            <input
-                                                type="text"
-                                                name="title"
-                                                id="title"
-                                                value={postInfo.title}
-                                                onChange={(ev) =>
-                                                    setTitle(ev.target.value)
-                                                }
-                                            />
-                                            <input
-                                                type="text"
-                                                name="summary"
-                                                id="summary"
-                                                value={postInfo.summary}
-                                                onChange={(ev) =>
-                                                    setSummary(ev.target.value)
-                                                }
-                                            />
+                                            <form
+                                                onSubmit={(ev) => {
+                                                    ev.preventDefault();
+                                                    UpdatePost();
+                                                }}
+                                                action="#"
+                                                method="PUT"
+                                            >
+                                                <div className="flex flex-col">
+                                                    <input
+                                                        type="text"
+                                                        name="title"
+                                                        id="title"
+                                                        value={title}
+                                                        onChange={(ev) =>
+                                                            setTitle(
+                                                                ev.target.value,
+                                                            )
+                                                        }
+                                                    />
+                                                    <input
+                                                        type="text"
+                                                        name="summary"
+                                                        id="summary"
+                                                        value={summary}
+                                                        onChange={(ev) =>
+                                                            setSummary(
+                                                                ev.target.value,
+                                                            )
+                                                        }
+                                                    />
+                                                    <button className="btn btn-square">
+                                                        <span className="loading loading-spinner"></span>
+                                                    </button>
+                                                </div>
+                                            </form>
                                         </section>
                                     </div>
                                 </dialog>
