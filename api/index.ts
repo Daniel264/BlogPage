@@ -186,19 +186,41 @@ app.get("/post", async (req: Request, res: Response) => {
 });
 
 app.get("/post/:id", async (req: Request, res: Response) => {
-  const postId = req.params.id;
+    const postId = req.params.id;
     const post = await Post.findByIdAndUpdate(
-      postId,
-      { $inc: { views: 1 } },
-      { new: true } // This returns the updated document
-    ).populate(
-        "author",
-        ["username"],
-    );
+        postId,
+        { $inc: { views: 1 } },
+        { new: true }, // This returns the updated document
+    ).populate("author", ["username"]);
     if (!post) return res.status(404).json({ message: "Post not found" });
     res.json(post);
 });
 
+app.put("/post/:id", async (req: Request, res: Response) => {
+
+  console.log("Cookies:", JSON.stringify(req.cookies, null, 2));
+
+    const { sessionCookie } = req.cookies;
+    if (!sessionCookie)
+        return res.status(401).json({ message: "Not authenticated" });
+
+    jwt.verify(sessionCookie, secret, {}, async (err: Error, info: any) => {
+        if (err) {
+            return res.status(403).json({ message: "Invalid token" });
+        }
+
+        const post = await Post.findById(req.params.id);
+        if (!post) return res.status(404).json({ message: "Post not found" });
+
+        if (post.author.toString() !== info.id) {
+            return res.status(403).json({ message: "Unauthorized" });
+        }
+
+        post.title = req.body.name;
+        await post.save();
+        res.send(post);
+    });
+});
 app.post("/comment", upload.none(), async (req: Request, res: Response) => {
     const { content, post_id, author_id } = req.body;
     console.log({ content, post_id, author_id });
