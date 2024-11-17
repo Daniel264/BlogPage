@@ -197,8 +197,7 @@ app.get("/post/:id", async (req: Request, res: Response) => {
 });
 
 app.put("/post/:id", async (req: Request, res: Response) => {
-
-  console.log("Cookies:", JSON.stringify(req.cookies, null, 2));
+    console.log("Cookies:", JSON.stringify(req.cookies, null, 2));
 
     const { sessionCookie } = req.cookies;
     if (!sessionCookie)
@@ -215,8 +214,9 @@ app.put("/post/:id", async (req: Request, res: Response) => {
         if (post.author.toString() !== info.id) {
             return res.status(403).json({ message: "Unauthorized" });
         }
-
-        post.title = req.body.name;
+        post.title = req.body.title;
+        post.summary = req.body.summary;
+        post.content = req.body.content;
         await post.save();
         res.send(post);
     });
