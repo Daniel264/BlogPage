@@ -76,7 +76,7 @@ const PostPage = () => {
                                 {/* You can open the modal using document.getElementById('ID').showModal() method */}
 
                                 <dialog id="my_modal_3" className="modal">
-                                    <div className="modal-box">
+                                    <div className="modal-box w-full flex flex-col items-center gap-3">
                                         <form method="dialog">
                                             {/* if there is a button in form, it will close the modal */}
                                             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
@@ -86,7 +86,7 @@ const PostPage = () => {
                                         <h3 className="font-bold text-lg">
                                             Hello!
                                         </h3>
-                                        <section>
+                                        <section className="w-full flex flex-col items-center">
                                             <form
                                                 onSubmit={(ev) => {
                                                     ev.preventDefault();
@@ -94,29 +94,32 @@ const PostPage = () => {
                                                 }}
                                                 action="#"
                                                 method="PUT"
+                                                className="w-full"
                                             >
-                                                <div className="flex flex-col">
+                                                <div className="flex flex-col gap-3 w-full items-center">
                                                     <input
                                                         type="text"
-                                                        name="title"
-                                                        id="title"
+                                                        // placeholder="Type here"
                                                         value={title}
+                                                        placeholder={postInfo.title}
                                                         onChange={(ev) =>
                                                             setTitle(
                                                                 ev.target.value,
                                                             )
                                                         }
+                                                        className="input input-bordered w-full"
                                                     />
                                                     <input
                                                         type="text"
-                                                        name="summary"
-                                                        id="summary"
+                                                        
+                                                        placeholder={postInfo.summary}
                                                         value={summary}
                                                         onChange={(ev) =>
                                                             setSummary(
                                                                 ev.target.value,
                                                             )
                                                         }
+                                                        className="input input-bordered w-full"
                                                     />
                                                     <button className="btn btn-square">
                                                         <span className="loading loading-spinner"></span>
