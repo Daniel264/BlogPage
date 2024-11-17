@@ -214,9 +214,10 @@ app.put("/post/:id", async (req: Request, res: Response) => {
         if (post.author.toString() !== info.id) {
             return res.status(403).json({ message: "Unauthorized" });
         }
-        post.title = req.body.title;
-        post.summary = req.body.summary;
-        post.content = req.body.content;
+        const { title, summary, content } = req.body;
+        post.title = title;
+        post.summary = summary;
+        post.content = content;
         await post.save();
         res.send(post);
     });

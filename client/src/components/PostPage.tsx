@@ -10,14 +10,17 @@ const PostPage = () => {
     const [title, setTitle] = useState<string>("");
     const [summary, setSummary] = useState<string>("");
     async function UpdatePost() {
-        const response = await fetch("http://localhost:3000/login", {
+        const response = await fetch(`http://localhost:3000/post/${id}`, {
             method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
+            // headers: {
+            //     "Content-Type": "application/json",
+            // },
             body: JSON.stringify({ title, summary }),
             credentials: "include",
         });
+
+        if (response.ok) console.log("Good");
+        else console.log("bad");
     }
     useEffect(() => {
         UpdatePost();
@@ -56,14 +59,22 @@ const PostPage = () => {
                                 )}
                             </span>
                             <span className="text-xl flex">
-                                <FaEdit size={25} onClick={() => {
-                                        const modal = document.getElementById("my_modal_3");
+                                <FaEdit
+                                    size={25}
+                                    onClick={() => {
+                                        const modal =
+                                            document.getElementById(
+                                                "my_modal_3",
+                                            );
                                         if (modal) {
-                                            (modal as HTMLDialogElement).showModal();
+                                            (
+                                                modal as HTMLDialogElement
+                                            ).showModal();
                                         }
-                                    }}/>
+                                    }}
+                                />
                                 {/* You can open the modal using document.getElementById('ID').showModal() method */}
-                                
+
                                 <dialog id="my_modal_3" className="modal">
                                     <div className="modal-box">
                                         <form method="dialog">
@@ -75,10 +86,26 @@ const PostPage = () => {
                                         <h3 className="font-bold text-lg">
                                             Hello!
                                         </h3>
-                                        <p className="py-4">
-                                            Press ESC key or click on ✕ button
-                                            to close
-                                        </p>
+                                        <section>
+                                            <input
+                                                type="text"
+                                                name="title"
+                                                id="title"
+                                                value={postInfo.title}
+                                                onChange={(ev) =>
+                                                    setTitle(ev.target.value)
+                                                }
+                                            />
+                                            <input
+                                                type="text"
+                                                name="summary"
+                                                id="summary"
+                                                value={postInfo.summary}
+                                                onChange={(ev) =>
+                                                    setSummary(ev.target.value)
+                                                }
+                                            />
+                                        </section>
                                     </div>
                                 </dialog>
                             </span>
