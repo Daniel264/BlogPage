@@ -203,14 +203,39 @@ app.get("/post", async (req: Request, res: Response) => {
 
 app.get("/post/:id", async (req: Request, res: Response) => {
     const postId = req.params.id;
-    const comments = await Post.find();
     const post = await Post.findByIdAndUpdate(
         postId,
         { $inc: { views: 1 } },
         { new: true }, // This returns the updated document
     ).populate("author", ["username"]);
     if (!post) return res.status(404).json({ message: "Post not found" });
-    res.json({ post, comments });
+    res.json({ post });
+});
+
+app.post("/post/:id/comments", async (req: Request, res: Response) => {
+    const postId = req.params.id;
+    const { content, authorId } = req.body;
+
+    try {
+        const post = Post.findByIdAndUpdate(
+            postId,
+            {
+                $push: {
+                    comments: {
+                        content,
+                        author: authorId,
+                    },
+                },
+            },
+            { new: true },
+        ).populate("comments.author", "username");
+        if (!post) return res.status(404).json({ message: "Post not found" });
+
+        res.json(post);
+    } catch (error) {
+        console.error("Error adding comment:", error);
+        res.status(500).json({ error: "Failed to add comment" });
+    }
 });
 
 app.put("/post/:id", async (req: Request, res: Response) => {
