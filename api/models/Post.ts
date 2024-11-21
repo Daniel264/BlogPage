@@ -8,11 +8,15 @@ const PostSchema = new Schema(
         content: String,
         cover: String,
         author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-        comment: String,
+        comment: {
+            String,
+            createdAt: { type: Date, default: Date.now },
+            updatedAt: { type: Date, default: Date.now },
+        },
         likes: { type: mongoose.Schema.Types.ObjectId },
         views: {
-          type: Number,
-          default: 0,
+            type: Number,
+            default: 0,
         },
     },
     {

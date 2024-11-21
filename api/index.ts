@@ -165,15 +165,31 @@ app.post(
             if (err) throw err;
 
             const { title, summary, content, comment } = req.body;
-            const postDoc = await Post.create({
-                title,
-                summary,
-                content,
-                comment,
-                cover: newPath,
-                author: info.id,
-            });
-            res.json(postDoc);
+            const { post_id, author_id } = req.body;
+            console.log({ content, post_id, author_id });
+
+            try {
+                const commentDoc = await Comment.create({
+                    comment,
+                    post: post_id,
+                    author: author_id,
+                });
+                // res.status(201).json(commentDoc);
+                const postDoc = await Post.create({
+                    title,
+                    summary,
+                    content,
+                    comment: commentDoc._id,
+                    cover: newPath,
+                    author: info.id,
+                });
+                res.status(201).json({ post: postDoc, comment: commentDoc });
+            } catch (error) {
+                res.status(500).json({
+                    message: "Failed to create comment",
+                    error,
+                });
+            }
         });
     },
 );
@@ -187,13 +203,14 @@ app.get("/post", async (req: Request, res: Response) => {
 
 app.get("/post/:id", async (req: Request, res: Response) => {
     const postId = req.params.id;
+    const comments = await Comment.find();
     const post = await Post.findByIdAndUpdate(
         postId,
         { $inc: { views: 1 } },
         { new: true }, // This returns the updated document
     ).populate("author", ["username"]);
     if (!post) return res.status(404).json({ message: "Post not found" });
-    res.json(post);
+    res.json({ post, comments });
 });
 
 app.put("/post/:id", async (req: Request, res: Response) => {
@@ -222,26 +239,26 @@ app.put("/post/:id", async (req: Request, res: Response) => {
         res.send(post);
     });
 });
-app.post("/comment", upload.none(), async (req: Request, res: Response) => {
-    const { content, post_id, author_id } = req.body;
-    console.log({ content, post_id, author_id });
+// app.post("comment", upload.none(), async (req: Request, res: Response) => {
+//     const { content, post_id, author_id } = req.body;
+//     console.log({ content, post_id, author_id });
 
-    try {
-        const commentDoc = await Comment.create({
-            content,
-            post: post_id,
-            author: author_id,
-        });
-        res.status(201).json(commentDoc);
-    } catch (error) {
-        res.status(500).json({ message: "Failed to create comment", error });
-    }
-});
+//     try {
+//         const commentDoc = await Comment.create({
+//             content,
+//             post: post_id,
+//             author: author_id,
+//         });
+//         res.status(201).json(commentDoc);
+//     } catch (error) {
+//         res.status(500).json({ message: "Failed to create comment", error });
+//     }
+// });
 
-app.get("/comment", async (req: Request, res: Response) => {
-    const comments = await Comment.find();
-    res.json(comments);
-});
+// app.get("comment", async (req: Request, res: Response) => {
+//     const comments = await Comment.find();
+//     res.json(comments);
+// });
 
 app.post(
     "/picture",
