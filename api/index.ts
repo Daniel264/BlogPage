@@ -3,7 +3,7 @@ import cors from "cors";
 import { Request, Response } from "express";
 import multer, { Multer } from "multer";
 const Post = require("./models/Post");
-const Comment = require("./models/Comment");
+// const Comment = require("./models/Comment");
 const Picture = require("./models/Picture");
 import * as dotenv from "dotenv";
 dotenv.config();
@@ -169,7 +169,7 @@ app.post(
             console.log({ content, post_id, author_id });
 
             try {
-                const commentDoc = await Comment.create({
+                const commentDoc = await Post.create({
                     comment,
                     post: post_id,
                     author: author_id,
@@ -203,7 +203,7 @@ app.get("/post", async (req: Request, res: Response) => {
 
 app.get("/post/:id", async (req: Request, res: Response) => {
     const postId = req.params.id;
-    const comments = await Comment.find();
+    const comments = await Post.find();
     const post = await Post.findByIdAndUpdate(
         postId,
         { $inc: { views: 1 } },
