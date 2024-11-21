@@ -1,18 +1,18 @@
-
 interface Author {
-  username: string;
+    username: string;
 }
 
 interface Post {
-  _id: string;
-  id: string;
-  title: string;
-  summary: string;
-  content: string;
-  cover: string;
-  createdAt: string;
-  author: Author;
-  views: number;
+    _id: string;
+    id: string;
+    title: string;
+    summary: string;
+    content: string;
+    cover: string;
+    createdAt: string;
+    postId: string;
+    author?: Author;
+    views: number;
 }
 
 export default Post;

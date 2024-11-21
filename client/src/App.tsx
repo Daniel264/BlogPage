@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import { useEffect, useState } from "react";
 import Post from "./assets/Interface/usePost";
 import Trending from "./components/Trending";
+import BlogPageWrapper from "./components/BlogPageWrapper";
 
 //https://blogpage-1-r5za.onrender.com
 
@@ -41,6 +42,7 @@ function App() {
                         </div>
                     }
                 />
+              <Route path="/post/:id" element={<BlogPageWrapper />} />
             </Routes>
         </>
     );

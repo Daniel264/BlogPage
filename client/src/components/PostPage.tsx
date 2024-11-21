@@ -51,6 +51,7 @@ const PostPage = () => {
                                 Views: <FaEye size={26} />
                                 {postInfo.views}
                             </span>
+                            
                             <span className="text-xl flex gap-2">
                                 <FaCalendarCheck size={32} />
                                 {format(
@@ -111,7 +112,7 @@ const PostPage = () => {
                                                     />
                                                     <input
                                                         type="text"
-                                                        
+
                                                         placeholder={postInfo.summary}
                                                         value={summary}
                                                         onChange={(ev) =>
