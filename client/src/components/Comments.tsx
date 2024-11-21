@@ -9,12 +9,7 @@ import { Comment } from "../assets/Interface/useComment";
 
 import { formatDistanceToNow } from "date-fns";
 
-interface CommentsProps {
-    postId: string | undefined;
-}
-
-const Comments: React.FC<CommentsProps> = ({postId}) => {
-    // const { id } = useParams();
+const Comments = () => {
     const [comment, setComment] = useState("");
     // const [user_id, setUser_id] = useState("");
     // const [author_id, setAuthor_id] = useState("");
@@ -25,14 +20,11 @@ const Comments: React.FC<CommentsProps> = ({postId}) => {
         // data.set("author_id", author_id);
         ev.preventDefault();
 
-        const response = await fetch(
-            `http://localhost:3000/post${postId}/comments`,
-            {
-                method: "POST",
-                body: data,
-                credentials: "include",
-            },
-        );
+        const response = await fetch("http://localhost:3000/post", {
+            method: "POST",
+            body: data,
+            credentials: "include",
+        });
         // response.json();
 
         if (response.ok) {
@@ -44,7 +36,7 @@ const Comments: React.FC<CommentsProps> = ({postId}) => {
     const [rest, setRest] = useState<Comment[]>([]);
     // eslint-disable-next-line react-hooks/rules-of-hooks
     async function fetchComments() {
-        const response = await fetch(`http://localhost:3000/post${postId}`);
+        const response = await fetch("http://localhost:3000/post");
         if (response.ok) {
             const comments = await response.json();
             setRest(comments);

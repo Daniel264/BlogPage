@@ -7,8 +7,7 @@ import { FaComment, FaRegCalendarAlt, FaEye } from "react-icons/fa";
 import Comments from "./Comments";
 
 const BlogPage = ({
-    // _id,
-    postId,
+    _id,
     title,
     summary,
     createdAt,
@@ -17,7 +16,7 @@ const BlogPage = ({
     views,
 }: Post) => {
     const [loading, setLoading] = useState(true);
-    // const { id } = useParams();
+
     useEffect(() => {
         const timer = setTimeout(() => {
             setLoading(false);
@@ -72,7 +71,7 @@ const BlogPage = ({
                 </div>
                 <Link
                     className=" text-[1.7rem] leading-[2.5rem] font-semibold hover:text-[#646464] hover:opacity-75 transition-opacity hover:transition-all duration-200 ease-linear"
-                    to={`/post/${postId}`}
+                    to={`/post/${_id}`}
                 >
                     {title}
                 </Link>
@@ -88,14 +87,14 @@ const BlogPage = ({
                         <div className="flex gap-2 w-fit h-fit justify-center items-center">
                             <FaEye />
                             {/* <span className="text-sm font-semibold">Views:</span> */}
-                            {views}
+                             {views}
                         </div>
                     </div>
                     <dialog id="my_modal_2" className="modal">
                         <div className="modal-box">
                             <h3 className="font-bold text-lg">Comments</h3>
                             <p className="py-4">
-                                <Comments postId={postId} />
+                                <Comments />
                             </p>
                         </div>
                         <form method="dialog" className="modal-backdrop">
@@ -105,7 +104,7 @@ const BlogPage = ({
                 </div>
             </div>
             <div className="max-w-[400px] min-w-[400px] max-h-[250px] overflow-hidden">
-                <Link className="" to={`/post/${postId}`}>
+                <Link className="" to={`/post/${_id}`}>
                     <img
                         className="min-w-full min-h-full hover:scale-110  transition-all ease-in duration-300 overflow-hidden"
                         src={"http://localhost:3000/" + cover}
