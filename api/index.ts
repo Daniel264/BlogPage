@@ -217,7 +217,7 @@ app.post("/post/:id/comments", async (req: Request, res: Response) => {
     const { content, authorId } = req.body;
 
     try {
-        const post = Post.findByIdAndUpdate(
+        const post = await Post.findByIdAndUpdate(
             postId,
             {
                 $push: {
@@ -228,7 +228,11 @@ app.post("/post/:id/comments", async (req: Request, res: Response) => {
                 },
             },
             { new: true },
-        ).populate("comments.author", "username");
+        )
+            .populate({ path: "comments.author", select: "username" })
+            .lean();
+        console.log("post", post);
+
         if (!post) return res.status(404).json({ message: "Post not found" });
 
         res.json(post);
