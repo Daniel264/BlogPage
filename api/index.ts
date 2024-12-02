@@ -3,7 +3,7 @@ import cors from "cors";
 import { Request, Response } from "express";
 import multer, { Multer } from "multer";
 const Post = require("./models/Post");
-const Comment = require("./models/Comment");
+// const Comment = require("./models/Comment");
 const Picture = require("./models/Picture");
 import * as dotenv from "dotenv";
 dotenv.config();
@@ -165,15 +165,31 @@ app.post(
             if (err) throw err;
 
             const { title, summary, content, comment } = req.body;
-            const postDoc = await Post.create({
-                title,
-                summary,
-                content,
-                comment,
-                cover: newPath,
-                author: info.id,
-            });
-            res.json(postDoc);
+            const { post_id, author_id } = req.body;
+            console.log({ content, post_id, author_id });
+
+            try {
+                const commentDoc = await Post.create({
+                    comment,
+                    post: post_id,
+                    author: author_id,
+                });
+                // res.status(201).json(commentDoc);
+                const postDoc = await Post.create({
+                    title,
+                    summary,
+                    content,
+                    comment: commentDoc._id,
+                    cover: newPath,
+                    author: info.id,
+                });
+                res.status(201).json({ post: postDoc, comment: commentDoc });
+            } catch (error) {
+                res.status(500).json({
+                    message: "Failed to create comment",
+                    error,
+                });
+            }
         });
     },
 );
@@ -186,39 +202,92 @@ app.get("/post", async (req: Request, res: Response) => {
 });
 
 app.get("/post/:id", async (req: Request, res: Response) => {
-  const postId = req.params.id;
+    const postId = req.params.id;
     const post = await Post.findByIdAndUpdate(
-      postId,
-      { $inc: { views: 1 } },
-      { new: true } // This returns the updated document
-    ).populate(
-        "author",
-        ["username"],
-    );
+        postId,
+        { $inc: { views: 1 } },
+        { new: true }, // This returns the updated document
+    ).populate("author", ["username"]);
     if (!post) return res.status(404).json({ message: "Post not found" });
-    res.json(post);
+    res.json({ post });
 });
 
-app.post("/comment", upload.none(), async (req: Request, res: Response) => {
-    const { content, post_id, author_id } = req.body;
-    console.log({ content, post_id, author_id });
+app.post("/post/:id/comments", async (req: Request, res: Response) => {
+    const postId = req.params.id;
+    const { content, authorId } = req.body;
 
     try {
-        const commentDoc = await Comment.create({
-            content,
-            post: post_id,
-            author: author_id,
-        });
-        res.status(201).json(commentDoc);
+        const post = await Post.findByIdAndUpdate(
+            postId,
+            {
+                $push: {
+                    comments: {
+                        content,
+                        author: authorId,
+                    },
+                },
+            },
+            { new: true },
+        )
+            .populate({ path: "comments.author", select: "username" })
+            .lean();
+        console.log("post", post);
+
+        if (!post) return res.status(404).json({ message: "Post not found" });
+
+        res.json(post);
     } catch (error) {
-        res.status(500).json({ message: "Failed to create comment", error });
+        console.error("Error adding comment:", error);
+        res.status(500).json({ error: "Failed to add comment" });
     }
 });
 
-app.get("/comment", async (req: Request, res: Response) => {
-    const comments = await Comment.find();
-    res.json(comments);
+app.put("/post/:id", async (req: Request, res: Response) => {
+    console.log("Cookies:", JSON.stringify(req.cookies, null, 2));
+
+    const { sessionCookie } = req.cookies;
+    if (!sessionCookie)
+        return res.status(401).json({ message: "Not authenticated" });
+
+    jwt.verify(sessionCookie, secret, {}, async (err: Error, info: any) => {
+        if (err) {
+            return res.status(403).json({ message: "Invalid token" });
+        }
+
+        const post = await Post.findById(req.params.id);
+        if (!post) return res.status(404).json({ message: "Post not found" });
+
+        if (post.author.toString() !== info.id) {
+            return res.status(403).json({ message: "Unauthorized" });
+        }
+        const { title, summary, content } = req.body;
+        post.title = title;
+        post.summary = summary;
+        post.content = content;
+        await post.save();
+        res.send(post);
+    });
 });
+// app.post("comment", upload.none(), async (req: Request, res: Response) => {
+//     const { content, post_id, author_id } = req.body;
+//     console.log({ content, post_id, author_id });
+
+//     try {
+//         const commentDoc = await Comment.create({
+//             content,
+//             post: post_id,
+//             author: author_id,
+//         });
+//         res.status(201).json(commentDoc);
+//     } catch (error) {
+//         res.status(500).json({ message: "Failed to create comment", error });
+//     }
+// });
+
+// app.get("comment", async (req: Request, res: Response) => {
+//     const comments = await Comment.find();
+//     res.json(comments);
+// });
 
 app.post(
     "/picture",

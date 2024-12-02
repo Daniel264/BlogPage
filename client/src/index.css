@@ -58,29 +58,40 @@ h6 {
 
 body {
     /* font-family: ClashGrotesk-Regular, sans-serif; */
-    font-family: Manrope_da111, sans-serif;
+    /* font-family: Manrope_da111, sans-serif; */
+    font-family: "Open Sans Variable", sans-serif;
+    font-weight: 400; /* Regular weight */
+    font-stretch: 100%; /* Normal width */
 }
 
 .Toastify__toast-body {
-    font-family: Manrope_da111, sans-serif;
+    font-family: "Open Sans Variable", sans-serif;
+    font-weight: 500;
     font-size: 0.9rem;
 }
 
 h1 {
-    font-family: Manrope_da111, sans-serif;
+    font-family: "Open Sans Variable", sans-serif;
+    font-weight: 800; /* Bold weight */
+    font-stretch: 110%; /* Slightly wider text */
 }
 
 h2 {
-    font-family: Manrope_semibold, sans-serif;
+    font-family: "Open Sans Variable", sans-serif;
+    font-weight: 600;
 }
 
 p {
-    font-family: Manrope_medium, sans-serif;
+    /* font-family: Manrope_medium, sans-serif; */
     /* font-family: ClashGrotesk-Medium, sans-serif; */
+    font-family: "Open Sans Variable", sans-serif;
+    font-weight: 400; /* Light weight */
+    font-stretch: 100%; /* Condensed text */
 }
 
 input {
-    font-family: Manrope_light, sans-serif;
+    font-family: "Open Sans Variable", sans-serif;
+    font-weight: 300;
 }
 
 @font-face {
@@ -90,6 +101,16 @@ input {
     src:
         local("Formula Condensed Light"),
         url("../public/fonts/FormulaCondensed-Light.woff") format("woff");
+}
+
+@font-face {
+    font-family: "Open Sans Variable";
+    src: url("../public/fonts/OpenSans-VariableFont_wdth,wght.ttf")
+        format("truetype");
+    font-weight: 100 900; /* Supports a range of weights */
+    font-stretch: 75% 125%;
+    /* Supports width variation */
+    font-style: normal;
 }
 
 @font-face {
